@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".usuario.gui.CadastroPfActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <Switch
+        android:id="@+id/switchTipoCadastro"
+        android:layout_width="48dp"
+        android:layout_height="39dp"
+        android:thumbTint="@color/colorBtnBlue"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/editTextNome"
+        android:layout_width="353dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/edt_nome"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="162dp" />
+
+    <EditText
+        android:id="@+id/editTextSenha"
+        android:layout_width="352dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/edt_senha"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="279dp" />
+
+    <EditText
+        android:id="@+id/editTextCpf"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="@string/edt_cpf"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="392dp" />
+
+    <EditText
+        android:id="@+id/editTextConfirmaSenha"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/edt_confsenha"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="337dp" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="352dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:hint="@string/edt_telefone"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="451dp" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/edt_email"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="221dp" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="99dp"
+        android:layout_height="33dp"
+        tools:layout_editor_absoluteX="270dp"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="211dp"
+        android:layout_height="48dp"
+        android:text="@string/lbl_title_cadastro"
+        android:textColor="@color/colorBtnBlue"
+        android:textSize="40sp"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pessoa_fis"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="76dp" />
+
+</android.support.constraint.ConstraintLayout>
