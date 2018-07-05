@@ -40,7 +40,7 @@
     <string name="lbl_title_cadastro">CADASTRO</string>
     <string name="title_activity_act_home">Home</string>
     <string name="dialogo_titulo_erro">Erro</string>
-    <string name="dialogo_botao_ok">Ok</string>
+    <string name="dialogo_botao_ok">OK</string>
     <string name="title_menu_conta">Conta</string>
     <string name="title_activity_act_perfil">Perfil</string>
     <string name="title_activity_act_editar_perfil">Editar Perfil</string>
@@ -49,8 +49,8 @@
     <string name="title_menu_cancelar">Cancelar</string>
     <string name="title_menu_sair">Sair</string>
     <string name="title_activity_act_criar_post">Criar Postagem</string>
-    <string name="edt_texto_post">Digite aqui...</string>
-    <string name="edt_texto_tags">Digite suas tags aqui...</string>
+    <string name="edt_texto_post">Digite aqui…</string>
+    <string name="edt_texto_tags">Digite suas tags aqui…</string>
     <string name="title_menu_postar">Postar</string>
     <string name="exemplo_hint_usuario">Nome do Usuário</string>
     <string name="exemplo_hint_post">post do usuário</string>
@@ -102,4 +102,5 @@
     <string name="pessoa_jur">Pessoa Jurídica</string>
     <string name="edt_razao_social">Razão Social</string>
     <string name="edt_cnpj">CNPJ</string>
+    <string name="switch_cpf_cpnj">CPF/CPNJ</string>
 </resources>

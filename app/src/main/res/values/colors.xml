@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
 
     <color name="colorToolBarBase1">#03a9f4</color>         <!-- Azul Base -->
     <color name="colorToolBarBase2">#ffc107</color>         <!-- Amarelo Base -->
@@ -26,4 +26,6 @@
     <color name="colorBoxBackground">#e1e1e1</color>
     <color name="colorItemBackground">#ffffff</color>
     <color name="colorNumComentarios">#808080</color>
+
+    <color name="divider">#afafaf</color>
 </resources>
