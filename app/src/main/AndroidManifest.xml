@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".usuario.gui.CadastroPfActivity"></activity>
+        <activity android:name=".usuario.gui.CadastroPjActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

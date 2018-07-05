@@ -100,4 +100,5 @@
     <string name="msg_cadastro_sucesso">Cadastrado com Sucesso!</string>
     <string name="pessoa_fis">Pessoa Física</string>
     <string name="pessoa_jur">Pessoa Jurídica</string>
+    <string name="edt_cnpj">CNPJ</string>
 </resources>

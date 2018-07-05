@@ -4,48 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usuario.gui.CadastroPfActivity"
+    tools:context=".usuario.gui.CadastroPjActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <Switch
-        android:id="@+id/switchTipoCadastro"
+        android:id="@+id/switch1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginEnd="11dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:thumbTint="@color/colorBtnBlue"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNome"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCpf"
         app:layout_constraintEnd_toStartOf="@+id/textViewPessoaJur"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:ems="10"
-        android:hint="@string/edt_nome"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCpf"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchTipoCadastro" />
-
-    <EditText
         android:id="@+id/editTextSenha"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="45dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="@string/edt_senha"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDataNasc"
+        app:layout_constraintBottom_toTopOf="@+id/editTextConfirmaSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
@@ -54,26 +39,28 @@
         android:id="@+id/editTextCpf"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="315dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:ems="10"
-        android:hint="@string/edt_cpf"
+        android:hint="@string/edt_cnpj"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCancelar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPessoaJur" />
 
     <EditText
         android:id="@+id/editTextConfirmaSenha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="138dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="@string/edt_confsenha"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
@@ -81,24 +68,21 @@
     <EditText
         android:id="@+id/editTextTelefone"
         android:layout_width="0dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="88dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="88dp"
         android:ems="10"
         android:hint="@string/edt_telefone"
         android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextSenha"
+        app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNome" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:ems="10"
@@ -107,45 +91,21 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
-
-    <Spinner
-        android:id="@+id/spinnerSexo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCancelar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewSexo"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDataNasc" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTelefone" />
 
     <TextView
         android:id="@+id/textViewPessoaJur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="175dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/pessoa_fis"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginTop="21dp"
+        android:text="@string/pessoa_jur"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCpf"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/switchTipoCadastro"
-        app:layout_constraintTop_toTopOf="@+id/switchTipoCadastro" />
-
-    <EditText
-        android:id="@+id/editTextDataNasc"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="@string/edt_datanasc"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerSexo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+        app:layout_constraintStart_toEndOf="@+id/switch1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonCadastrar"
@@ -159,7 +119,8 @@
         android:textColor="@color/colorFontNormalLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonCancelar"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmaSenha" />
 
     <Button
         android:id="@+id/buttonCancelar"
@@ -173,19 +134,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonCadastrar"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSexo" />
-
-    <TextView
-        android:id="@+id/textViewSexo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginStart="16dp"
-        android:text="@string/lbl_sexo"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerSexo"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerSexo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinnerSexo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
 
 </android.support.constraint.ConstraintLayout>
