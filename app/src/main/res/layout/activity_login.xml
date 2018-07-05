@@ -54,6 +54,7 @@
                 app:layout_constraintRight_toRightOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+
             <TextView
                 android:id="@+id/txtSubtitle"
                 android:layout_width="0dp"
@@ -69,7 +70,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/txtLogo1"
                 app:layout_constraintRight_toRightOf="@+id/txtLogo1"
-                app:layout_constraintTop_toBottomOf="@+id/txtLogo1" />
+                app:layout_constraintTop_toBottomOf="@+id/txtLogo1"/>
 
             <EditText
                 android:id="@+id/edtLogin"
@@ -83,8 +84,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/txtSubtitle"
                 app:layout_constraintRight_toRightOf="@+id/txtSubtitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtSubtitle" />
-
+                app:layout_constraintTop_toBottomOf="@+id/txtSubtitle"
+      />
             <EditText
                 android:id="@+id/edtSenha"
                 android:layout_width="0dp"
@@ -93,7 +94,6 @@
                 android:ems="10"
                 android:hint="@string/edt_senha"
                 android:inputType="textPassword"
-                android:onClick="efetuarLogin"
                 android:selectAllOnFocus="false"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/edtLogin"
@@ -110,7 +110,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorBtnBlue"
-                android:onClick="efetuarLogin"
                 android:text="@string/btn_Entrar"
                 android:textColor="@color/colorFontNormalLight"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -125,7 +124,6 @@
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorBtnYellow"
-                android:onClick="cadastrarUsuario"
                 android:text="@string/btn_cadastrar"
                 android:textColor="@color/colorFontNormalLight"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextSenha"
+        android:id="@+id/editTextSenhapj"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
@@ -30,15 +30,15 @@
         android:ems="10"
         android:hint="@string/edt_senha"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/editTextConfirmaSenha"
+        app:layout_constraintBottom_toTopOf="@+id/editTextConfirmaSenhapj"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailpj" />
 
     <EditText
-        android:id="@+id/editTextCpf"
+        android:id="@+id/editTextCnpj"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="47dp"
         android:layout_marginBottom="315dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -47,11 +47,13 @@
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/buttonCancelar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPessoaJur" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPessoaJur"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextConfirmaSenha"
+        android:id="@+id/editTextConfirmaSenhapj"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="138dp"
@@ -60,10 +62,11 @@
         android:ems="10"
         android:hint="@string/edt_confsenha"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrar"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrarpj"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenhapj" />
 
     <EditText
         android:id="@+id/editTextTelefone"
@@ -74,13 +77,13 @@
         android:ems="10"
         android:hint="@string/edt_telefone"
         android:inputType="phone"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+        app:layout_constraintBottom_toTopOf="@+id/editTextEmailpj"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCnpj" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextEmailpj"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -88,10 +91,12 @@
         android:ems="10"
         android:hint="@string/edt_email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editTextSenha"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSenhapj"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTelefone" />
+
+
 
     <TextView
         android:id="@+id/textViewPessoaJur"
@@ -107,8 +112,24 @@
         app:layout_constraintStart_toEndOf="@+id/switch1"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/editTextRazaoSocial"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="@string/edt_razao_social"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSenhapj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmaSenhapj"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
-        android:id="@+id/buttonCadastrar"
+        android:id="@+id/buttonCadastrarpj"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
@@ -120,7 +141,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonCancelar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmaSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRazaoSocial"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/buttonCancelar"
@@ -133,7 +155,7 @@
         android:textColor="@color/colorFontNormalLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonCadastrar"
+        app:layout_constraintStart_toEndOf="@+id/buttonCadastrarpj"
         app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
 
 </android.support.constraint.ConstraintLayout>
