@@ -36,6 +36,22 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailpj" />
 
     <EditText
+        android:id="@+id/editTextConfirmaSenhapj"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="138dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="@string/edt_confsenha"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrarpj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSenhapj" />
+
+    <EditText
         android:id="@+id/editTextCnpj"
         android:layout_width="0dp"
         android:layout_height="47dp"
@@ -51,22 +67,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPessoaJur"
         app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editTextConfirmaSenhapj"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="138dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="@string/edt_confsenha"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCadastrarpj"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenhapj" />
 
     <EditText
         android:id="@+id/editTextTelefone"
