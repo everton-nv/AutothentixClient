@@ -78,8 +78,8 @@ public class CadastroPfActivity extends AppCompatActivity {
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validarEmail(email.getText().toString());
-                validarTele(telefone.getText().toString());
+                /*validarEmail(email.getText().toString());
+                validarTele(telefone.getText().toString());*/
                 validarCpf(cpf.getText().toString());
                 validarSenha(senha.getText().toString());
                 validarConfSenha(repetirSenha.getText().toString(), senha.getText().toString());
@@ -156,25 +156,6 @@ public class CadastroPfActivity extends AppCompatActivity {
         };
     }
 
-    private void validarEmail(String Email) {
-
-        if (Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-            usuario.setEmail(Email);
-
-        } else {
-            Toast.makeText(CadastroPfActivity.this, "Verifique o campo do email!!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void validarTele(String telefone) {
-
-        if (telefone.length() == 9) {
-            pessoaFisica.setTelefone(telefone);
-
-        } else {
-            Toast.makeText(CadastroPfActivity.this, "Verifique o campo do telefone!!", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void validarCpf(String cpf) {
 
