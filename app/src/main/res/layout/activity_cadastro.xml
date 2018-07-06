@@ -170,7 +170,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="NULL"
+                            android:onClick="validarCadastrar"
                             android:text="@string/btn_cadastrar"
                             android:textColor="@android:color/holo_blue_dark" />
 
@@ -186,16 +186,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-<<<<<<< HEAD
                             android:onClick="NULL"
                             android:text="@string/btn_cancelar"
                             android:textColor="@android:color/holo_red_dark" />
-
-=======
-                            android:onClick="validarCadastrar"
-                            android:text="@string/btn_cadastrar"
-                            android:textColor="@android:color/holo_blue_dark" />
->>>>>>> 1bcf484c36c97c964a3ed25b91a6e51e83a2a5e6
                     </LinearLayout>
                 </LinearLayout>
 

@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             } else{
 
-                                Intent abrirPerfil = new Intent(LoginActivity.this, CadastroPjActivity.class);
+                                Intent abrirPerfil = new Intent(LoginActivity.this, CadastroActivity.class);
                                 startActivity(abrirPerfil);
                             }
 
