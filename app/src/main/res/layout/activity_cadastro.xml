@@ -198,7 +198,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick=""
+                            android:onClick="validarCadastrar"
                             android:text="@string/btn_cadastrar"
                             android:textColor="@android:color/holo_blue_dark" />
                     </LinearLayout>

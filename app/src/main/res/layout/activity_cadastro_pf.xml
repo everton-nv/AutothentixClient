@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usuario.gui.CadastroPfActivity"
+    tools:context=".usuario.gui.CadastroActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <Switch
