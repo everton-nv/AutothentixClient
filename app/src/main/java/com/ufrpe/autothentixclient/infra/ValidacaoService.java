@@ -15,7 +15,7 @@ public class ValidacaoService {
     private static final int ZERO = 0;
     private static final int TAMANHO_DATA = 10;
 
-    static boolean isCampoVazio(String valor) {
+    public boolean isCampoVazio(String valor) {
 
         return (TextUtils.isEmpty(valor) || valor.trim().isEmpty());
     }

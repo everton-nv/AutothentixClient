@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                             String p = pessoa;
                             if (p == "Pessoa Física"){
 
-                                Intent abrirPerfil = new Intent(LoginActivity.this, CadastroPfActivity.class);
+                                Intent abrirPerfil = new Intent(LoginActivity.this, CadastroActivity.class);
                                 startActivity(abrirPerfil);
 
                             } else{

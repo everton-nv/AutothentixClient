@@ -2,14 +2,12 @@ package com.ufrpe.autothentixclient.usuario.gui;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,13 +18,14 @@ import android.widget.Toast;
 
 import com.ufrpe.autothentixclient.R;
 //import com.ufrpe.autothentixclient.infra.Validação;
+import com.ufrpe.autothentixclient.infra.ValidacaoService;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class CadastroPfActivity extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity {
 
     private Usuario usuario = new Usuario();
   //  private Validação validação;
@@ -35,59 +34,37 @@ public class CadastroPfActivity extends AppCompatActivity {
     private TextView displayDate;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private static final String TAG = "Cadastro";
-    private EditText nome;
-    private EditText cpf;
-    private EditText dataNasc;
-    private EditText sexo;
-    private EditText telefone;
-    private EditText email;
-    private EditText senha;
-    private EditText repetirSenha;
-    private Button entrar;
+    private EditText edtNome,edtCpf,edtDataNasc,edtSexo, edtTelefone,edtEmail,edtSenha,edtRepetirSenha;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_pf);
+        setContentView(R.layout.activity_cadastro);
 
-        nome = findViewById(R.id.editTextNome);
-        cpf = findViewById(R.id.editTextCpf);
-        dataNasc = findViewById(R.id.editTextDataNasc);
-        sexo = findViewById(R.id.editTextSexo);
-        telefone = findViewById(R.id.editTextTelef);
-        email = findViewById(R.id.editTextEmail);
-        senha = findViewById(R.id.editTextSenha);
-        repetirSenha = findViewById(R.id.editTextConfirmaSenha);
-        entrar = findViewById(R.id.buttonCadastrar);
+        edtNome = findViewById(R.id.editTextNome);
+        edtCpf = findViewById(R.id.editTextCpf);
+        edtDataNasc = findViewById(R.id.editTextDataNasc);
+        edtSexo = findViewById(R.id.editTextSexo);
+        edtTelefone = findViewById(R.id.editTextTelef);
+        edtEmail = findViewById(R.id.editTextEmail);
+        edtSenha = findViewById(R.id.editTextSenha);
+        edtRepetirSenha = findViewById(R.id.editTextConfirmaSenha);
 
-        sexo.setOnClickListener(new View.OnClickListener() {
+        edtSexo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setarGeneroEditText();
             }
         });
 
-        dataNasc.setOnClickListener(new View.OnClickListener() {
+        edtDataNasc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setarDataNascEditText();
             }
         });
 
-        entrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*validarEmail(email.getText().toString());
-                validarTele(telefone.getText().toString());*/
-                validarCpf(cpf.getText().toString());
-                validarSenha(senha.getText().toString());
-                validarConfSenha(repetirSenha.getText().toString(), senha.getText().toString());
-                validarNome(nome.getText().toString());
-                //validação.validarConfSenha(senha.getText().toString(), this);
-
-            }
-        });
 
     }
 
@@ -95,6 +72,7 @@ public class CadastroPfActivity extends AppCompatActivity {
         ArrayList<String> itens = new ArrayList<String>();
         itens.add("Feminino");
         itens.add("Masculino");
+        itens.add("Outro");
 
         //adapter utilizando um layout customizado (TextView)
         final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.alert_criar_conta_pt1, itens);
@@ -108,7 +86,7 @@ public class CadastroPfActivity extends AppCompatActivity {
 
                 String genero = adapter.getItem(arg1).toString();
 
-                sexo.setText(genero);
+                edtSexo.setText(genero);
                 String sexo = genero;
                 pessoaFisica.setSexo(genero);
                 alerta.dismiss();
@@ -120,7 +98,7 @@ public class CadastroPfActivity extends AppCompatActivity {
     }
 
     public void setarDataNascEditText() {
-        displayDate = (TextView) findViewById(R.id.editTextDataNasc);
+        displayDate = findViewById(R.id.editTextDataNasc);
 
         displayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +110,7 @@ public class CadastroPfActivity extends AppCompatActivity {
                 int dia = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog dialog = new DatePickerDialog(CadastroPfActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, dateSetListener, ano, mes, dia);
+                DatePickerDialog dialog = new DatePickerDialog(CadastroActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, dateSetListener, ano, mes, dia);
 
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -149,7 +127,7 @@ public class CadastroPfActivity extends AppCompatActivity {
 
                 Log.d(TAG, "dataSet: date: dd/mm/yyyy: " + dayOfMonth + "/" + month + "/" + year);
                 String date = dayOfMonth + "/" + (month + 1) + "/" + year;
-                dataNasc.setText(date);
+                edtDataNasc.setText(date);
                 String data = date;
                 pessoaFisica.setDataNasc(data);
             }
@@ -157,44 +135,68 @@ public class CadastroPfActivity extends AppCompatActivity {
     }
 
 
-    private void validarCpf(String cpf) {
+    public void validarCadastrar(){
+        String nome     = edtNome.getText().toString();
+        String cpf     = edtCpf.getText().toString();
+        String email    = edtEmail.getText().toString();
+        String nasc     = edtDataNasc.getText().toString();
+        String senha    = edtSenha.getText().toString();
+        String sexo = edtSexo.getText().toString();
+        String telefone = edtTelefone.getText().toString();
+        String repetirSenha = edtRepetirSenha.getText().toString();
 
-        if (cpf.length() == 11 ) {
-            pessoaFisica.setCpf(cpf);
+        ValidacaoService validacaoCadastro = new ValidacaoService();
+        boolean valid = true;
 
-        } else {
-            Toast.makeText(CadastroPfActivity.this, "Verifique o campo do cpf!!", Toast.LENGTH_SHORT).show();
+        if (!validacaoCadastro.isSenhaValida(senha)){
+            edtSenha.requestFocus();
+            edtSenha.setError(getString(R.string.msg_senha_fora_padrão));
+            valid = false;
         }
+        if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)){
+            edtSenha.requestFocus();
+            edtSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
+            valid = false;
+        }
+        if (!validacaoCadastro.isDataValida(nasc)){
+            edtDataNasc.requestFocus();
+            edtDataNasc.setError(getString(R.string.msg_data_invalida));
+            valid = false;
+        }
+        if (!validacaoCadastro.isEmailValido(email)){
+            edtEmail.requestFocus();
+            edtEmail.setError(getString(R.string.msg_email_invalido));
+            valid = false;
+        }
+        if (!validacaoCadastro.isCpfValido(cpf)){
+            edtCpf.requestFocus();
+            edtCpf.setError(getString(R.string.msg_nick_invalido));
+            valid = false;
+        }
+        if (!validacaoCadastro.isTelefoneValido(telefone)){
+            edtCpf.requestFocus();
+            edtCpf.setError(getString(R.string.msg_nick_invalido));
+            valid = false;
+        }
+
+        if (validacaoCadastro.isCampoVazio(nome)){
+            edtNome.requestFocus();
+            edtNome.setError(getString(R.string.msg_nome_invalido));
+            valid = false;
+        }
+
+        /*if (valid) {
+            UsuarioService service = new UsuarioService(getApplicationContext());
+            try {
+                service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
+                GuiUtil.myToast(this, getString(R.string.msg_cadastro_sucesso));
+                finish();
+            } catch (Exception e) {
+                GuiUtil.myToast(this, e);
+            }
+        }*/
     }
 
-    private void validarSenha(String senha) {
-
-        if (senha.length() == 8 ) {
-            usuario.setSenha(senha);
-
-        } else {
-            Toast.makeText(CadastroPfActivity.this, "Verifique o campo do senha!!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void validarConfSenha(String confSenha, String senha) {
-
-        if (!confSenha.isEmpty()) {
-
-        } else {
-            Toast.makeText(CadastroPfActivity.this, "Verifique o campo do confirmar senha!!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void validarNome(String nome) {
-
-        if (!nome.isEmpty()) {
-            pessoaFisica.setNome(nome);
-
-        } else {
-            Toast.makeText(CadastroPfActivity.this, "Verifique o campo do Nome!!", Toast.LENGTH_SHORT).show();
-        }
-    }
 }
 
 
