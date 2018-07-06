@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="divider_thickness">0.5dp</dimen>
+    <dimen name="divider_layout_margin">8dp</dimen>
     <dimen name="margin_end_card">8dp</dimen>
     <dimen name="margin_start_card">8dp</dimen>
     <dimen name="margin_top_card">8dp</dimen>
     <dimen name="card_border">3dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_padding">8dp</dimen>
+    <dimen name="switch_margin_bottom">8dp</dimen>
+    <dimen name="switch_margin_end">8dp</dimen>
+    <dimen name="switch_margin_start">8dp</dimen>
+    <dimen name="divider_horizontal_margin_start">8dp</dimen>
+    <dimen name="divider_horizontal_margin_end">8dp</dimen>
+    <dimen name="divider_horizontal_margin_bottom">8dp</dimen>
+    <dimen name="edit_text_margin_bottom">8dp</dimen>
+    <dimen name="edit_text_margin_end">8dp</dimen>
+    <dimen name="edit_text_margin_start">8dp</dimen>
 </resources>

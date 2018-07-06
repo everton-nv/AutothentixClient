@@ -27,22 +27,29 @@
 
                 <Switch
                     android:id="@+id/switchTipoCadastro"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:text="@string/switch_cpf_cpnj"
-                    android:textColor="@color/colorPostDataFont"
-                    android:thumbTint="@color/colorBtnBlue" />
+                    android:layout_marginBottom="@dimen/switch_margin_bottom"
+                    android:layout_marginEnd="@dimen/switch_margin_end"
+                    android:layout_marginStart="@dimen/switch_margin_start"
+                    android:text="@string/switch_tipo_cadastro_pessoa_fisica"
+                    android:textColor="@color/colorPostDataFont" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_thickness"
+                    android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
+                    android:background="@color/divider" />
 
                 <EditText
                     android:id="@+id/editTextNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_nome"
                     android:inputType="textPersonName" />
 
@@ -50,11 +57,9 @@
                     android:id="@+id/editTextCpf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_cpf"
                     android:inputType="number" />
 
@@ -62,11 +67,9 @@
                     android:id="@+id/editTextRazaoSocial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_razao_social"
                     android:inputType="textPersonName"
                     android:visibility="gone" />
@@ -75,11 +78,9 @@
                     android:id="@+id/editTextCnpj"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_cnpj"
                     android:inputType="number"
                     android:visibility="gone" />
@@ -87,12 +88,10 @@
                 <EditText
                     android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="49dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_email"
                     android:inputType="textEmailAddress" />
 
@@ -100,11 +99,9 @@
                     android:id="@+id/editTextSexo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/lbl_sexo"
                     android:inputType="textPersonName" />
 
@@ -112,23 +109,19 @@
                     android:id="@+id/editTextDataNasc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/lbl_datanasc"
                     android:inputType="date" />
 
                 <EditText
                     android:id="@+id/editTextTelef"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_telefone"
                     android:inputType="phone" />
 
@@ -136,11 +129,9 @@
                     android:id="@+id/editTextSenha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_senha"
                     android:inputType="textPassword" />
 
@@ -148,11 +139,9 @@
                     android:id="@+id/editTextConfirmaSenha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:hint="@string/edt_confsenha"
                     android:inputType="textPassword" />
 
@@ -176,15 +165,14 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/btnCancel"
-                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                            android:id="@+id/btnRegister"
+                            style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick=""
-                            android:text="@string/btn_cancelar"
-                            android:textColor="@android:color/holo_red_dark" />
-
+                            android:onClick="NULL"
+                            android:text="@string/btn_cadastrar"
+                            android:textColor="@android:color/holo_blue_dark" />
 
                         <View
                             android:id="@+id/view10"
@@ -193,14 +181,15 @@
                             android:background="@color/divider" />
 
                         <Button
-                            android:id="@+id/btnRegister"
-                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:id="@+id/btnCancel"
+                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick=""
-                            android:text="@string/btn_cadastrar"
-                            android:textColor="@android:color/holo_blue_dark" />
+                            android:onClick="NULL"
+                            android:text="@string/btn_cancelar"
+                            android:textColor="@android:color/holo_red_dark" />
+
                     </LinearLayout>
                 </LinearLayout>
 

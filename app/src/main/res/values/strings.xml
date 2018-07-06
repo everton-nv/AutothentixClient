@@ -102,5 +102,6 @@
     <string name="pessoa_jur">Pessoa Jurídica</string>
     <string name="edt_razao_social">Razão Social</string>
     <string name="edt_cnpj">CNPJ</string>
-    <string name="switch_cpf_cpnj">CPF/CPNJ</string>
+    <string name="switch_tipo_cadastro_pessoa_fisica">Pessoa Física</string>
+    <string name="switch_tipo_cadastro_pessoa_juridica">Pessoa Jurídica</string>
 </resources>
