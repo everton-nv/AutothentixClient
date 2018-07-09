@@ -115,7 +115,6 @@ public class CadastroActivity extends AppCompatActivity {
                 String genero = adapter.getItem(arg1).toString();
 
                 edtSexo.setText(genero);
-                String sexo = genero;
                 pessoaFisica.setSexo(genero);
                 alerta.dismiss();
             }
@@ -157,8 +156,17 @@ public class CadastroActivity extends AppCompatActivity {
         };
     }
 
+    public void verificarTipoCadastro(View view){
+        boolean verificador = switchTipoCadastro.isChecked();
 
-    public void validarCadastrar(View view){
+        if (verificador){
+            validarCadastroPj();
+        }else {
+            validarCadastroPf();
+        }
+    }
+
+    public void validarCadastroPf(){
         String nome     = edtNome.getText().toString();
         String cpf     = edtCpf.getText().toString();
         String email    = edtEmail.getText().toString();
@@ -193,12 +201,12 @@ public class CadastroActivity extends AppCompatActivity {
         }
         if (!validacaoCadastro.isCpfValido(cpf)){
             edtCpf.requestFocus();
-            edtCpf.setError(getString(R.string.msg_nick_invalido));
+            edtCpf.setError(getString(R.string.msg_cpf_invalido));
             valid = false;
         }
         if (!validacaoCadastro.isTelefoneValido(telefone)){
             edtCpf.requestFocus();
-            edtCpf.setError(getString(R.string.msg_nick_invalido));
+            edtCpf.setError(getString(R.string.msg_telefone_invalido));
             valid = false;
         }
 
@@ -219,6 +227,51 @@ public class CadastroActivity extends AppCompatActivity {
             }
         }*/
     }
+
+    public void validarCadastroPj(){
+        String razaoSocial = edtRazaoSocial.getText().toString();
+        String cnpj = edtCnpj.getText().toString();
+        String email = edtEmail.getText().toString();
+        String telefone = edtTelefone.getText().toString();
+        String senha = edtSenha.getText().toString();
+        String repetirSenha = edtRepetirSenha.getText().toString();
+
+        ValidacaoService validacaoCadastro = new ValidacaoService();
+        boolean valid = true;
+
+        if (!validacaoCadastro.isSenhaValida(senha)){
+            edtSenha.requestFocus();
+            edtSenha.setError(getString(R.string.msg_senha_fora_padrão));
+            valid = false;
+        }
+        if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)){
+            edtSenha.requestFocus();
+            edtSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
+            valid = false;
+        }
+        if (validacaoCadastro.isCampoVazio(razaoSocial)){
+            edtRazaoSocial.requestFocus();
+            edtRazaoSocial.setError(getString(R.string.msg_razao_social_invalida));
+        }
+        if (!validacaoCadastro.isEmailValido(email)){
+            edtEmail.requestFocus();
+            edtEmail.setError(getString(R.string.msg_email_invalido));
+            valid = false;
+        }
+        if (!validacaoCadastro.isCpfValido(cnpj)){
+            edtCpf.requestFocus();
+            edtCpf.setError(getString(R.string.msg_cnpj_invalido));
+            valid = false;
+        }
+        if (!validacaoCadastro.isTelefoneValido(telefone)){
+            edtCpf.requestFocus();
+            edtCpf.setError(getString(R.string.msg_telefone_invalido));
+            valid = false;
+        }
+
+    }
+
+
 
 }
 

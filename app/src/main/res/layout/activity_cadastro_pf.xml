@@ -191,6 +191,7 @@
         android:backgroundTint="@android:color/holo_blue_dark"
         android:text="@string/btn_cadastrar"
         android:textColor="@color/colorFontNormalLight"
+        android:onClick="verificarTipoCadastro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonCancelar"
         app:layout_constraintStart_toStartOf="parent" />

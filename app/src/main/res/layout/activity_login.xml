@@ -126,6 +126,7 @@
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorBtnYellow"
                 android:text="@string/btn_cadastrar"
+                android:onClick="cadastrar"
                 android:textColor="@color/colorFontNormalLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@+id/btnEntrar"
