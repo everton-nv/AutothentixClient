@@ -28,13 +28,13 @@ import java.util.Calendar;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    private Usuario usuario = new Usuario();
+   // private Usuario usuario = new Usuario();
   //  private Validação validação;
     private PessoaFisica pessoaFisica = new PessoaFisica();
     private AlertDialog alerta;
-    private TextView displayDate;
+  /*  private TextView displayDate;
     private DatePickerDialog.OnDateSetListener dateSetListener;
-    private static final String TAG = "Cadastro";
+    private static final String TAG = "Cadastro";*/
     private EditText edtNome,edtCpf,edtDataNasc,edtSexo, edtTelefone,edtEmail,edtSenha,edtRepetirSenha,
             edtCnpj, edtRazaoSocial;
     private Switch switchTipoCadastro;
@@ -64,12 +64,12 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
-        edtDataNasc.setOnClickListener(new View.OnClickListener() {
+       /* edtDataNasc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setarDataNascEditText();
             }
-        });
+        });*/
 
         switchTipoCadastro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -124,7 +124,7 @@ public class CadastroActivity extends AppCompatActivity {
         alerta.show();
     }
 
-    public void setarDataNascEditText() {
+  /*  public void setarDataNascEditText() {
         displayDate = findViewById(R.id.editTextDataNasc);
 
         displayDate.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +154,7 @@ public class CadastroActivity extends AppCompatActivity {
                 pessoaFisica.setDataNasc(data);
             }
         };
-    }
+    }*/
 
     public void verificarTipoCadastro(View view){
         boolean verificador = switchTipoCadastro.isChecked();
@@ -185,8 +185,8 @@ public class CadastroActivity extends AppCompatActivity {
             valid = false;
         }
         if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)){
-            edtSenha.requestFocus();
-            edtSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
+            edtRepetirSenha.requestFocus();
+            edtRepetirSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
             valid = false;
         }
         if (!validacaoCadastro.isDataValida(nasc)){
@@ -205,8 +205,8 @@ public class CadastroActivity extends AppCompatActivity {
             valid = false;
         }
         if (!validacaoCadastro.isTelefoneValido(telefone)){
-            edtCpf.requestFocus();
-            edtCpf.setError(getString(R.string.msg_telefone_invalido));
+            edtTelefone.requestFocus();
+            edtTelefone.setError(getString(R.string.msg_telefone_invalido));
             valid = false;
         }
 
@@ -245,8 +245,8 @@ public class CadastroActivity extends AppCompatActivity {
             valid = false;
         }
         if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)){
-            edtSenha.requestFocus();
-            edtSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
+            edtRepetirSenha.requestFocus();
+            edtRepetirSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
             valid = false;
         }
         if (validacaoCadastro.isCampoVazio(razaoSocial)){
@@ -259,13 +259,13 @@ public class CadastroActivity extends AppCompatActivity {
             valid = false;
         }
         if (!validacaoCadastro.isCpfValido(cnpj)){
-            edtCpf.requestFocus();
-            edtCpf.setError(getString(R.string.msg_cnpj_invalido));
+            edtCnpj.requestFocus();
+            edtCnpj.setError(getString(R.string.msg_cnpj_invalido));
             valid = false;
         }
         if (!validacaoCadastro.isTelefoneValido(telefone)){
-            edtCpf.requestFocus();
-            edtCpf.setError(getString(R.string.msg_telefone_invalido));
+            edtTelefone.requestFocus();
+            edtTelefone.setError(getString(R.string.msg_telefone_invalido));
             valid = false;
         }
 

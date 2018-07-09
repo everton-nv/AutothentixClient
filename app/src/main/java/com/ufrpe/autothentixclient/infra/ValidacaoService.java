@@ -7,7 +7,8 @@ import java.util.Date;
 
 
 public class ValidacaoService {
-    private static final String DATA_COMUM   = "dd/MM/yyyy";
+    private static final String DATA_COMUM_CB   = "dd/MM/yyyy";
+    private static final String DATA_COMUM_SB = "yyyyMMdd";
 
     private static final int TAMCPF = 11;
     private static final int TAMCNPJ = 14;
@@ -55,7 +56,7 @@ public class ValidacaoService {
     }
 
     static boolean dataMenorOuIgualQueAtual(String data) {
-        SimpleDateFormat dataFormatada = new SimpleDateFormat(DATA_COMUM);
+        SimpleDateFormat dataFormatada = new SimpleDateFormat(DATA_COMUM_CB);
         dataFormatada.setLenient(false);
         //Testa no formato dd/MM/yyyy
         try {
@@ -70,9 +71,9 @@ public class ValidacaoService {
         return false;
     }
 
-    static boolean dataExiste(String data) {
-        SimpleDateFormat dataFormatada = new SimpleDateFormat(DATA_COMUM);
-        dataFormatada.setLenient(false);
+    static boolean dataExiste(String data){
+        SimpleDateFormat dataFormatada = new SimpleDateFormat (DATA_COMUM_CB);
+        dataFormatada.setLenient (false);
 
         //Testa no formato dd/MM/yyyy
         try {
@@ -80,6 +81,17 @@ public class ValidacaoService {
             return true;
         } catch (Exception e) {
         }
+
+        dataFormatada = new SimpleDateFormat (DATA_COMUM_SB);
+        dataFormatada.setLenient (false);
+
+        //Testa no formato yyyyMMdd
+        try {
+            dataFormatada.parse(data);
+            return true;
+        } catch (Exception e) {
+        }
+
         return false;
     }
 
