@@ -1,42 +1,27 @@
 package com.ufrpe.autothentixclient.usuario.gui;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
-import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
-//import com.ufrpe.autothentixclient.infra.Validação;
+
 
 public class CadastroActivity extends AppCompatActivity {
-
-   // private Usuario usuario = new Usuario();
-  //  private Validação validação;
     private PessoaFisica pessoaFisica = new PessoaFisica();
     private AlertDialog alerta;
-  /*  private TextView displayDate;
-    private DatePickerDialog.OnDateSetListener dateSetListener;
-    private static final String TAG = "Cadastro";*/
-    private EditText edtNome,edtCpf,edtDataNasc,edtSexo, edtTelefone,edtEmail,edtSenha,edtRepetirSenha,
-            edtCnpj, edtRazaoSocial;
+    private EditText edtNome,edtCpf,edtDataNasc,edtSexo, edtTelefone,edtEmail,edtSenha,edtRepetirSenha, edtCnpj, edtRazaoSocial;
     private Switch switchTipoCadastro;
 
 
@@ -63,13 +48,6 @@ public class CadastroActivity extends AppCompatActivity {
                 setarGeneroEditText();
             }
         });
-
-       /* edtDataNasc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setarDataNascEditText();
-            }
-        });*/
 
         switchTipoCadastro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -115,7 +93,6 @@ public class CadastroActivity extends AppCompatActivity {
                 String genero = adapter.getItem(arg1).toString();
 
                 edtSexo.setText(genero);
-                pessoaFisica.setSexo(genero);
                 alerta.dismiss();
             }
         });
@@ -123,38 +100,6 @@ public class CadastroActivity extends AppCompatActivity {
         alerta = builder.create();
         alerta.show();
     }
-
-  /*  public void setarDataNascEditText() {
-        displayDate = findViewById(R.id.editTextDataNasc);
-
-        displayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int ano = calendar.get(Calendar.YEAR);
-                int mes = calendar.get(Calendar.MONTH);
-                int dia = calendar.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(CadastroActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, dateSetListener, ano, mes, dia);
-
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-                Log.d(TAG, "dataSet: date: dd/mm/yyyy: " + dayOfMonth + "/" + month + "/" + year);
-                String date = dayOfMonth + "/" + (month + 1) + "/" + year;
-                edtDataNasc.setText(date);
-                String data = date;
-                pessoaFisica.setDataNasc(data);
-            }
-        };
-    }*/
 
     public void verificarTipoCadastro(View view){
         boolean verificador = switchTipoCadastro.isChecked();
@@ -270,9 +215,4 @@ public class CadastroActivity extends AppCompatActivity {
         }
 
     }
-
-
-
 }
-
-

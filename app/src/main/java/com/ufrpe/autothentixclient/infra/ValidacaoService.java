@@ -41,8 +41,9 @@ public class ValidacaoService {
         if (isCampoVazio(senha)) {
             return false;
         } else {
-            String rex = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z].{6,12}))";
-            return (senha.matches(rex));
+            String rex = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})";
+            boolean teste = (senha.matches(rex));
+            return teste;
         }
     }
 
