@@ -14,7 +14,10 @@ public class ValidacaoService {
     private static final int TAMCNPJ = 14;
     private static final int TAMTEL = 11;
     private static final int ZERO = 0;
-    private static final int TAMANHO_DATA = 10;
+    private static final int DOIS = 2;
+    private static final int QUATRO = 4;
+    private static final int TAMANHO_DATA_CB = 10;
+    private static final int TAMANHO_DATA_SB = 8;
 
     public boolean isCampoVazio(String valor) {
 
@@ -98,6 +101,18 @@ public class ValidacaoService {
 
     public boolean isDataValida(String data){
 
-        return(dataExiste(data) && dataMenorOuIgualQueAtual(data) && data.length() == TAMANHO_DATA);
+        return(dataExiste(data) && dataMenorOuIgualQueAtual(data) && (data.length() == TAMANHO_DATA_CB) || data.length() == TAMANHO_DATA_SB);
+    }
+
+    public String dataFormatoBanco(String data){
+        String dataFormatada;
+        if (data.contains("/")){
+             dataFormatada = data.replace("/","-");
+
+        }else{
+             dataFormatada = data.substring(ZERO,DOIS) + "-" + data.substring(DOIS,QUATRO) + "-" + data.substring(4,TAMANHO_DATA_SB);
+        }
+        return dataFormatada;
+
     }
 }

@@ -12,17 +12,19 @@ import android.widget.Switch;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
-import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
+import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.ArrayList;
 
 
 
 public class CadastroActivity extends AppCompatActivity {
-    private PessoaFisica pessoaFisica = new PessoaFisica();
     private AlertDialog alerta;
     private EditText edtNome,edtCpf,edtDataNasc,edtSexo, edtTelefone,edtEmail,edtSenha,edtRepetirSenha, edtCnpj, edtRazaoSocial;
     private Switch switchTipoCadastro;
+
+    private static final int ZERO = 0;
+    private static final int UM = 1;
 
 
     @Override
@@ -111,66 +113,62 @@ public class CadastroActivity extends AppCompatActivity {
         }
     }
 
-    public void validarCadastroPf(){
-        String nome     = edtNome.getText().toString();
-        String cpf     = edtCpf.getText().toString();
-        String email    = edtEmail.getText().toString();
-        String nasc     = edtDataNasc.getText().toString();
-        String senha    = edtSenha.getText().toString();
-        String sexo = edtSexo.getText().toString();
+    public void validarCadastroPf() {
+        String nome = edtNome.getText().toString();
+        String cpf = edtCpf.getText().toString();
+        String email = edtEmail.getText().toString();
+        String nasc = edtDataNasc.getText().toString();
+        String senha = edtSenha.getText().toString();
+        String sexo = edtSexo.getText().toString().substring(ZERO,UM);
         String telefone = edtTelefone.getText().toString();
         String repetirSenha = edtRepetirSenha.getText().toString();
 
         ValidacaoService validacaoCadastro = new ValidacaoService();
         boolean valid = true;
 
-        if (!validacaoCadastro.isSenhaValida(senha)){
+        if (!validacaoCadastro.isSenhaValida(senha)) {
             edtSenha.requestFocus();
             edtSenha.setError(getString(R.string.msg_senha_fora_padrão));
             valid = false;
         }
-        if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)){
+        if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)) {
             edtRepetirSenha.requestFocus();
             edtRepetirSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
             valid = false;
         }
-        if (!validacaoCadastro.isDataValida(nasc)){
+        if (!validacaoCadastro.isDataValida(nasc)) {
             edtDataNasc.requestFocus();
             edtDataNasc.setError(getString(R.string.msg_data_invalida));
             valid = false;
         }
-        if (!validacaoCadastro.isEmailValido(email)){
+        if (!validacaoCadastro.isEmailValido(email)) {
             edtEmail.requestFocus();
             edtEmail.setError(getString(R.string.msg_email_invalido));
             valid = false;
         }
-        if (!validacaoCadastro.isCpfValido(cpf)){
+        if (!validacaoCadastro.isCpfValido(cpf)) {
             edtCpf.requestFocus();
             edtCpf.setError(getString(R.string.msg_cpf_invalido));
             valid = false;
         }
-        if (!validacaoCadastro.isTelefoneValido(telefone)){
+        if (!validacaoCadastro.isTelefoneValido(telefone)) {
             edtTelefone.requestFocus();
             edtTelefone.setError(getString(R.string.msg_telefone_invalido));
             valid = false;
         }
 
-        if (validacaoCadastro.isCampoVazio(nome)){
+        if (validacaoCadastro.isCampoVazio(nome)) {
             edtNome.requestFocus();
             edtNome.setError(getString(R.string.msg_nome_invalido));
             valid = false;
         }
 
-        /*if (valid) {
-            UsuarioService service = new UsuarioService(getApplicationContext());
-            try {
-                service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
-                GuiUtil.myToast(this, getString(R.string.msg_cadastro_sucesso));
-                finish();
-            } catch (Exception e) {
-                GuiUtil.myToast(this, e);
-            }
-        }*/
+        if (valid) {
+            UsuarioService service = new UsuarioService();
+            //Função que vai enviar as informações para o banco.
+            //Chamar a função de formatar data para o banco para passar coo parâmetro.
+
+        }
     }
 
     public void validarCadastroPj(){
