@@ -1,5 +1,6 @@
 package com.ufrpe.autothentixclient.infra;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -12,9 +13,10 @@ import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.PASSW
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.TITLE_PREFERENCES;
 
 public class SharedPreferencesServices {
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
+    @SuppressLint("CommitPrefEdits")
     public SharedPreferencesServices(Context context) {
         sharedPreferences = context.getSharedPreferences(TITLE_PREFERENCES, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();

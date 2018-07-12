@@ -2,8 +2,11 @@ package com.ufrpe.autothentixclient.usuario.gui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -15,7 +18,7 @@ import com.ufrpe.autothentixclient.infra.ValidacaoService;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.ArrayList;
-
+import java.util.Objects;
 
 
 public class CadastroActivity extends AppCompatActivity {
@@ -31,6 +34,13 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        try{
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(R.string.screen_name_signup);
+        } catch (Exception e){
+            Log.e(getString(R.string.log_screen_signup), e.getMessage());
+            this.returnLoginActivity();
+        }
 
         switchTipoCadastro = findViewById(R.id.switchTipoCadastro);
         edtNome = findViewById(R.id.editTextNome);
@@ -77,17 +87,43 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
+    private void returnLoginActivity(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.returnLoginActivity();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.returnLoginActivity();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickCancel(View view){
+        this.returnLoginActivity();
+    }
+
     private void setarGeneroEditText() {
         ArrayList<String> itens = new ArrayList<String>();
-        itens.add("Feminino");
-        itens.add("Masculino");
-        itens.add("Outro");
+        itens.add(getString(R.string.sex_fem));
+        itens.add(getString(R.string.sex_male));
+        itens.add(getString(R.string.sex_other));
 
         //adapter utilizando um layout customizado (TextView)
         final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.alert_criar_conta_pt1, itens);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Escolha seu gênero:");
+        builder.setTitle(R.string.choice_your_genre);
         //define o diálogo como uma lista, passa o adapter.
 
         builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
