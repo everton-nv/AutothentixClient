@@ -201,9 +201,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         if (valid) {
             UsuarioService service = new UsuarioService();
-            //Função que vai enviar as informações para o banco.
-            //Chamar a função de formatar data para o banco para passar coo parâmetro.
-
+            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo, nasc);
         }
     }
 
