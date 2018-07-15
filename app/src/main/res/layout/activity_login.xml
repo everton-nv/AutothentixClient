@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayoutLogin"
+    android:background="@drawable/activity_login_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".usuario.gui.LoginActivity"
@@ -20,103 +21,137 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
-                android:layout_height="176dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/content_description_logo_autothentix"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/perfil"
-                android:contentDescription="@string/content_description_logo_autothentix" />
+                app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:id="@+id/txtLogo1"
                 android:layout_width="0dp"
-                android:layout_height="57dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:elegantTextHeight="false"
-                android:fontFamily="sans-serif"
+                android:textSize="72sp"
                 android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/lbl_logo"
-                android:textAllCaps="false"
                 android:textColor="@color/colorFontLogo"
-                android:textIsSelectable="false"
-                android:textSize="36sp"
-                android:typeface="normal"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintLeft_toLeftOf="@+id/imageView"
                 app:layout_constraintRight_toRightOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:ignore="MissingPrefix" />
 
 
             <TextView
                 android:id="@+id/txtSubtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:clickable="false"
+                android:textSize="22sp"
                 android:gravity="center"
-                android:includeFontPadding="false"
+                android:maxLines="1"
                 android:text="@string/lbl_subtitle"
                 android:textColor="@color/colorFontSubtitle"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintLeft_toLeftOf="@+id/txtLogo1"
                 app:layout_constraintRight_toRightOf="@+id/txtLogo1"
-                app:layout_constraintTop_toBottomOf="@+id/txtLogo1"/>
+                app:layout_constraintTop_toBottomOf="@+id/txtLogo1"
+                tools:ignore="MissingPrefix" />
 
-            <EditText
-                android:id="@+id/edtLogin"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layoutedtLogin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/edt_email"
-                android:inputType="textPersonName"
-                android:selectAllOnFocus="false"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="@+id/txtSubtitle"
                 app:layout_constraintRight_toRightOf="@+id/txtSubtitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtSubtitle"
-      />
-            <EditText
-                android:id="@+id/edtSenha"
+                app:layout_constraintTop_toBottomOf="@+id/txtSubtitle">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:layout_gravity="center"
+                    android:hint="@string/edt_email"
+                    android:inputType="textPersonName"
+                    android:selectAllOnFocus="false" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/layoutedtSenha"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/edt_senha"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="false"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="@+id/edtLogin"
-                app:layout_constraintRight_toRightOf="@+id/edtLogin"
-                app:layout_constraintTop_toBottomOf="@+id/edtLogin" />
+                app:layout_constraintLeft_toLeftOf="@+id/layoutedtLogin"
+                app:layout_constraintRight_toRightOf="@+id/layoutedtLogin"
+                app:layout_constraintTop_toBottomOf="@+id/layoutedtLogin">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edtSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:layout_gravity="center"
+                    android:hint="@string/edt_senha"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="false"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!--<EditText-->
+                <!--android:id="@+id/edtLogin"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:ems="10"-->
+                <!--android:hint="@string/edt_email"-->
+                <!--android:inputType="textPersonName"-->
+                <!--android:selectAllOnFocus="false"-->
+                <!--app:layout_constraintHorizontal_bias="0.0"-->
+                <!--app:layout_constraintLeft_toLeftOf="@+id/txtSubtitle"-->
+                <!--app:layout_constraintRight_toRightOf="@+id/txtSubtitle"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/txtSubtitle" />-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/edtSenha"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:ems="10"-->
+                <!--android:hint="@string/edt_senha"-->
+                <!--android:inputType="textPassword"-->
+                <!--android:selectAllOnFocus="false"-->
+                <!--app:layout_constraintHorizontal_bias="0.0"-->
+                <!--app:layout_constraintLeft_toLeftOf="@+id/layoutedtLogin"-->
+                <!--app:layout_constraintRight_toRightOf="@+id/layoutedtLogin"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/layoutedtLogin" />-->
 
             <Button
                 android:id="@+id/btnEntrar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorBtnBlue"
                 android:text="@string/btn_Entrar"
+                android:onClick="logar"
                 android:textColor="@color/colorFontNormalLight"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="@+id/edtSenha"
-                app:layout_constraintRight_toRightOf="@+id/edtSenha"
-                app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
+                app:layout_constraintLeft_toLeftOf="@+id/layoutedtSenha"
+                app:layout_constraintRight_toRightOf="@+id/layoutedtSenha"
+                app:layout_constraintTop_toBottomOf="@+id/layoutedtSenha" />
 
             <Button
                 android:id="@+id/btnCadastrar"
@@ -124,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorBtnYellow"
+                android:backgroundTint="@color/colorBtnGreen"
                 android:text="@string/btn_cadastrar"
                 android:onClick="cadastrar"
                 android:textColor="@color/colorFontNormalLight"

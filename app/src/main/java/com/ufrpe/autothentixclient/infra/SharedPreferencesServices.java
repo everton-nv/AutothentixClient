@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_ID_USER_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_LOGIN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_PASSWORD_PREFERENCES;
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_TOKEN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.ID_USER_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.LOGIN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.PASSWORD_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.TITLE_PREFERENCES;
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.TOKEN_PREFERENCES;
 
 public class SharedPreferencesServices {
     private SharedPreferences sharedPreferences;
@@ -37,6 +39,11 @@ public class SharedPreferencesServices {
         editor.commit();
     }
 
+    public void setTokenPreferences(String token){
+        editor.putString(TOKEN_PREFERENCES, token);
+        editor.commit();
+    }
+
     public long getIdUserPreferences(){
         return sharedPreferences.getLong(ID_USER_PREFERENCES, DEFAULT_ID_USER_PREFERENCES);
     }
@@ -48,6 +55,11 @@ public class SharedPreferencesServices {
     public String getPasswordPreferences(){
         return sharedPreferences.getString(PASSWORD_PREFERENCES, DEFAULT_PASSWORD_PREFERENCES);
     }
+
+    public String getTokenPreferences(){
+        return sharedPreferences.getString(TOKEN_PREFERENCES, DEFAULT_TOKEN_PREFERENCES);
+    }
+
 
     public void clearPreferences(){
         editor.clear();

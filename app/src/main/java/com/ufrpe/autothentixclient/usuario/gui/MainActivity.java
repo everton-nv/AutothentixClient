@@ -1,5 +1,6 @@
 package com.ufrpe.autothentixclient.usuario.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -57,6 +58,17 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+//    private void startPatientFragment(){
+//        DocumentoFragment mFragment = (DocumentoFragment) getSupportFragmentManager().findFragmentByTag("lista de consultas");
+//        if(mFragment == null) {
+//            mFragment = new DocumentoFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.rl_fragment_container, mFragment, "Documents List");
+//            ft.commit();
+//        }
+//    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -71,7 +83,12 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()){
             case R.id.action_settings:
-                return true;
+                myToastShort(this, "Settings Click ok");
+                break;
+            case R.id.action_logout:
+                myToastShort(this, "Logout Click ok");
+                changeActivity(LoginActivity.class);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -83,27 +100,33 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         switch (item.getItemId()){
             case R.id.nav_camera:
-                myToastShort(this, "Camera");
+                myToastShort(this, "Camera Click ok");
                 break;
             case R.id.nav_gallery:
-                myToastShort(this, "Galeria");
+                myToastShort(this, "Galeria Click ok");
                 break;
             case R.id.nav_slideshow:
-                myToastShort(this, "Slide Show");
+                myToastShort(this, "Slide Show Click ok");
                 break;
             case R.id.nav_manage:
-                myToastShort(this, "Gerenciamento");
+                myToastShort(this, "Gerenciamento Click ok");
                 break;
             case R.id.nav_share:
-                myToastShort(this, "Compartilhar");
+                myToastShort(this, "Compartilhar Click ok");
                 break;
             case R.id.nav_send:
-                myToastShort(this, "Enviar");
+                myToastShort(this, "Enviar Click ok");
                 break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void changeActivity(Class screenClass){
+        Intent intent = new Intent(this, screenClass);
+        startActivity(intent);
+        finish();
     }
 }

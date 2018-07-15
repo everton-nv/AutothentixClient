@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,7 +24,8 @@ import java.util.Objects;
 
 public class CadastroActivity extends AppCompatActivity {
     private AlertDialog alerta;
-    private EditText edtNome,edtCpf,edtDataNasc,edtSexo, edtTelefone,edtEmail,edtSenha,edtRepetirSenha, edtCnpj, edtRazaoSocial;
+    private EditText edtNome, edtCpf, edtDataNasc, edtSexo, edtTelefone, edtEmail, edtSenha, edtRepetirSenha, edtCnpj, edtRazaoSocial;
+    private TextInputLayout layoutTextNome, layoutTextCpf, layoutTextRazaoSocial, layoutTextCnpj, layoutTextSexo, layoutTextDataNasc;
     private Switch switchTipoCadastro;
 
     private static final int ZERO = 0;
@@ -54,6 +56,13 @@ public class CadastroActivity extends AppCompatActivity {
         edtCnpj = findViewById(R.id.editTextCnpj);
         edtRazaoSocial = findViewById(R.id.editTextRazaoSocial);
 
+        layoutTextNome = findViewById(R.id.layoutTextNome);
+        layoutTextCpf = findViewById(R.id.layoutTextCpf);
+        layoutTextRazaoSocial = findViewById(R.id.layoutTextRazaoSocial);
+        layoutTextCnpj = findViewById(R.id.layoutTextCnpj);
+        layoutTextSexo = findViewById(R.id.layoutTextSexo);
+        layoutTextDataNasc = findViewById(R.id.layoutTextDataNasc);
+
         edtSexo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,10 +78,18 @@ public class CadastroActivity extends AppCompatActivity {
                     edtCnpj.setVisibility(View.VISIBLE);
                     edtRazaoSocial.setVisibility(View.VISIBLE);
 
+                    layoutTextCnpj.setVisibility(View.VISIBLE);
+                    layoutTextRazaoSocial.setVisibility(View.VISIBLE);
+
                     edtNome.setVisibility(View.GONE);
                     edtCpf.setVisibility(View.GONE);
                     edtDataNasc.setVisibility(View.GONE);
                     edtSexo.setVisibility(View.GONE);
+
+                    layoutTextNome.setVisibility(View.GONE);
+                    layoutTextCpf.setVisibility(View.GONE);
+                    layoutTextDataNasc.setVisibility(View.GONE);
+                    layoutTextSexo.setVisibility(View.GONE);
                 } else {
                     switchTipoCadastro.setText(R.string.switch_tipo_cadastro_pessoa_fisica);
                     edtNome.setVisibility(View.VISIBLE);
@@ -80,8 +97,17 @@ public class CadastroActivity extends AppCompatActivity {
                     edtDataNasc.setVisibility(View.VISIBLE);
                     edtSexo.setVisibility(View.VISIBLE);
 
+                    layoutTextNome.setVisibility(View.VISIBLE);
+                    layoutTextCpf.setVisibility(View.VISIBLE);
+                    layoutTextDataNasc.setVisibility(View.VISIBLE);
+                    layoutTextSexo.setVisibility(View.VISIBLE);
+
                     edtCnpj.setVisibility(View.GONE);
                     edtRazaoSocial.setVisibility(View.GONE);
+
+                    layoutTextCnpj.setVisibility(View.GONE);
+                    layoutTextRazaoSocial.setVisibility(View.GONE);
+
                 }
             }
         });

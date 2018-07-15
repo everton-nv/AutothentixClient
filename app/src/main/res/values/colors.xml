@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#ff4081</color>
+    <color name="colorPrimary">#302b63</color>
+    <color name="colorPrimaryDark">#24243e</color>
+    <color name="colorAccent">#24243e</color>
+
+    <color name="colorPrimaryTD">#302b63</color>
+    <color name="colorPrimaryDarkTD">#24243e</color>
+    <color name="colorAccentTD">#03a9f4</color>
 
     <color name="colorToolBarBase1">#03a9f4</color>         <!-- Azul Base -->
     <color name="colorToolBarBase2">#ffc107</color>         <!-- Amarelo Base -->
@@ -13,9 +17,11 @@
     <color name="colorFontSubtitle">#c0c0c0</color>
     <color name="colorFontNormalLight">#ffffff</color>
     <color name="colorFontNormalDark">#000000</color>
+    <color name="colorFontLink">#03a9f4</color>
 
     <color name="colorBtnBlue">#03a9f4</color>
     <color name="colorBtnYellow">#ffc107</color>
+    <color name="colorBtnGreen">#669900</color>
     <color name="colorBtnRed">#d34836</color>
 
     <color name="colorUserFont">#101010</color>
@@ -26,6 +32,17 @@
     <color name="colorBoxBackground">#e1e1e1</color>
     <color name="colorItemBackground">#ffffff</color>
     <color name="colorNumComentarios">#808080</color>
+
+
+    <color name="image_bg">#002a80</color>
+
+    <color name="side_nav_bar_gradient_start">#0f0c29</color>
+    <color name="side_nav_bar_gradient_center">#302b63</color>
+    <color name="side_nav_bar_gradient_end">#24243e</color>
+
+    <color name="activity_login_gradient_start">#0f0c29</color>
+    <color name="activity_login_gradient_center">#302b63</color>
+    <color name="activity_login_gradient_end">#24243e</color>
 
     <color name="divider">#afafaf</color>
 </resources>

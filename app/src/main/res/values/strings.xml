@@ -15,7 +15,7 @@
         completions."
     </string>
     <string name="lbl_logo">AUTOTHENTIX</string>
-    <string name="lbl_subtitle">Good feelings, create life</string>
+    <string name="lbl_subtitle">Sheets Nevermore</string>
     <string name="lbl_cadastrar">Cadastrar</string>
     <string name="lbl_login">Login</string>
     <string name="lbl_senha">Senha</string>
@@ -122,4 +122,5 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Sair</string>
 </resources>
