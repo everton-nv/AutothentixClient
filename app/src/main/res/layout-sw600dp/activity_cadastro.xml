@@ -20,7 +20,7 @@
             app:cardCornerRadius="@dimen/card_border"
             app:cardElevation="@dimen/card_elevation">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -34,6 +34,8 @@
                     android:layout_marginBottom="@dimen/switch_margin_bottom"
                     android:layout_marginEnd="@dimen/switch_margin_end"
                     android:layout_marginStart="@dimen/switch_margin_start"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
                     android:textSize="18sp"
                     android:text="@string/switch_tipo_cadastro_pessoa_fisica"
                     android:textColor="@color/colorPostDataFont" />
@@ -43,15 +45,104 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/divider_thickness"
                     android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
+                    android:layout_below="@id/switchTipoCadastro"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:background="@color/divider" />
 
+                <View
+                    android:id="@+id/centerView1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@id/view1"
+                    android:layout_centerInParent="true" />
+
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextNome"
+                    android:id="@+id/layoutTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/view1"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edt_email"
+                        android:inputType="textEmailAddress" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextTelef"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/layoutTextEmail"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextTelef"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edt_telefone"
+                        android:inputType="phone" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/layoutTextTelef"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextSenha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edt_senha"
+                        android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextConfirmaSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/layoutTextSenha"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextConfirmaSenha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edt_confsenha"
+                        android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextNome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/view1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editTextNome"
@@ -61,23 +152,16 @@
                         android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 
-                <!--<EditText-->
-                <!--android:id="@+id/editTextNome"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_nome"-->
-                <!--android:inputType="textPersonName" />-->
-
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layoutTextCpf"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/layoutTextNome"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editTextCpf"
@@ -87,15 +171,44 @@
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
 
-                <!--<EditText-->
-                <!--android:id="@+id/editTextCpf"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_cpf"-->
-                <!--android:inputType="number" />-->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextSexo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/layoutTextCpf"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextSexo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/lbl_sexo"
+                        android:inputType="textPersonName" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextDataNasc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/layoutTextSexo"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextDataNasc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nextFocusDown="@id/editTextEmail"
+                        android:hint="@string/lbl_datanasc"
+                        android:inputType="date" />
+                </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layoutTextRazaoSocial"
@@ -104,6 +217,9 @@
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/view1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:visibility="gone">
 
                     <android.support.design.widget.TextInputEditText
@@ -115,17 +231,6 @@
                         android:visibility="gone" />
                 </android.support.design.widget.TextInputLayout>
 
-                <!--<EditText-->
-                <!--android:id="@+id/editTextRazaoSocial"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_razao_social"-->
-                <!--android:inputType="textPersonName"-->
-                <!--android:visibility="gone" />-->
-
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layoutTextCnpj"
                     android:layout_width="match_parent"
@@ -133,189 +238,27 @@
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
+                    android:layout_below="@id/layoutTextRazaoSocial"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:visibility="gone">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editTextCnpj"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:nextFocusDown="@id/editTextEmail"
                         android:hint="@string/edt_cnpj"
                         android:inputType="number"
                         android:visibility="gone" />
                 </android.support.design.widget.TextInputLayout>
 
-                <!--<EditText-->
-                <!--android:id="@+id/editTextCnpj"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_cnpj"-->
-                <!--android:inputType="number"-->
-                <!--android:visibility="gone" />-->
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edt_email"
-                        android:inputType="textEmailAddress" />
-                </android.support.design.widget.TextInputLayout>
-
-                <!--<EditText-->
-                <!--android:id="@+id/editTextEmail"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_email"-->
-                <!--android:inputType="textEmailAddress" />-->
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextSexo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextSexo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/lbl_sexo"
-                        android:inputType="textPersonName" />
-                </android.support.design.widget.TextInputLayout>
-
-                <!--<EditText-->
-                <!--android:id="@+id/editTextSexo"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/lbl_sexo"-->
-                <!--android:inputType="textPersonName" />-->
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextDataNasc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextDataNasc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/lbl_datanasc"
-                        android:inputType="date" />
-                </android.support.design.widget.TextInputLayout>
-
-                <!--<EditText-->
-                <!--android:id="@+id/editTextDataNasc"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/lbl_datanasc"-->
-                <!--android:inputType="date" />-->
-
-                    <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextTelef"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextTelef"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edt_telefone"
-                        android:inputType="phone" />
-                </android.support.design.widget.TextInputLayout>
-
-                <!--<EditText-->
-                <!--android:id="@+id/editTextTelef"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_telefone"-->
-                <!--android:inputType="phone" />-->
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextSenha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextSenha"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edt_senha"
-                        android:inputType="textPassword" />
-                </android.support.design.widget.TextInputLayout>
-
-                <!--<EditText-->
-                <!--android:id="@+id/editTextSenha"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_senha"-->
-                <!--android:inputType="textPassword" />-->
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextConfirmaSenha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextConfirmaSenha"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edt_confsenha"
-                        android:inputType="textPassword" />
-                </android.support.design.widget.TextInputLayout>
-
-                <!--<EditText-->
-                <!--android:id="@+id/editTextConfirmaSenha"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/edit_text_margin_bottom"-->
-                <!--android:layout_marginEnd="@dimen/edit_text_margin_end"-->
-                <!--android:layout_marginStart="@dimen/edit_text_margin_start"-->
-                <!--android:hint="@string/edt_confsenha"-->
-                <!--android:inputType="textPassword" />-->
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="bottom"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_below="@id/layoutTextConfirmaSenha">
 
                     <View
                         android:id="@+id/view9"
@@ -358,7 +301,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

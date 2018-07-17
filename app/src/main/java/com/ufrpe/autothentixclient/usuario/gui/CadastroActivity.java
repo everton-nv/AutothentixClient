@@ -18,7 +18,6 @@ import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -63,10 +62,18 @@ public class CadastroActivity extends AppCompatActivity {
         layoutTextSexo = findViewById(R.id.layoutTextSexo);
         layoutTextDataNasc = findViewById(R.id.layoutTextDataNasc);
 
-        edtSexo.setOnClickListener(new View.OnClickListener() {
+//        edtSexo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setarGeneroEditText();
+//            }
+//        });
+        edtSexo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                setarGeneroEditText();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    setarGeneroEditText();
+                }
             }
         });
 
@@ -140,23 +147,20 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     private void setarGeneroEditText() {
-        ArrayList<String> itens = new ArrayList<String>();
-        itens.add(getString(R.string.sex_fem));
-        itens.add(getString(R.string.sex_male));
-        itens.add(getString(R.string.sex_other));
-
         //adapter utilizando um layout customizado (TextView)
-        final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.alert_criar_conta_pt1, itens);
+        final ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.alert_criar_conta_pt1, getResources().getStringArray(R.array.gender));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
         builder.setTitle(R.string.choice_your_genre);
         //define o diálogo como uma lista, passa o adapter.
 
         builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                String genero = adapter.getItem(arg1).toString();
+                String genero = Objects.requireNonNull(adapter.getItem(arg1)).toString();
 
                 edtSexo.setText(genero);
+                edtDataNasc.requestFocus();
                 alerta.dismiss();
             }
         });
