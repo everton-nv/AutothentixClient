@@ -1,19 +1,19 @@
 package com.ufrpe.autothentixclient.usuario.dominio;
 
 public class PessoaFisica {
-    private String nome;
+    private String name;
     private String cpf;
-    private String telefone;
-    private String dataNasc;
-    private String sexo;
+    private String phone;
+    private String birthdate;
+    private String sex;
     private long idUsuario;
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCpf() {
@@ -24,28 +24,28 @@ public class PessoaFisica {
         this.cpf = cpf;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getDataNasc() {
-        return dataNasc;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-    public void setDataNasc(String dataNasc) {
-        this.dataNasc = dataNasc;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getSex() {
+        return sex;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public long getIdUsuario() {
