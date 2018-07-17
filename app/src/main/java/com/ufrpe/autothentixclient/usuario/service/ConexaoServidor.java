@@ -1,7 +1,8 @@
 package com.ufrpe.autothentixclient.usuario.service;
 
 
-import android.app.DownloadManager;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -15,13 +16,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ConexaoServidor {
-
-    private static final String CADASTROPF = "https://app-autothentix.herokuapp.com/registra/Pfisica";
-    private static final String CADASTROPJ = "https://app-autothentix.herokuapp.com/registra/Pjuridica";
-    private static final String LOGAR =     "https://app-autothentix.herokuapp.com/autenticacao/login";
-
-
+public class ConexaoServidor extends AsyncTask<String, String, String> {
 
     /*public String inserirPessoaFisica(String json){
         String jsonResposta = null;
@@ -68,7 +63,7 @@ public class ConexaoServidor {
 
         return jsonResposta;
     }*/
-
+    /*
     public String inserirPessoaFisica(String json) throws IOException {
 
         OkHttpClient client = new OkHttpClient();
@@ -91,7 +86,7 @@ public class ConexaoServidor {
 
         return response.body().string();
 
-    }
+    }*/
 
     /*public String logarUsuario(String json) throws IOException{
         String jsonResposta = null;
@@ -100,13 +95,18 @@ public class ConexaoServidor {
         HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
         conexao.setRequestMethod("POST");
-        conexao.addRequestProperty("Content-type","application/json");
-        conexao.setRequestProperty("Accept", "application/json");
+        conexao.addRequestProperty("Content-type", "application/json");
+        //conexao.setRequestProperty("Accept", "application/json");
 
         conexao.setDoOutput(true);
 
-        PrintStream printStream = new PrintStream(conexao.getOutputStream());
-        printStream.println(json);
+        try{
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(json);
+        }catch(Exception ex){
+            Log.getStackTraceString(ex);
+        }
+
 
         conexao.connect();
 
@@ -115,7 +115,38 @@ public class ConexaoServidor {
         return jsonResposta;
     }*/
 
-    public String logarUsuario(String json) throws IOException {
+    @Override
+    protected String doInBackground(String... strings) {
+        String jsonResposta = null;
+        try{
+        URL url = new URL(strings[1]);
+        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+        conexao.setRequestMethod("POST");
+        conexao.addRequestProperty("Content-type", "application/json");
+        //conexao.setRequestProperty("Accept", "application/json");
+
+        conexao.setDoOutput(true);
+
+        PrintStream printStream = new PrintStream(conexao.getOutputStream());
+        printStream.println(strings[0]);
+
+        conexao.connect();
+
+        jsonResposta = new Scanner(conexao.getInputStream()).next();
+        }catch(Exception e){
+            e.printStackTrace();;
+        }
+        return jsonResposta;
+    }
+    /*
+    @Override
+    protected Object doInBackground(Object[] objects) {
+        return null;
+    }*/
+    /*
+
+    public String logarUsuario(String json) throws IOException, JSONException {
 
         OkHttpClient client = new OkHttpClient();
 
@@ -127,8 +158,9 @@ public class ConexaoServidor {
 
         MediaType mediaType =
                 MediaType.parse("application/json; charset=utf-8");
+        JSONObject jsonObject = new JSONObject(json);
 
-        RequestBody body = RequestBody.create(mediaType, json);
+        RequestBody body = RequestBody.create(mediaType, String.valueOf(jsonObject));
         builder.post(body);
 
         Request request = builder.build();
@@ -137,7 +169,7 @@ public class ConexaoServidor {
 
         return response.body().string();
 
-    }
+    }*/
 
 }
 

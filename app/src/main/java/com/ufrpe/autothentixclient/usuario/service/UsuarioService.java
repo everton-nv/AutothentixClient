@@ -5,10 +5,18 @@ import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
 import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 
 public class UsuarioService {
+
+    private static final String URLBASE = "https://app-autothentix.herokuapp.com/";
+    private static final String CADASTROPF = URLBASE + "registra/Pfisica";
+    private static final String CADASTROPJ = URLBASE + "registra/Pjuridica";
+    private static final String LOGAR = URLBASE + "auth/login";
+
     private static final int UM = 1;
     Gson gson = new Gson();
 
@@ -53,19 +61,19 @@ public class UsuarioService {
        String jsonPessoaJuridica = gson.toJson(pessoaJuridica);
        return jsonPessoaJuridica;
    }
-
+    /*
    public String inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc) throws IOException {
         ConexaoServidor conexaoServidor = new ConexaoServidor();
         String jsonUser = criarJsonUsuario(criarObjUsuario(email,senha));
         String jsonPf = criarJsonPessoaFisica(criarObjPessoaFisica(nome,cpf,telefone,sexo,dataNasc));
         String novoJson = juntarJsonPf(jsonUser,jsonPf);
         return conexaoServidor.inserirPessoaFisica(novoJson);
-   }
-
-    public String logar(String email, String senha) throws IOException {
-        ConexaoServidor conexaoServidor = new ConexaoServidor();
+   }*/
+    public String logar(String email, String senha) throws IOException, JSONException {
+        //ConexaoServidor conexaoServidor = new ConexaoServidor();
         String jsonUser = criarJsonUsuario(criarObjUsuario(email,senha));
-        return conexaoServidor.logarUsuario(jsonUser);
+       return String.valueOf(new ConexaoServidor().execute(jsonUser,LOGAR));
+        //return conexaoServidor.logarUsuario(jsonUser);
     }
 
 

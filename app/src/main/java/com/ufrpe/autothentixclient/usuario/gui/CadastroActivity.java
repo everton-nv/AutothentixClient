@@ -163,7 +163,7 @@ public class CadastroActivity extends AppCompatActivity {
         alerta = builder.create();
         alerta.show();
     }
-
+/*
     public void verificarTipoCadastro(View view) throws IOException {
         boolean verificador = switchTipoCadastro.isChecked();
 
@@ -273,5 +273,5 @@ public class CadastroActivity extends AppCompatActivity {
             valid = false;
         }
 
-    }
+    }*/
 }

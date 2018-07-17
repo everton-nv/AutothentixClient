@@ -14,6 +14,8 @@ import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 
@@ -37,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         changeActivity(CadastroActivity.class);
     }
 
-    public void logar(View view) throws IOException {
+    public void logar(View view) throws IOException, JSONException {
         String email = edtEmail.getText().toString();
         String password = edtPassword.getText().toString();
 

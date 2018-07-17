@@ -4,7 +4,7 @@ public class Usuario {
 
     private String email;
     private String password;
-    private long id;
+    //private long id;
 
     public String getEmail(){
 
@@ -24,7 +24,7 @@ public class Usuario {
 
         this.password = novaSenha;
     }
-
+/*
     public long getId(){
 
         return this.id;
@@ -33,5 +33,5 @@ public class Usuario {
     public void setId(long novoId){
 
         this.id = novoId;
-    }
+    }*/
 }
