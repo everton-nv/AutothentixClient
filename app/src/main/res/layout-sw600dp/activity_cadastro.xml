@@ -129,6 +129,7 @@
                         android:id="@+id/editTextConfirmaSenha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="verificarTipoCadastro"
                         android:hint="@string/edt_confsenha"
                         android:inputType="textPassword" />
                 </android.support.design.widget.TextInputLayout>

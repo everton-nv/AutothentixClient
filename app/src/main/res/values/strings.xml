@@ -100,6 +100,7 @@
     <string name="msg_cnpj_invalido">CNPJ Inválido</string>
     <string name="msg_telefone_invalido">Telefone Inválido</string>
     <string name="msg_nome_invalido">Nome Inválido</string>
+    <string name="msg_sexo_invalido">Preencha o campo sexo</string>
     <string name="msg_razao_social_invalida">Razão Social Inválida</string>
     <string name="msg_cadastro_sucesso">Cadastrado com Sucesso!</string>
     <string name="pessoa_fis">Pessoa Física</string>

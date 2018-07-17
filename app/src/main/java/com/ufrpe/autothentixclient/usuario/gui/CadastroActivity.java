@@ -63,12 +63,6 @@ public class CadastroActivity extends AppCompatActivity {
         layoutTextSexo = findViewById(R.id.layoutTextSexo);
         layoutTextDataNasc = findViewById(R.id.layoutTextDataNasc);
 
-//        edtSexo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                setarGeneroEditText();
-//            }
-//        });
         edtSexo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -186,13 +180,17 @@ public class CadastroActivity extends AppCompatActivity {
         String email = edtEmail.getText().toString();
         String nasc = edtDataNasc.getText().toString();
         String senha = edtSenha.getText().toString();
-        String sexo = edtSexo.getText().toString().substring(ZERO,UM);
+        String sexo = edtSexo.getText().toString();
         String telefone = edtTelefone.getText().toString();
         String repetirSenha = edtRepetirSenha.getText().toString();
 
         ValidacaoService validacaoCadastro = new ValidacaoService();
         boolean valid = true;
 
+        if (validacaoCadastro.isCampoVazio(sexo)) {
+            edtSexo.requestFocus();
+            valid = false;
+        }
         if (!validacaoCadastro.isSenhaValida(senha)) {
             edtSenha.requestFocus();
             edtSenha.setError(getString(R.string.msg_senha_fora_padrão));
@@ -203,9 +201,9 @@ public class CadastroActivity extends AppCompatActivity {
             edtRepetirSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
             valid = false;
         }
-        if (!validacaoCadastro.isDataValida(nasc)) {
-            edtDataNasc.requestFocus();
-            edtDataNasc.setError(getString(R.string.msg_data_invalida));
+        if (!validacaoCadastro.isTelefoneValido(telefone)) {
+            edtTelefone.requestFocus();
+            edtTelefone.setError(getString(R.string.msg_telefone_invalido));
             valid = false;
         }
         if (!validacaoCadastro.isEmailValido(email)) {
@@ -213,26 +211,24 @@ public class CadastroActivity extends AppCompatActivity {
             edtEmail.setError(getString(R.string.msg_email_invalido));
             valid = false;
         }
+        if (!validacaoCadastro.isDataValida(nasc)) {
+            edtDataNasc.requestFocus();
+            edtDataNasc.setError(getString(R.string.msg_data_invalida));
+            valid = false;
+        }
         if (!validacaoCadastro.isCpfValido(cpf)) {
             edtCpf.requestFocus();
             edtCpf.setError(getString(R.string.msg_cpf_invalido));
             valid = false;
         }
-        if (!validacaoCadastro.isTelefoneValido(telefone)) {
-            edtTelefone.requestFocus();
-            edtTelefone.setError(getString(R.string.msg_telefone_invalido));
-            valid = false;
-        }
-
         if (validacaoCadastro.isCampoVazio(nome)) {
             edtNome.requestFocus();
             edtNome.setError(getString(R.string.msg_nome_invalido));
             valid = false;
         }
-
         if (valid) {
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo, validacaoCadastro.dataFormatoBanco(nasc));
+            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo.substring(ZERO,UM), validacaoCadastro.dataFormatoBanco(nasc));
         }
     }
 

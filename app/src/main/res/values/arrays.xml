@@ -4,6 +4,6 @@
         name="gender">
         <item>Feminino</item>
         <item>Masculino</item>
-        <item>Outros</item>
+        <item>Outro</item>
     </string-array>
 </resources>

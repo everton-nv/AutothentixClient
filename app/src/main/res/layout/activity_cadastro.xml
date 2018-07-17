@@ -114,22 +114,6 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edt_email"
-                        android:inputType="textEmailAddress" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
                     android:id="@+id/layoutTextSexo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,6 +143,22 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/lbl_datanasc"
                         android:inputType="date" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edt_email"
+                        android:inputType="textEmailAddress" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -205,6 +205,7 @@
                         android:id="@+id/editTextConfirmaSenha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="verificarTipoCadastro"
                         android:hint="@string/edt_confsenha"
                         android:inputType="textPassword" />
                 </android.support.design.widget.TextInputLayout>
