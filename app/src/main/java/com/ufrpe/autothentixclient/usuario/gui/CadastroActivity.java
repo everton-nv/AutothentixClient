@@ -18,6 +18,7 @@ import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -165,7 +166,7 @@ public class CadastroActivity extends AppCompatActivity {
         alerta.show();
     }
 
-    public void verificarTipoCadastro(View view){
+    public void verificarTipoCadastro(View view) throws IOException {
         boolean verificador = switchTipoCadastro.isChecked();
 
         if (verificador){
@@ -175,7 +176,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
     }
 
-    public void validarCadastroPf() {
+    public void validarCadastroPf() throws IOException {
         String nome = edtNome.getText().toString();
         String cpf = edtCpf.getText().toString();
         String email = edtEmail.getText().toString();
@@ -227,7 +228,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         if (valid) {
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo, nasc);
+            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo, validacaoCadastro.dataFormatoBanco(nasc));
         }
     }
 

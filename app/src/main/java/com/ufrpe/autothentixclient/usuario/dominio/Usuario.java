@@ -3,7 +3,7 @@ package com.ufrpe.autothentixclient.usuario.dominio;
 public class Usuario {
 
     private String email;
-    private String senha;
+    private String password;
     private long id;
 
     public String getEmail(){
@@ -17,12 +17,12 @@ public class Usuario {
     }
 
     public String getSenha(){
-        return this.senha;
+        return this.password;
     }
 
     public void setSenha(String novaSenha){
 
-        this.senha = novaSenha;
+        this.password = novaSenha;
     }
 
     public long getId(){

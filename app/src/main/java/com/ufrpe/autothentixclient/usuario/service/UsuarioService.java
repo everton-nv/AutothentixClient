@@ -5,6 +5,8 @@ import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
 import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
+import java.io.IOException;
+
 
 public class UsuarioService {
     private static final int UM = 1;
@@ -21,11 +23,11 @@ public class UsuarioService {
 
     public PessoaFisica criarObjPessoaFisica(String nome, String cpf, String telefone, String sexo, String dataNasc){
         PessoaFisica pessoaFisica = new PessoaFisica();
-        pessoaFisica.setNome(nome);
+        pessoaFisica.setName(nome);
         pessoaFisica.setCpf(cpf);
-        pessoaFisica.setTelefone(telefone);
-        pessoaFisica.setSexo(sexo);
-        pessoaFisica.setDataNasc(dataNasc);
+        pessoaFisica.setPhone(telefone);
+        pessoaFisica.setSex(sexo);
+        pessoaFisica.setBirthdate(dataNasc);
         return pessoaFisica;
     }
 
@@ -52,7 +54,7 @@ public class UsuarioService {
        return jsonPessoaJuridica;
    }
 
-   public String inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc){
+   public String inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc) throws IOException {
         ConexaoServidor conexaoServidor = new ConexaoServidor();
         String jsonUser = criarJsonUsuario(criarObjUsuario(email,senha));
         String jsonPf = criarJsonPessoaFisica(criarObjPessoaFisica(nome,cpf,telefone,sexo,dataNasc));
@@ -60,7 +62,14 @@ public class UsuarioService {
         return conexaoServidor.inserirPessoaFisica(novoJson);
    }
 
-   static String juntarJsonPf(String jsonUser, String jsonPf){
+    public String logar(String email, String senha) throws IOException {
+        ConexaoServidor conexaoServidor = new ConexaoServidor();
+        String jsonUser = criarJsonUsuario(criarObjUsuario(email,senha));
+        return conexaoServidor.logarUsuario(jsonUser);
+    }
+
+
+    static String juntarJsonPf(String jsonUser, String jsonPf){
         String jason1 = jsonUser.replace("}",",");
         String jason2 = jsonPf.substring(UM,jsonPf.length());
         return jason1 + jason2;
