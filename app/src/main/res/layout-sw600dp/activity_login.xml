@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:contentDescription="@string/content_description_logo_autothentix"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -37,7 +37,7 @@
 
             <TextView
                 android:id="@+id/txtLogo1"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="72sp"
@@ -115,29 +115,29 @@
                 android:id="@+id/btnEntrar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/colorBtnBlue"
                 android:text="@string/btn_Entrar"
                 android:onClick="logar"
                 android:textColor="@color/colorFontNormalLight"
-                app:layout_constraintLeft_toLeftOf="@+id/layoutedtSenha"
                 app:layout_constraintRight_toRightOf="@+id/layoutedtSenha"
-                app:layout_constraintTop_toBottomOf="@+id/layoutedtSenha" />
+                app:layout_constraintTop_toBottomOf="@+id/layoutedtSenha"
+                app:layout_constraintLeft_toRightOf="@id/btnCadastrar"/>
 
             <Button
                 android:id="@+id/btnCadastrar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
-                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorBtnGreen"
                 android:text="@string/btn_cadastrar"
                 android:onClick="cadastrar"
                 android:textColor="@color/colorFontNormalLight"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/btnEntrar"
-                app:layout_constraintRight_toRightOf="@+id/btnEntrar"
-                app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+                app:layout_constraintLeft_toLeftOf="@+id/layoutedtSenha"
+                app:layout_constraintTop_toBottomOf="@+id/layoutedtSenha"
+                app:layout_constraintRight_toLeftOf="@+id/btnEntrar"/>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

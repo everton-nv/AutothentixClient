@@ -274,22 +274,6 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/btnRegister"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:onClick="verificarTipoCadastro"
-                            android:text="@string/btn_cadastrar"
-                            android:textColor="@color/colorBtnBlue" />
-
-                        <View
-                            android:id="@+id/view10"
-                            android:layout_width="@dimen/divider_thickness"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider" />
-
-                        <Button
                             android:id="@+id/btnCancel"
                             style="@style/Widget.AppCompat.Button.Borderless.Colored"
                             android:layout_width="match_parent"
@@ -298,6 +282,22 @@
                             android:onClick="onClickCancel"
                             android:text="@string/btn_cancelar"
                             android:textColor="@color/colorBtnRed" />
+
+                        <View
+                            android:id="@+id/view10"
+                            android:layout_width="@dimen/divider_thickness"
+                            android:layout_height="match_parent"
+                            android:background="@color/divider" />
+
+                        <Button
+                            android:id="@+id/btnRegister"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:onClick="verificarTipoCadastro"
+                            android:text="@string/btn_cadastrar"
+                            android:textColor="@color/colorBtnBlue" />
                     </LinearLayout>
                 </LinearLayout>
 

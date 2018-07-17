@@ -15,9 +15,9 @@
     <dimen name="divider_horizontal_margin_start">8dp</dimen>
     <dimen name="divider_horizontal_margin_end">8dp</dimen>
     <dimen name="divider_horizontal_margin_bottom">8dp</dimen>
-    <dimen name="edit_text_margin_bottom">16dp</dimen>
+    <dimen name="edit_text_margin_bottom">8dp</dimen>
     <dimen name="edit_text_margin_end">16dp</dimen>
-    <dimen name="edit_text_margin_start">8dp</dimen>
+    <dimen name="edit_text_margin_start">16dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
