@@ -5,31 +5,27 @@ import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
 import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-
 
 public class UsuarioService {
 
     private static final String URLBASE = "https://app-autothentix.herokuapp.com/";
-    private static final String CADASTROPF = URLBASE + "registra/Pfisica";
-    private static final String CADASTROPJ = URLBASE + "registra/Pjuridica";
-    private static final String LOGAR = URLBASE + "auth/login";
+    private static final String ROTACADASTROPF = URLBASE + "registra/Pfisica";
+    private static final String ROTACADASTROPJ = URLBASE + "registra/Pjuridica";
+    private static final String ROTALOGAR = URLBASE + "auth/login";
 
     private static final int UM = 1;
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
 
     public UsuarioService(){}
 
-    public Usuario criarObjUsuario(String email, String senha){
+    private Usuario criarObjUsuario(String email, String senha){
         Usuario usuario = new Usuario();
         usuario.setEmail(email);
         usuario.setSenha(senha);
         return usuario;
     }
 
-    public PessoaFisica criarObjPessoaFisica(String nome, String cpf, String telefone, String sexo, String dataNasc){
+    private PessoaFisica criarObjPessoaFisica(String nome, String cpf, String telefone, String sexo, String dataNasc){
         PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setName(nome);
         pessoaFisica.setCpf(cpf);
@@ -47,37 +43,29 @@ public class UsuarioService {
         return pessoaJuridica;
     }
 
-   public  String criarJsonUsuario(Usuario usuario){
-         String jsonUsuario = gson.toJson(usuario);
-         return jsonUsuario;
-   }
-
-   public String criarJsonPessoaFisica(PessoaFisica pessoaFisica){
-       String jsonPessoaFisica = gson.toJson(pessoaFisica);
-       return jsonPessoaFisica;
-   }
-
-   public String criarJsonPessoaJuridica(PessoaJuridica pessoaJuridica){
-       String jsonPessoaJuridica = gson.toJson(pessoaJuridica);
-       return jsonPessoaJuridica;
-   }
-    /*
-   public String inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc) throws IOException {
-        ConexaoServidor conexaoServidor = new ConexaoServidor();
-        String jsonUser = criarJsonUsuario(criarObjUsuario(email,senha));
-        String jsonPf = criarJsonPessoaFisica(criarObjPessoaFisica(nome,cpf,telefone,sexo,dataNasc));
-        String novoJson = juntarJsonPf(jsonUser,jsonPf);
-        return conexaoServidor.inserirPessoaFisica(novoJson);
-   }*/
-    public String logar(String email, String senha) throws IOException, JSONException {
-        //ConexaoServidor conexaoServidor = new ConexaoServidor();
-        String jsonUser = criarJsonUsuario(criarObjUsuario(email,senha));
-       return String.valueOf(new ConexaoServidor().execute(jsonUser,LOGAR));
-        //return conexaoServidor.logarUsuario(jsonUser);
+    private String criarJsonObjeto(Object objeto){
+        return gson.toJson(objeto);
     }
 
+   public void inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc){
+        String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
+        String jsonPf = criarJsonObjeto(criarObjPessoaFisica(nome,cpf,telefone,sexo,dataNasc));
+        String novoJson = juntarJsonPf(jsonUser,jsonPf);
+        new ConexaoServidor().execute(novoJson, ROTACADASTROPF);
+   }
+   public void inserirCadastroPj(String razaoSocial, String cnpj, String email, String telefone, String senha){
+        String jsonUser = criarJsonObjeto(criarObjUsuario(email, senha));
+        String jsonPj = criarJsonObjeto(criarObjPessoaJuridica(razaoSocial, cnpj, telefone));
+        String novoJson = juntarJsonPf(jsonUser, jsonPj);
+        new ConexaoServidor().execute(novoJson, ROTACADASTROPJ);
+   }
 
-    static String juntarJsonPf(String jsonUser, String jsonPf){
+    public String logar(String email, String senha){
+        String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
+        return String.valueOf(new ConexaoServidor().execute(jsonUser,ROTALOGAR));
+    }
+
+    private static String juntarJsonPf(String jsonUser, String jsonPf){
         String jason1 = jsonUser.replace("}",",");
         String jason2 = jsonPf.substring(UM,jsonPf.length());
         return jason1 + jason2;

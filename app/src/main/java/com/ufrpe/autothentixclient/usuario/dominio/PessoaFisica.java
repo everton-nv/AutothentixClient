@@ -6,7 +6,6 @@ public class PessoaFisica {
     private String phone;
     private String birthdate;
     private String sex;
-    private long idUsuario;
 
     public String getName() {
         return name;
@@ -46,13 +45,5 @@ public class PessoaFisica {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
     }
 }

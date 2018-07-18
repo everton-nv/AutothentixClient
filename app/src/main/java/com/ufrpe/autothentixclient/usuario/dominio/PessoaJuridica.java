@@ -7,7 +7,6 @@ public class PessoaJuridica {
     private String telefone;
     private String dataInic;
     private String codNatJuridica;
-    private long idUsuario;
 
     public String getCnpj() {
         return cnpj;
@@ -55,13 +54,5 @@ public class PessoaJuridica {
 
     public void setCodNatJuridica(String codNatJuridica) {
         this.codNatJuridica = codNatJuridica;
-    }
-
-    public long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
     }
 }

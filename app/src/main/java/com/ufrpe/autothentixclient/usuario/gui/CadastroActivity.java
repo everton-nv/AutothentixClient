@@ -36,10 +36,10 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        try{
+        try {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.screen_name_signup);
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e(getString(R.string.log_screen_signup), e.getMessage());
             this.returnLoginActivity();
         }
@@ -66,7 +66,7 @@ public class CadastroActivity extends AppCompatActivity {
         edtSexo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
+                if (hasFocus) {
                     setarGeneroEditText();
                 }
             }
@@ -115,7 +115,7 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
-    private void returnLoginActivity(){
+    private void returnLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
@@ -128,7 +128,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 this.returnLoginActivity();
                 break;
@@ -137,7 +137,7 @@ public class CadastroActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickCancel(View view){
+    public void onClickCancel(View view) {
         this.returnLoginActivity();
     }
 
@@ -163,13 +163,13 @@ public class CadastroActivity extends AppCompatActivity {
         alerta = builder.create();
         alerta.show();
     }
-/*
+
     public void verificarTipoCadastro(View view) throws IOException {
         boolean verificador = switchTipoCadastro.isChecked();
 
-        if (verificador){
+        if (verificador) {
             validarCadastroPj();
-        }else {
+        } else {
             validarCadastroPf();
         }
     }
@@ -228,11 +228,11 @@ public class CadastroActivity extends AppCompatActivity {
         }
         if (valid) {
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo.substring(ZERO,UM), validacaoCadastro.dataFormatoBanco(nasc));
+            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo.substring(ZERO, UM), validacaoCadastro.dataFormatoBanco(nasc));
         }
     }
 
-    public void validarCadastroPj(){
+    public void validarCadastroPj() {
         String razaoSocial = edtRazaoSocial.getText().toString();
         String cnpj = edtCnpj.getText().toString();
         String email = edtEmail.getText().toString();
@@ -243,35 +243,38 @@ public class CadastroActivity extends AppCompatActivity {
         ValidacaoService validacaoCadastro = new ValidacaoService();
         boolean valid = true;
 
-        if (!validacaoCadastro.isSenhaValida(senha)){
+        if (!validacaoCadastro.isSenhaValida(senha)) {
             edtSenha.requestFocus();
             edtSenha.setError(getString(R.string.msg_senha_fora_padrão));
             valid = false;
         }
-        if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)){
+        if (!validacaoCadastro.isSenhaIgual(senha, repetirSenha)) {
             edtRepetirSenha.requestFocus();
             edtRepetirSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
             valid = false;
         }
-        if (validacaoCadastro.isCampoVazio(razaoSocial)){
+        if (validacaoCadastro.isCampoVazio(razaoSocial)) {
             edtRazaoSocial.requestFocus();
             edtRazaoSocial.setError(getString(R.string.msg_razao_social_invalida));
         }
-        if (!validacaoCadastro.isEmailValido(email)){
+        if (!validacaoCadastro.isEmailValido(email)) {
             edtEmail.requestFocus();
             edtEmail.setError(getString(R.string.msg_email_invalido));
             valid = false;
         }
-        if (!validacaoCadastro.isCpfValido(cnpj)){
+        if (!validacaoCadastro.isCpfValido(cnpj)) {
             edtCnpj.requestFocus();
             edtCnpj.setError(getString(R.string.msg_cnpj_invalido));
             valid = false;
         }
-        if (!validacaoCadastro.isTelefoneValido(telefone)){
+        if (!validacaoCadastro.isTelefoneValido(telefone)) {
             edtTelefone.requestFocus();
             edtTelefone.setError(getString(R.string.msg_telefone_invalido));
             valid = false;
         }
-
-    }*/
+        if (valid) {
+            UsuarioService service = new UsuarioService();
+            service.inserirCadastroPj(razaoSocial, cnpj, email, telefone, senha);
+        }
+    }
 }
