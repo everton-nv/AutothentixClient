@@ -293,7 +293,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
 
     @Override
     public void processFinish(String output) {
-        if(output == null){
+        if(output == null || output.contains("error")){
             GuiUtil.myToast(getApplicationContext(), "Usuário já existe.");
             changeActivity(CadastroActivity.class);
         }

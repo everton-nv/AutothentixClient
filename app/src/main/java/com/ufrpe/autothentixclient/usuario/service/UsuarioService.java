@@ -1,16 +1,21 @@
 package com.ufrpe.autothentixclient.usuario.service;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
 import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
+import java.util.logging.Logger;
+
 
 public class UsuarioService {
 
     private static final String URLBASE = "https://app-autothentix.herokuapp.com/";
-    private static final String ROTACADASTROPF = URLBASE + "registra/Pfisica";
-    private static final String ROTACADASTROPJ = URLBASE + "registra/Pjuridica";
+    //private static final String URLBASE = "http://localhost:5000/";
+    private static final String ROTACADASTROPF = URLBASE + "registra/pfisica";
+    private static final String ROTACADASTROPJ = URLBASE + "registra/pjurudica";
     private static final String ROTALOGAR = URLBASE + "auth/login";
 
     private static final int UM = 1;
@@ -60,7 +65,11 @@ public class UsuarioService {
         String jsonUser = criarJsonObjeto(criarObjUsuario(email, senha));
         String jsonPj = criarJsonObjeto(criarObjPessoaJuridica(razaoSocial, cnpj, telefone));
         String novoJson = juntarJsonPf(jsonUser, jsonPj);
-        conexaoServidor.execute(novoJson, ROTACADASTROPJ);
+        try{
+            conexaoServidor.execute(novoJson, ROTACADASTROPJ);
+        }catch(Exception ex){
+            Log.getStackTraceString(ex);
+        }
    }
 
     public void logar(String email, String senha, ConexaoServidor conexaoServidor){
