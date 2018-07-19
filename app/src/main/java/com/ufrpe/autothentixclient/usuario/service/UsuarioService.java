@@ -15,8 +15,11 @@ public class UsuarioService {
 
     private static final int UM = 1;
     private Gson gson = new Gson();
+    private String respostaServidor;
 
-    public UsuarioService(){}
+    public UsuarioService(){
+
+    }
 
     private Usuario criarObjUsuario(String email, String senha){
         Usuario usuario = new Usuario();
@@ -47,22 +50,30 @@ public class UsuarioService {
         return gson.toJson(objeto);
     }
 
-   public void inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc){
+   public void inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc, ConexaoServidor conexaoServidor){
         String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
         String jsonPf = criarJsonObjeto(criarObjPessoaFisica(nome,cpf,telefone,sexo,dataNasc));
         String novoJson = juntarJsonPf(jsonUser,jsonPf);
-        new ConexaoServidor().execute(novoJson, ROTACADASTROPF);
+        conexaoServidor.execute(novoJson, ROTACADASTROPF);
    }
-   public void inserirCadastroPj(String razaoSocial, String cnpj, String email, String telefone, String senha){
+   public void inserirCadastroPj(String razaoSocial, String cnpj, String email, String telefone, String senha, ConexaoServidor conexaoServidor){
         String jsonUser = criarJsonObjeto(criarObjUsuario(email, senha));
         String jsonPj = criarJsonObjeto(criarObjPessoaJuridica(razaoSocial, cnpj, telefone));
         String novoJson = juntarJsonPf(jsonUser, jsonPj);
-        new ConexaoServidor().execute(novoJson, ROTACADASTROPJ);
+        conexaoServidor.execute(novoJson, ROTACADASTROPJ);
    }
 
-    public String logar(String email, String senha){
+    public void logar(String email, String senha, ConexaoServidor conexaoServidor){
         String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
-        return String.valueOf(new ConexaoServidor().execute(jsonUser,ROTALOGAR));
+        conexaoServidor.execute(jsonUser,ROTALOGAR);
+    }
+
+    public String getRespostaServidor() {
+        return respostaServidor;
+    }
+
+    public void setRespostaServidor(String respostaServidor) {
+        this.respostaServidor = respostaServidor;
     }
 
     private static String juntarJsonPf(String jsonUser, String jsonPf){

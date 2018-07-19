@@ -15,14 +15,17 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.ufrpe.autothentixclient.R;
+import com.ufrpe.autothentixclient.infra.GuiUtil;
+import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
+import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.io.IOException;
 import java.util.Objects;
 
 
-public class CadastroActivity extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity implements AsyncResposta{
     private AlertDialog alerta;
     private EditText edtNome, edtCpf, edtDataNasc, edtSexo, edtTelefone, edtEmail, edtSenha, edtRepetirSenha, edtCnpj, edtRazaoSocial;
     private TextInputLayout layoutTextNome, layoutTextCpf, layoutTextRazaoSocial, layoutTextCnpj, layoutTextSexo, layoutTextDataNasc;
@@ -30,12 +33,15 @@ public class CadastroActivity extends AppCompatActivity {
 
     private static final int ZERO = 0;
     private static final int UM = 1;
+    ConexaoServidor conexaoServidor = new ConexaoServidor();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        conexaoServidor.delegate = this;
+
         try {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.screen_name_signup);
@@ -228,7 +234,8 @@ public class CadastroActivity extends AppCompatActivity {
         }
         if (valid) {
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo.substring(ZERO, UM), validacaoCadastro.dataFormatoBanco(nasc));
+            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo.substring(ZERO, UM), validacaoCadastro.dataFormatoBanco(nasc), conexaoServidor);
+
         }
     }
 
@@ -274,7 +281,27 @@ public class CadastroActivity extends AppCompatActivity {
         }
         if (valid) {
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPj(razaoSocial, cnpj, email, telefone, senha);
+            service.inserirCadastroPj(razaoSocial, cnpj, email, telefone, senha, conexaoServidor);
+        }
+    }
+
+    public void changeActivity(Class screenClass){
+        Intent intent = new Intent(this, screenClass);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void processFinish(String output) {
+        if(output == null){
+            GuiUtil.myToast(getApplicationContext(), "Usuário já existe.");
+            changeActivity(CadastroActivity.class);
+        }
+        else{
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getApplicationContext());
+            sharedPreferencesServices.setTokenPreferences(output);
+            GuiUtil.myToast(getApplicationContext(), "Cadastrado com sucesso.");
+            changeActivity(LoginActivity.class);
         }
     }
 }

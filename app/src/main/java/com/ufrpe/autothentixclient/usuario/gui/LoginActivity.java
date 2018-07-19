@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
+import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
+import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import org.json.JSONException;
@@ -19,12 +21,14 @@ import org.json.JSONException;
 import java.io.IOException;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements AsyncResposta {
     private EditText edtEmail, edtPassword;
+    ConexaoServidor conexaoServidor = new ConexaoServidor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        conexaoServidor.delegate = this;
         setContentView(R.layout.activity_login);
         edtEmail = findViewById(R.id.edtLogin);
         edtPassword = findViewById(R.id.edtSenha);
@@ -58,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         if(valid){
             UsuarioService usuarioService = new UsuarioService();
-            onResponse(usuarioService.logar(email, password));
+            usuarioService.logar(email, password, conexaoServidor);
         }
 
     }
@@ -69,14 +73,16 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onResponse(String token){
-        if(token != null){
-            changeActivity(MainActivity.class);
+    @Override
+    public void processFinish(String output) {
+        if(output == null){
+            GuiUtil.myToast(getApplicationContext(), "Email ou senha incorretos.");
+            changeActivity(LoginActivity.class);
         }
         else{
-            GuiUtil.myToast(getApplicationContext(), "Usuario não encontrado.");
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getApplicationContext());
+            sharedPreferencesServices.setTokenPreferences(output);
+            changeActivity(MainActivity.class);
         }
     }
-
-
 }
