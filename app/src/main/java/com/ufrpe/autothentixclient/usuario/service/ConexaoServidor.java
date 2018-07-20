@@ -1,14 +1,9 @@
 package com.ufrpe.autothentixclient.usuario.service;
 
 
-import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.ufrpe.autothentixclient.infra.GuiUtil;
-import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.usuario.gui.AsyncResposta;
-import com.ufrpe.autothentixclient.usuario.gui.LoginActivity;
-import com.ufrpe.autothentixclient.usuario.gui.MainActivity;
 
 import java.io.PrintStream;
 import java.net.HttpURLConnection;

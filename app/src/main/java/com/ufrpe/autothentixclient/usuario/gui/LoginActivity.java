@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ufrpe.autothentixclient.R;
+import com.ufrpe.autothentixclient.documento.gui.MainActivity;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;

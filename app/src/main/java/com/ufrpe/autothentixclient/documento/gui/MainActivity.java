@@ -1,4 +1,4 @@
-package com.ufrpe.autothentixclient.usuario.gui;
+package com.ufrpe.autothentixclient.documento.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ufrpe.autothentixclient.R;
+import com.ufrpe.autothentixclient.usuario.gui.LoginActivity;
 
 import static com.ufrpe.autothentixclient.infra.GuiUtil.myToastShort;
 
