@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import com.ufrpe.autothentixclient.R;
@@ -34,6 +35,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
     private static final int ZERO = 0;
     private static final int UM = 1;
     ConexaoServidor conexaoServidor = new ConexaoServidor();
+    ProgressBar progressBar;
 
 
     @Override
@@ -50,6 +52,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
             this.returnLoginActivity();
         }
 
+        progressBar = (ProgressBar) findViewById(R.id.login_progress);
         switchTipoCadastro = findViewById(R.id.switchTipoCadastro);
         edtNome = findViewById(R.id.editTextNome);
         edtCpf = findViewById(R.id.editTextCpf);
@@ -77,6 +80,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
                 }
             }
         });
+
 
         switchTipoCadastro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -159,9 +163,10 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 String genero = Objects.requireNonNull(adapter.getItem(arg1)).toString();
-
                 edtSexo.setText(genero);
-                edtDataNasc.requestFocus();
+                if(edtSexo.hasFocus()){
+                    edtDataNasc.requestFocus();
+                }
                 alerta.dismiss();
             }
         });
@@ -172,6 +177,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
 
     public void verificarTipoCadastro(View view) throws IOException {
         boolean verificador = switchTipoCadastro.isChecked();
+        processStart();
 
         if (verificador) {
             validarCadastroPj();
@@ -194,7 +200,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         boolean valid = true;
 
         if (validacaoCadastro.isCampoVazio(sexo)) {
-            edtSexo.requestFocus();
+            setarGeneroEditText();
             valid = false;
         }
         if (!validacaoCadastro.isSenhaValida(senha)) {
@@ -292,7 +298,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
     }
     @Override
     public  void processStart(){
-        openProgressBar();
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
