@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".documento.gui.MainActivity"
+            android:name=".usuario.gui.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="userPortrait">

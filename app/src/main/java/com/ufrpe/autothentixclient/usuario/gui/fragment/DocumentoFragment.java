@@ -1,4 +1,4 @@
-//package com.ufrpe.autothentixclient.documento.gui.fragment;
+//package com.ufrpe.autothentixclient.usuario.gui.fragment;
 //
 //import android.content.Intent;
 //import android.os.Bundle;
@@ -11,6 +11,7 @@
 //import android.view.ViewGroup;
 //
 //import com.ufrpe.autothentixclient.R;
+//import com.ufrpe.autothentixclient.documento.Documento;
 //import com.ufrpe.autothentixclient.infra.GuiUtil;
 //import com.ufrpe.plushealth.business.MainServices;
 //import com.ufrpe.plushealth.business.SharedPreferencesServices;
@@ -22,7 +23,7 @@
 //import static com.ufrpe.plushealth.domain.EnumScreenName.APPOINTMENT;
 //
 ///**
-// * Classe que exibirá @see {@link android.support.v7.widget.CardView} com os dados do @see {@link com.ufrpe.autothentixclient.documento.dominio.Documento}
+// * Classe que exibirá @see {@link android.support.v7.widget.CardView} com os dados do @see {@link com.ufrpe.autothentixclient.documento.Documento}
 // * em um @see {@link DocumentoRecyclerAdapter}.
 // */
 //

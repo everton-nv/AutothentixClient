@@ -1,4 +1,4 @@
-package com.ufrpe.autothentixclient.documento.gui.fragment;
+package com.ufrpe.autothentixclient.usuario.gui.fragment;
 
 import android.view.View;
 

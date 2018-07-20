@@ -1,4 +1,4 @@
-//package com.ufrpe.autothentixclient.documento.gui.fragment;
+//package com.ufrpe.autothentixclient.usuario.gui.fragment;
 //
 //import android.content.Context;
 //import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@
 //import android.widget.TextView;
 //
 //import com.ufrpe.autothentixclient.R;
+//import com.ufrpe.autothentixclient.documento.Documento;
 //import com.ufrpe.plushealth.business.PersonServices;
 //import com.ufrpe.plushealth.business.SharedPreferencesServices;
 //import com.ufrpe.plushealth.domain.Appointment;
@@ -25,7 +26,7 @@
 //
 ///**
 // * Classe que personaliza o @see {@link RecyclerView.Adapter} para exibição
-//* dos @see {@link Documento}.
+// * dos @see {@link Documento}.
 // */
 //
 //public class DocumentoRecyclerAdapter extends RecyclerView.Adapter<DocumentoRecyclerAdapter.MyViewHolder> {
