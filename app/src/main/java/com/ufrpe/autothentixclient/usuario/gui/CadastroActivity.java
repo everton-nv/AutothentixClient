@@ -290,6 +290,10 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         startActivity(intent);
         finish();
     }
+    @Override
+    public  void processStart(){
+        openProgressBar();
+    }
 
     @Override
     public void processFinish(String output) {

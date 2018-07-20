@@ -72,6 +72,10 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
         startActivity(intent);
         finish();
     }
+    @Override
+    public  void processStart(){
+
+    }
 
     @Override
     public void processFinish(String output) {

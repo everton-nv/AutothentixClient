@@ -22,6 +22,11 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
     public AsyncResposta delegate = null;
 
     @Override
+    protected void onPreExecute(){
+        delegate.processStart();
+    }
+
+    @Override
     protected String doInBackground(String... strings) {
         String jsonResposta = null;
         try{
