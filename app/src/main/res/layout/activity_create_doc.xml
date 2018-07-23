@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".usuario.gui.CreateDocActivity">
 
     <ScrollView
@@ -72,7 +73,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="verificarTipoCadastro"
                             android:text="@string/btn_ok"
                             android:textColor="@color/colorBtnBlue" />
                     </LinearLayout>
@@ -107,7 +107,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="verificarTipoCadastro"
                             android:text="@string/btn_criar"
                             android:textColor="@color/colorBtnBlue" />
                     </LinearLayout>

@@ -113,6 +113,8 @@
     <string name="screen_name_signup">Cadastro</string>
     <string name="screen_name_create_doc">Novo Documento</string>
     <string name="log_screen_signup">SignUpScreen</string>
+    <string name="log_screen_create_doc_service">CreateDocSer</string>
+    <string name="log_screen_view_doc">viewDoc</string>
     <string name="sex_fem">Feminino</string>
     <string name="sex_male">Masculino</string>
     <string name="sex_other">Outro</string>
@@ -127,4 +129,20 @@
     <string name="action_logout">Sair</string>
     <string name="btn_ok">OK</string>
     <string name="btn_criar">Criar</string>
+    <string name="edt_contratante_nome">Nome do Contratante</string>
+    <string name="edt_contratante_nacionalidade">Nacionalidade do Contratante</string>
+    <string name="edt_contratante_rg">RG do Contratante</string>
+    <string name="edt_contratante_cpf">CPF do Contratante</string>
+    <string name="edt_contratada_cnpj">CNPJ do Contratado</string>
+    <string name="edt_contratada_nome">Nome do Contratado</string>
+    <string name="edt_contratada_nacionalidade">Nacionalidade do Contratado</string>
+    <string name="edt_contratada_profissao">Profissão do Contratado</string>
+    <string name="edt_contratada_cpf">CPF do Contratado</string>
+    <string name="edt_valor">Valor</string>
+    <string name="edt_valor_extenso">Valor por Extenso</string>
+    <string name="edt_cidade">Cidade</string>
+    <string name="edt_estado">Estado</string>
+    <string name="edt_data_atual">Data Atual</string>
+    <string name="edt_contratada_nome_empresa">Nome da Empresa Contratada</string>
+    <string name="msg_error_open_activity">Ocorreu um erro ao abrir a janela.   Tente novamente.</string>
 </resources>

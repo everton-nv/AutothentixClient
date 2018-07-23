@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                initActivity(CreateDocDeServicoActivity.class);
             }
         });
 
@@ -125,8 +124,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void changeActivity(Class screenClass){
+        initActivity(screenClass);
+        finish();
+    }
+
+    public void initActivity(Class screenClass){
         Intent intent = new Intent(this, screenClass);
         startActivity(intent);
-        finish();
     }
 }

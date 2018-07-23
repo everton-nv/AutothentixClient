@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.ufrpe.autothentixclient.R;
+import com.ufrpe.autothentixclient.infra.GuiUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class CreateDocActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.screen_name_create_doc);
         } catch (Exception e) {
             Log.e(getString(R.string.log_screen_signup), e.getMessage());
+            GuiUtil.myToastShort(this, getString(R.string.msg_error_open_activity));
             this.returnMainActivity();
         }
 

@@ -25,13 +25,15 @@
         </activity>
         <activity
             android:name=".usuario.gui.CadastroActivity"
-            android:screenOrientation="userPortrait"></activity>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".usuario.gui.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="userPortrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".usuario.gui.CreateDocActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".usuario.gui.CreateDocActivity" />
+        <activity android:name=".usuario.gui.CreateDocDeServicoActivity" />
+        <activity android:name=".usuario.gui.ViewDocActivity"></activity>
     </application>
 
 </manifest>

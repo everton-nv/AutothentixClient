@@ -49,6 +49,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
             getSupportActionBar().setTitle(R.string.screen_name_signup);
         } catch (Exception e) {
             Log.e(getString(R.string.log_screen_signup), e.getMessage());
+            GuiUtil.myToastShort(this, getString(R.string.msg_error_open_activity));
             this.returnLoginActivity();
         }
 
@@ -296,6 +297,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         startActivity(intent);
         finish();
     }
+
     @Override
     public  void processStart(){
         progressBar.setVisibility(View.VISIBLE);
