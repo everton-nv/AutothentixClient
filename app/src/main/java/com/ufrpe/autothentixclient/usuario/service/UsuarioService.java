@@ -14,7 +14,8 @@ public class UsuarioService {
     private static final String ROTACADASTROPJ = URLBASE + "registra/pjurudica";
     private static final String ROTALOGAR = URLBASE + "auth/login";
     private static  final String ROTAGERARDOC = URLBASE + "geradocumento/html";
-
+    private static final String METODOGET = "GET";
+    private static final String METODOPOST = "POST";
     private static final int UM = 1;
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -79,13 +80,13 @@ public class UsuarioService {
         String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
         String jsonPf = criarJsonObjeto(criarObjPessoaFisica(nome,cpf,telefone,sexo,dataNasc));
         String novoJson = juntarJsonPf(jsonUser,jsonPf);
-        conexaoServidor.execute(novoJson, ROTACADASTROPF);
+        conexaoServidor.execute(novoJson, ROTACADASTROPF, METODOPOST);
    }
    public void inserirCadastroPj(String razaoSocial, String cnpj, String email, String telefone, String senha, ConexaoServidor conexaoServidor){
         String jsonUser = criarJsonObjeto(criarObjUsuario(email, senha));
         String jsonPj = criarJsonObjeto(criarObjPessoaJuridica(razaoSocial, cnpj, telefone));
         String novoJson = juntarJsonPf(jsonUser, jsonPj);
-        conexaoServidor.execute(novoJson, ROTACADASTROPJ);
+        conexaoServidor.execute(novoJson, ROTACADASTROPJ, METODOPOST);
    }
 
    public void inserirDocumento(String nomeContratante, String cpfContratante , String rgContratante, String nacContratante, String nomeEmpresa ,
@@ -93,19 +94,18 @@ public class UsuarioService {
                                 String valorNumerico, String valorExtenso, String cidade, String estado, String dataAtual, String nomeDocumento, ConexaoServidor conexaoServidor ) {
         String jsonDoc = criarJsonObjeto(criarObjDocumento(nomeContratante , cpfContratante , rgContratante, nacContratante,  nomeEmpresa , nomeContratado,
                          cnpjContratado,nacContratado,cpfContratado,  profContratado, valorNumerico, valorExtenso, cidade, estado, dataAtual, nomeDocumento));
-        conexaoServidor.execute(jsonDoc, ROTAGERARDOC);
+        conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST);
    }
 
 
     public void logar(String email, String senha, ConexaoServidor conexaoServidor){
         String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
-        conexaoServidor.execute(jsonUser,ROTALOGAR);
+        conexaoServidor.execute(jsonUser,ROTALOGAR, METODOPOST);
     }
 
     public String getRespostaServidor() {
         return respostaServidor;
     }
-
     public void setRespostaServidor(String respostaServidor) {
         this.respostaServidor = respostaServidor;
     }
