@@ -116,4 +116,8 @@ public class ValidacaoService {
         return dataFormatada;
 
     }
+    public boolean isDataDoc(String data){
+        return(dataExiste(data) && (data.length() == TAMANHO_DATA_CB) || data.length() == TAMANHO_DATA_SB);
+
+    }
 }

@@ -32,7 +32,7 @@
             android:screenOrientation="userPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".usuario.gui.CreateDocActivity" />
-        <activity android:name=".usuario.gui.CreateDocDeServicoActivity" />
+        <activity android:name=".usuario.gui.CreateDocServicoActivity" />
         <activity android:name=".usuario.gui.ViewDocActivity"></activity>
     </application>
 

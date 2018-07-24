@@ -28,7 +28,7 @@ public class ViewDocActivity extends AppCompatActivity {
         }
 
         WebView myWebView = (WebView) findViewById(R.id.webview);
-        myWebView.loadUrl("https://www.xvideos.com");
+        myWebView.loadUrl("www.google.com");
     }
 
     private void closeActivity(){

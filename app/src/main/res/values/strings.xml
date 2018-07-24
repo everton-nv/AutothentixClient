@@ -27,6 +27,7 @@
     <string name="edt_cpf">CPF</string>
     <string name="edt_telefone">Telefone</string>
     <string name="edt_nome">Nome</string>
+    <string name="edt_nomeDoc">Nome do Documento</string>
     <string name="lbl_cadastro">Cadastro</string>
     <string name="edt_email">Email</string>
     <string name="lbl_datanasc">Nascimento</string>
@@ -59,6 +60,7 @@
     <string name="print_msg_postado">Postado com sucesso.</string>
     <string name="print_msg_comentado">Comentario enviado com sucesso.</string>
     <string name="print_erro_validacao_edt_senha_invalida">Senha inválida.</string>
+    <string name="print_erro_validacao_edt_rg_invalido"> RG inválido.</string>
     <string name="print_erro_validacao_edt_data_invalida">Data inválida.</string>
     <string name="print_erro_validacao_edt_email_invalido">Email inválido.</string>
     <string name="print_erro_validacao_edt_nick_invalido">Nick inválido.</string>
@@ -97,8 +99,14 @@
     <string name="msg_senha_nao_confere_com_anterior">A senha digitada não confere com a anterior.</string>
     <string name="msg_email_invalido">Endereço de Email Inválido.</string>
     <string name="msg_cpf_invalido">CPF Inválido</string>
+    <string name="msg_rg_invalido">RG Inválido</string>
+    <string name="msg_nacionalidade_invalido">Nacionalidade Inválido</string>
+    <string name="msg_profissão_invalido">Profissão Inválido</string>
     <string name="msg_cnpj_invalido">CNPJ Inválido</string>
     <string name="msg_telefone_invalido">Telefone Inválido</string>
+    <string name="msg_valor_invalido">Valor Inválido</string>
+    <string name="msg_cidade_invalido">Cidade Inválida</string>
+    <string name="msg_estado_invalido">Estado Inválido</string>
     <string name="msg_nome_invalido">Nome Inválido</string>
     <string name="msg_sexo_invalido">Preencha o campo sexo</string>
     <string name="msg_razao_social_invalida">Razão Social Inválida</string>

@@ -8,7 +8,6 @@
 //import android.widget.TextView;
 //
 //import com.ufrpe.autothentixclient.R;
-//import com.ufrpe.autothentixclient.documento.Documento;
 //import com.ufrpe.plushealth.business.PersonServices;
 //import com.ufrpe.plushealth.business.SharedPreferencesServices;
 //import com.ufrpe.plushealth.domain.Appointment;
