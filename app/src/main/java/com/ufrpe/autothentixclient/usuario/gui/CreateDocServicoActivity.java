@@ -17,12 +17,13 @@ import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.Objects;
 
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
+
 public class CreateDocServicoActivity extends AppCompatActivity implements AsyncResposta {
 
     private EditText edtNomeContratante, edtNacContratante, edtRgContratante, edtCpfContratante;
     private EditText edtNomeEmpresa, edtCnpjContratado, edtNomeContratado, edtNacContratado, edtProfContratado, edtCpfContratado;
     private EditText edtValorNumerico , edtValorExtenso, edtNomeDoc , edtCidade, edtEstado, edtDataAtual;
-    private Button criar;
     ConexaoServidor conexaoServidor = new ConexaoServidor();
 
 
@@ -46,8 +47,7 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         edtEstado = findViewById(R.id.editTextEstado);
         edtDataAtual = findViewById(R.id.editTextDataAtual);
         edtCpfContratado = findViewById(R.id.editTextContratadaCPF);
-        edtNomeDoc = findViewById(R.id.editTextNome);
-        criar = findViewById(R.id.btnRegister);
+        edtNomeDoc = findViewById(R.id.editTextDocNome);
 
         try {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -79,6 +79,13 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         startActivity(intent);
     }
 
+    private void initPreview(String link){
+        Intent intent = new Intent(this, ViewDocActivity.class);
+        intent.putExtra(URL_PREVIEW.getValue(), link);
+        startActivity(intent);
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -91,6 +98,23 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
     }
 
     public void  onClickCreateDoc(View view){
+
+        edtNomeContratante.setText("Jadiel");
+        edtCpfContratante.setText("11122233344");
+        edtRgContratante.setText("1234567");
+        edtNacContratante.setText("Brasileiro");
+        edtNomeEmpresa.setText("Jadiel Company");
+        edtNomeContratado.setText("Outro");
+        edtCnpjContratado.setText("12345678912345");
+        edtNacContratado.setText("Brasileiro");
+        edtProfContratado.setText("babá");
+        edtValorNumerico.setText("150");
+        edtValorExtenso.setText("um,cinco,zero");
+        edtCidade.setText("Hellcife");
+        edtEstado.setText("PE");
+        edtDataAtual.setText("25/08/2018");
+        edtCpfContratado.setText("99988877766");
+        edtNomeDoc.setText("Teste");
 
         String nomeContratante = edtNomeContratante.getText().toString();
         String cpfContratante = edtCpfContratante.getText().toString();
@@ -213,14 +237,14 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         if (valid){
             UsuarioService usuarioService = new UsuarioService();
             usuarioService.inserirDocumento(nomeContratante , cpfContratante , rgContratante, nacContratante,  nomeEmpresa , nomeContratado,
-                                            cnpjContratado,nacContratado,cpfContratado,  profContratado, valorNumerico, valorExtenso, cidade, estado, dataAtual, nomeDocumento, conexaoServidor );
+                                            cnpjContratado,nacContratado,cpfContratado,  profContratado, valorNumerico, valorExtenso, cidade, estado, validacaoCadastro.dataFormatoBanco(dataAtual), nomeDocumento, conexaoServidor );
         }
 
     }
 
     @Override
     public void processFinish(String output) {
-        initPreview();
+        initPreview(output);
 
     }
 

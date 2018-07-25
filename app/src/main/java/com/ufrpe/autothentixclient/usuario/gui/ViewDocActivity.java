@@ -11,6 +11,8 @@ import com.ufrpe.autothentixclient.infra.GuiUtil;
 
 import java.util.Objects;
 
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
+
 public class ViewDocActivity extends AppCompatActivity {
 
     @Override
@@ -27,8 +29,7 @@ public class ViewDocActivity extends AppCompatActivity {
             closeActivity();
         }
 
-        WebView myWebView = (WebView) findViewById(R.id.webview);
-        myWebView.loadUrl("www.google.com");
+        initVlisualizarDoc();
     }
 
     private void closeActivity(){
@@ -49,5 +50,18 @@ public class ViewDocActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initVlisualizarDoc(){
+        try {
+            Bundle bundle = getIntent().getExtras();
+            String link = bundle.getString(URL_PREVIEW.getValue());
+
+            WebView myWebView = findViewById(R.id.webview);
+            myWebView.loadUrl(link);
+        } catch (Exception e){
+            Log.e("ViewDocActivity",e.getMessage());
+            GuiUtil.myToast(this,"Ocorreu um erro ao conectar com o servidor, tente novamente.");
+        }
     }
 }
