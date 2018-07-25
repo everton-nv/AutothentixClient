@@ -36,4 +36,15 @@
     <dimen name="margin_start_text_card_recycleview">4dp</dimen>
     <dimen name="margin_end_text_card_recycleview">4dp</dimen>
     <dimen name="text_size_card_recycleview">18sp</dimen>
+    <dimen name="login_activity_margin_top_app_name">8dp</dimen>
+    <dimen name="login_activity_margin_start_app_name">16dp</dimen>
+    <dimen name="login_activity_margin_end_app_name">16dp</dimen>
+    <dimen name="login_activity_text_size_app_name">72sp</dimen>
+    <dimen name="login_activity_height_logo">150dp</dimen>
+    <dimen name="login_activity_margin_top_logo">32dp</dimen>
+    <dimen name="login_activity_margin_top_twitter_description">8dp</dimen>
+    <dimen name="login_activity_text_size_twitter_description">22sp</dimen>
+    <dimen name="login_activity_margin_bottom_last_button">24dp</dimen>
+    <dimen name="login_activity_margin_top_last_button">8dp</dimen>
+    <dimen name="login_activity_sw600dp_margin_top_last_button">16dp</dimen>
 </resources>
