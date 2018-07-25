@@ -13,11 +13,25 @@
     <color name="colorToolBarDark1">#01547a</color>       <!-- Azul Sombra (Talvez não seja necessário) -->
     <color name="colorToolBarDark2">#e5ad06</color>       <!-- Amarelo Sombra (Talvez não seja necessário) -->
 
+    <!--Fontes-->
     <color name="colorFontLogo">#03a9f4</color>
     <color name="colorFontSubtitle">#c0c0c0</color>
     <color name="colorFontNormalLight">#ffffff</color>
     <color name="colorFontNormalDark">#000000</color>
     <color name="colorFontLink">#03a9f4</color>
+    <color name="color_text_off">#AAA</color>
+    <color name="color_text_label_in_list">#6e6e6e</color>
+    <color name="color_text_value_in_list">#101010</color>
+    <color name="color_text_blue_dark">#0099cc</color>
+    <color name="color_text_blue_light">#FF33B5E5</color>
+    <color name="color_text_green_dark">#FF669900</color>
+    <color name="color_text_green_light">#FF99CC00</color>
+    <color name="color_text_orange_dark">#FFFF8800</color>
+    <color name="color_text_orange_light">#FFFFBB33</color>
+    <color name="color_text_purple">#FFAA66CC</color>
+    <color name="color_text_red_dark">#FFCC0000</color>
+    <color name="color_text_red_light">#FFFF4444</color>
+
 
     <color name="colorBtnBlue">#03a9f4</color>
     <color name="colorBtnYellow">#ffc107</color>

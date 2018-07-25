@@ -2,6 +2,7 @@ package com.ufrpe.autothentixclient.usuario.dominio;
 
 public class Documento {
 
+    private String id;
     private String nomedoc;
     private String contratantenome;
     private String contratatantenacionalidade;
@@ -149,4 +150,11 @@ public class Documento {
     private String estado;
 
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

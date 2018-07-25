@@ -118,11 +118,13 @@
     <string name="switch_tipo_cadastro_pessoa_fisica">Pessoa Física:&#160;&#160;</string>
     <string name="switch_tipo_cadastro_pessoa_juridica">Pessoa Jurídica:&#160;&#160;</string>
     <string name="content_description_logo_autothentix">Logo Autothentix</string>
+    <string name="content_description_doc_icon">Ícone do documento</string>
     <string name="screen_name_signup">Cadastro</string>
     <string name="screen_name_create_doc">Novo Documento</string>
     <string name="log_screen_signup">SignUpScreen</string>
     <string name="log_screen_create_doc_service">CreateDocSer</string>
     <string name="log_screen_view_doc">viewDoc</string>
+    <string name="log_screen_doc_fragment">DocFragment</string>
     <string name="sex_fem">Feminino</string>
     <string name="sex_male">Masculino</string>
     <string name="sex_other">Outro</string>
@@ -153,4 +155,7 @@
     <string name="edt_data_atual">Data Atual</string>
     <string name="edt_contratada_nome_empresa">Nome da Empresa Contratada</string>
     <string name="msg_error_open_activity">Ocorreu um erro ao abrir a janela.   Tente novamente.</string>
+    <string name="log_screen_doc_on_click_listener">DocOnClickListener</string>
+    <string name="lbl_doc">Documento:</string>
+    <string name="exemple_doc_name">Nome do Documento</string>
 </resources>

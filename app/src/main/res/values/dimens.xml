@@ -26,4 +26,13 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="padding_start_dialog_alert_option">24dp</dimen>
+    <dimen name="margin_top_card_recycleview">4dp</dimen>
+    <dimen name="margin_start_card_recycleview">8dp</dimen>
+    <dimen name="margin_end_card_recycleview">8dp</dimen>
+    <dimen name="margin_bottom_card_recycleview">4dp</dimen>
+    <dimen name="card_elevation_recycleview">3dp</dimen>
+    <dimen name="card_corner_radius_recycleview">2dp</dimen>
+    <dimen name="margin_start_text_card_recycleview">4dp</dimen>
+    <dimen name="margin_end_text_card_recycleview">4dp</dimen>
+    <dimen name="text_size_card_recycleview">18sp</dimen>
 </resources>
