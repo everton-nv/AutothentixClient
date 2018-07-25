@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ufrpe.autothentixclient.R;
@@ -20,6 +23,9 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_LOGIN_PREFERENCES;
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_PASSWORD_PREFERENCES;
+
 
 public class LoginActivity extends AppCompatActivity implements AsyncResposta {
     private EditText edtEmail, edtPassword;
@@ -30,20 +36,45 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
         super.onCreate(savedInstanceState);
         conexaoServidor.delegate = this;
         setContentView(R.layout.activity_login);
-        edtEmail = findViewById(R.id.edtLogin);
-        edtPassword = findViewById(R.id.edtSenha);
-        TextView logo = (TextView) findViewById(R.id.txtLogo1);
+
+        try {
+            autoLogin();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("loginStackTrace", e.getMessage());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("loginJSON", e.getMessage());
+        }
+        setCustomFontLogo();
+    }
+
+    private  void setCustomFontLogo(){
+        TextView logo = findViewById(R.id.txtLogo1);
         TextView subtitle = findViewById(R.id.txtSubtitle);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/trench100free.ttf");
         logo.setTypeface(font);
         subtitle.setTypeface(font);
     }
 
+    private void findScreenInputs(){
+        edtEmail = findViewById(R.id.edtLogin);
+        edtPassword = findViewById(R.id.edtSenha);
+    }
+
+    private void showLoginLayout() {
+        LinearLayout linearLayout = findViewById(R.id.layoutProgressBar);
+        linearLayout.setVisibility(View.GONE);
+        ScrollView scrollView = findViewById(R.id.scrollViewLogin);
+        scrollView.setVisibility(View.VISIBLE);
+    }
+
     public void cadastrar(View view){
         changeActivity(CadastroActivity.class);
     }
 
-    public void logar(View view) throws IOException, JSONException {
+    private void logar() throws IOException, JSONException {
+        findScreenInputs();
         String email = edtEmail.getText().toString();
         String password = edtPassword.getText().toString();
 
@@ -64,7 +95,39 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
             UsuarioService usuarioService = new UsuarioService();
             usuarioService.logar(email, password, conexaoServidor);
         }
+    }
 
+    public void logar(View view) throws IOException, JSONException {
+        logar();
+    }
+
+    private void autoLogin() throws IOException, JSONException {
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+        String login = sharedPreferencesServices.getLoginPreferences();
+        String password = sharedPreferencesServices.getPasswordPreferences();
+
+        Boolean isAutologged;
+        Bundle bundle = getIntent().getExtras();
+
+        try{
+            isAutologged = bundle.getBoolean("autoLogin");
+        } catch(Exception e){
+            isAutologged = false;
+        }
+
+        if(login.equals(DEFAULT_LOGIN_PREFERENCES) && password.equals(DEFAULT_PASSWORD_PREFERENCES)){
+            showLoginLayout();
+        } else if(!isAutologged) {
+            findScreenInputs();
+            edtEmail.setText(login);
+            edtPassword.setText(password);
+            logar();
+        } else{
+            findScreenInputs();
+            edtEmail.setText(login);
+            edtPassword.setText(password);
+            showLoginLayout();
+        }
     }
 
     public void changeActivity(Class screenClass){
@@ -72,6 +135,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
         startActivity(intent);
         finish();
     }
+
     @Override
     public  void processStart(){
 
@@ -80,12 +144,19 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
     @Override
     public void processFinish(String output) {
         if(output == null){
-            GuiUtil.myToast(getApplicationContext(), "Email ou senha incorretos.");
-            changeActivity(LoginActivity.class);
+            GuiUtil.myToast(getApplicationContext(), getString(R.string.msg_erro_login_or_password_wrong));
+            showLoginLayout();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("autoLogin", true);
+            startActivity(intent);
+            finish();
+            //changeActivity(LoginActivity.class);
         }
         else{
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getApplicationContext());
             sharedPreferencesServices.setTokenPreferences(output);
+            sharedPreferencesServices.setLoginPreferences(edtEmail.getText().toString());
+            sharedPreferencesServices.setPasswordPreferences(edtPassword.getText().toString());
             changeActivity(MainActivity.class);
         }
     }

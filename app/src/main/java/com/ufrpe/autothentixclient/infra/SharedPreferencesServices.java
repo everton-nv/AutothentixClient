@@ -24,24 +24,30 @@ public class SharedPreferencesServices {
         editor = sharedPreferences.edit();
     }
 
-    public void setIdUserPreferences(long idUser){
-        editor.putLong(ID_USER_PREFERENCES, idUser);
+    private void setLong(String preferenceTag, long value){
+        editor.putLong(preferenceTag, value);
         editor.commit();
+    }
+
+    private void setString(String preferenceTag, String value){
+        editor.putString(preferenceTag, value);
+        editor.commit();
+    }
+
+    public void setIdUserPreferences(long idUser){
+        setLong(ID_USER_PREFERENCES, idUser);
     }
 
     public void setLoginPreferences(String login){
-        editor.putString(LOGIN_PREFERENCES, login);
-        editor.commit();
+        setString(LOGIN_PREFERENCES, login);
     }
 
     public void setPasswordPreferences(String password){
-        editor.putString(PASSWORD_PREFERENCES, password);
-        editor.commit();
+        setString(PASSWORD_PREFERENCES, password);
     }
 
     public void setTokenPreferences(String token){
-        editor.putString(TOKEN_PREFERENCES, token);
-        editor.commit();
+        setString(TOKEN_PREFERENCES, token);
     }
 
     public long getIdUserPreferences(){

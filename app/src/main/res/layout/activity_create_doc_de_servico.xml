@@ -25,6 +25,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutTextDocNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                    android:layout_marginEnd="@dimen/edit_text_margin_end"
+                    android:layout_marginStart="@dimen/edit_text_margin_start">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextDocNome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edt_nomeDoc"
+                        android:inputType="textPersonName" />
+                </android.support.design.widget.TextInputLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -328,22 +344,6 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/edt_data_atual"
                         android:inputType="date" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextDocNome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextDocNome"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edt_nomeDoc"
-                        android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
