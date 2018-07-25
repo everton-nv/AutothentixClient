@@ -158,4 +158,8 @@
     <string name="log_screen_doc_on_click_listener">DocOnClickListener</string>
     <string name="lbl_doc">Documento:</string>
     <string name="exemple_doc_name">Nome do Documento</string>
+    <string name="lbl_contractor_data">Dados do Contratante</string>
+    <string name="lbl_hired_data">Dados do Contratado</string>
+    <string name="lbl_values">Valores</string>
+    <string name="lbl_local">Local e Data</string>
 </resources>

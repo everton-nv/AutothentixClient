@@ -285,7 +285,6 @@
                             android:textColor="@color/colorBtnRed" />
 
                         <View
-                            android:id="@+id/view10"
                             android:layout_width="@dimen/divider_thickness"
                             android:layout_height="match_parent"
                             android:background="@color/divider" />

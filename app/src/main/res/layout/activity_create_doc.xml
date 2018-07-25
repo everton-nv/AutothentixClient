@@ -38,7 +38,6 @@
                     android:orientation="vertical">
 
                     <View
-                        android:id="@+id/view9"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/divider_thickness"
                         android:layout_gravity="center"
@@ -62,7 +61,6 @@
                             android:textColor="@color/colorBtnRed" />
 
                         <View
-                            android:id="@+id/viewBtnSpinner"
                             android:layout_width="@dimen/divider_thickness"
                             android:layout_height="match_parent"
                             android:background="@color/divider" />
@@ -96,7 +94,6 @@
                             android:textColor="@color/colorBtnRed" />
 
                         <View
-                            android:id="@+id/viewBtnEditText"
                             android:layout_width="@dimen/divider_thickness"
                             android:layout_height="match_parent"
                             android:background="@color/divider" />

@@ -47,7 +47,6 @@
                     android:textColor="@color/colorPostDataFont" />
 
                 <View
-                    android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/divider_thickness"
                     android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
@@ -225,7 +224,6 @@
                     android:orientation="vertical">
 
                     <View
-                        android:id="@+id/view9"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/divider_thickness"
                         android:layout_gravity="center"
@@ -248,7 +246,6 @@
                             android:textColor="@color/colorBtnRed" />
 
                         <View
-                            android:id="@+id/view10"
                             android:layout_width="@dimen/divider_thickness"
                             android:layout_height="match_parent"
                             android:background="@color/divider" />
