@@ -107,8 +107,9 @@ public class ValidacaoService {
     public String dataFormatoBanco(String data){
         String dataFormatada;
         if (data.contains("/")){
-            String dataReversa = new StringBuilder(data).reverse().toString();
-            dataFormatada = dataReversa.replace("/","-");
+           // String dataReversa = new StringBuilder(data).reverse().toString();
+            String dataNova = data.replace("/","");
+            dataFormatada = dataNova.substring(QUATRO,TAMANHO_DATA_SB) + "-" + dataNova.substring(DOIS,QUATRO) + "-" + dataNova.substring(ZERO,DOIS);
 
         }else{
             dataFormatada = data.substring(QUATRO,TAMANHO_DATA_SB) + "-" + data.substring(DOIS,QUATRO) + "-" + data.substring(ZERO,DOIS);
