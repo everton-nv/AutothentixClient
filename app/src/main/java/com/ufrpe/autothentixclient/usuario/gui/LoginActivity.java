@@ -16,6 +16,7 @@ import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
+import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
@@ -92,8 +93,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
             valid = false;
         }
         if(valid){
+            Usuario usuario = new Usuario(email, password);
             UsuarioService usuarioService = new UsuarioService();
-            usuarioService.logar(email, password, conexaoServidor);
+            usuarioService.logar(usuario, conexaoServidor);
         }
     }
 
@@ -153,8 +155,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
             //changeActivity(LoginActivity.class);
         }
         else{
+            UsuarioService usuarioService = new UsuarioService();
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getApplicationContext());
-            sharedPreferencesServices.setTokenPreferences(output);
+            sharedPreferencesServices.setTokenPreferences(usuarioService.limpandoJson(output));
             sharedPreferencesServices.setLoginPreferences(edtEmail.getText().toString());
             sharedPreferencesServices.setPasswordPreferences(edtPassword.getText().toString());
             changeActivity(MainActivity.class);

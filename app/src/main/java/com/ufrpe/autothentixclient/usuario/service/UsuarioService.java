@@ -6,6 +6,8 @@ import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
 import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
+import java.util.Map;
+
 
 public class UsuarioService {
 
@@ -13,92 +15,59 @@ public class UsuarioService {
     private static final String ROTACADASTROPF = URLBASE + "registra/pfisica";
     private static final String ROTACADASTROPJ = URLBASE + "registra/pjuridica";
     private static final String ROTALOGAR = URLBASE + "auth/login";
-    private static  final String ROTAGERARDOC = URLBASE + "geradocumento/html";
+    private static  final String ROTAGERARDOC = URLBASE + "geradocumento/salva";
     private static final String METODOGET = "GET";
     private static final String METODOPOST = "POST";
     private static final int UM = 1;
     private Gson gson = new Gson();
     private String respostaServidor;
 
+
     public UsuarioService(){
 
     }
 
-    private Usuario criarObjUsuario(String email, String senha){
-        Usuario usuario = new Usuario();
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        return usuario;
+    public String getRotalogar(){
+        return ROTALOGAR;
     }
 
-    private PessoaFisica criarObjPessoaFisica(String nome, String cpf, String telefone, String sexo, String dataNasc){
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        pessoaFisica.setName(nome);
-        pessoaFisica.setCpf(cpf);
-        pessoaFisica.setPhone(telefone);
-        pessoaFisica.setSex(sexo);
-        pessoaFisica.setBirthdate(dataNasc);
-        return pessoaFisica;
+    public String getRotagerardoc(){
+        return ROTAGERARDOC;
     }
 
-    public PessoaJuridica criarObjPessoaJuridica(String cnpj, String telefone){
-        PessoaJuridica pessoaJuridica = new PessoaJuridica();
-        pessoaJuridica.setCnpj(cnpj);
-        pessoaJuridica.setPhone(telefone);
-        return pessoaJuridica;
+    public  String getRotacadastropf(){
+        return ROTACADASTROPF;
     }
 
-    public Documento criarObjDocumento(String nomeContratante, String cpfContratante , String rgContratante, String nacContratante, String nomeEmpresa ,
-                                       String nomeContratado, String cnpjContratado, String nacContratado, String cpfContratado, String profContratado,
-                                       String valorNumerico, String valorExtenso, String cidade, String estado, String dataAtual, String nomeDocumento)
-    {   Documento documento = new Documento();
-        documento.setContratantenome(nomeContratante);
-        documento.setContratantecpf(cpfContratante);
-        documento.setContratanterg(rgContratante);
-        documento.setContratatantenacionalidade(nacContratante);
-        documento.setContratadanomeEmpresa(nomeEmpresa);
-        documento.setContratadanome(nomeContratado);
-        documento.setContratadacnpj(cnpjContratado);
-        documento.setContratadanacionalidade(nacContratado);
-        documento.setContratadacpf(cpfContratado);
-        documento.setContratadaprofissao(profContratado);
-        documento.setValor(valorNumerico);
-        documento.setValorExtenso(valorExtenso);
-        documento.setCidade(cidade);
-        documento.setEstado(estado);
-        documento.setDatatual(dataAtual);
-        documento.setNomedoc(nomeDocumento);
-        return  documento;
+    public String getRotacadastropj(){
+        return ROTACADASTROPJ;
     }
 
     private String criarJsonObjeto(Object objeto){
         return gson.toJson(objeto);
     }
 
-   public void inserirCadastroPf(String email, String senha, String nome, String cpf, String telefone, String sexo, String dataNasc, ConexaoServidor conexaoServidor){
-        String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
-        String jsonPf = criarJsonObjeto(criarObjPessoaFisica(nome,cpf,telefone,sexo,dataNasc));
+   public void inserirCadastroPf(Usuario usuario, PessoaFisica pessoaFisica, ConexaoServidor conexaoServidor){
+        String jsonUser = criarJsonObjeto(usuario);
+        String jsonPf = criarJsonObjeto(pessoaFisica);
         String novoJson = juntarJsonPf(jsonUser,jsonPf);
         conexaoServidor.execute(novoJson, ROTACADASTROPF, METODOPOST);
    }
-   public void inserirCadastroPj(String cnpj, String email, String telefone, String senha, ConexaoServidor conexaoServidor){
-        String jsonUser = criarJsonObjeto(criarObjUsuario(email, senha));
-        String jsonPj = criarJsonObjeto(criarObjPessoaJuridica(cnpj, telefone));
+   public void inserirCadastroPj(Usuario usuario, PessoaJuridica pessoaJuridica, ConexaoServidor conexaoServidor){
+        String jsonUser = criarJsonObjeto(usuario);
+        String jsonPj = criarJsonObjeto(pessoaJuridica);
         String novoJson = juntarJsonPf(jsonUser, jsonPj);
         conexaoServidor.execute(novoJson, ROTACADASTROPJ, METODOPOST);
    }
 
-   public void inserirDocumento(String nomeContratante, String cpfContratante , String rgContratante, String nacContratante, String nomeEmpresa ,
-                                String nomeContratado, String cnpjContratado, String nacContratado, String cpfContratado, String profContratado,
-                                String valorNumerico, String valorExtenso, String cidade, String estado, String dataAtual, String nomeDocumento, ConexaoServidor conexaoServidor ) {
-        String jsonDoc = criarJsonObjeto(criarObjDocumento(nomeContratante , cpfContratante , rgContratante, nacContratante,  nomeEmpresa , nomeContratado,
-                         cnpjContratado,nacContratado,cpfContratado,  profContratado, valorNumerico, valorExtenso, cidade, estado, dataAtual, nomeDocumento));
-        conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST);
+   public void inserirDocumento(Documento documento, ConexaoServidor conexaoServidor, String token ) {
+        String jsonDoc = criarJsonObjeto(documento);
+        conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST, token);
    }
 
 
-    public void logar(String email, String senha, ConexaoServidor conexaoServidor){
-        String jsonUser = criarJsonObjeto(criarObjUsuario(email,senha));
+    public void logar(Usuario usuario, ConexaoServidor conexaoServidor){
+        String jsonUser = criarJsonObjeto(usuario);
         conexaoServidor.execute(jsonUser,ROTALOGAR, METODOPOST);
     }
 
@@ -110,8 +79,15 @@ public class UsuarioService {
     }
 
     private static String juntarJsonPf(String jsonUser, String jsonPf){
-        String jason1 = jsonUser.replace("}",",");
-        String jason2 = jsonPf.substring(UM,jsonPf.length());
-        return jason1 + jason2;
+        String json1 = jsonUser.replace("}",",");
+        String json2 = jsonPf.substring(UM,jsonPf.length());
+        return json1 + json2;
+   }
+
+   public String limpandoJson(String json){
+       Map<String,Object> jsonNodes = gson.fromJson(json, Map.class);
+       String resultado = jsonNodes.get("token").toString();
+       return resultado;
+
    }
 }

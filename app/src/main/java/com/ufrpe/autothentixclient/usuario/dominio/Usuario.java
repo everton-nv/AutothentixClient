@@ -2,6 +2,13 @@ package com.ufrpe.autothentixclient.usuario.dominio;
 
 public class Usuario {
 
+    public Usuario(String email, String senha){
+        setEmail(email);
+        setSenha(senha);
+    }
+
+    public Usuario(){}
+
     private String email;
     private String password;
 

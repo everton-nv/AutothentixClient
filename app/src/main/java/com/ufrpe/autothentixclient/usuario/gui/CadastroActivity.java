@@ -19,6 +19,9 @@ import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
+import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
+import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
+import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
@@ -247,9 +250,10 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
             valid = false;
         }
         if (valid) {
+            Usuario usuario = new Usuario(email,senha);
+            PessoaFisica pessoaFisica = new PessoaFisica(nome, cpf, telefone, sexo.substring(ZERO, UM), validacaoCadastro.dataFormatoBanco(nasc));
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPf(email, senha, nome, cpf, telefone, sexo.substring(ZERO, UM), validacaoCadastro.dataFormatoBanco(nasc), conexaoServidor);
-
+            service.inserirCadastroPf(usuario, pessoaFisica, conexaoServidor);
         }
     }
 
@@ -289,8 +293,10 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
             valid = false;
         }
         if (valid) {
+            Usuario usuario = new Usuario(email, senha);
+            PessoaJuridica pessoaJuridica = new PessoaJuridica(razaoSocial, cnpj, telefone);
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPj(cnpj, email, telefone, senha, conexaoServidor);
+            service.inserirCadastroPj(usuario, pessoaJuridica, conexaoServidor);
         }
     }
 

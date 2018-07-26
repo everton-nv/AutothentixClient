@@ -1,6 +1,17 @@
 package com.ufrpe.autothentixclient.usuario.dominio;
 
 public class PessoaFisica {
+
+    public PessoaFisica(String nome, String cpf, String telefone, String sexo, String dataNasc){
+        setName(nome);
+        setCpf(cpf);
+        setPhone(telefone);
+        setSex(sexo);
+        setBirthdate(dataNasc);
+    }
+
+    public PessoaFisica(){}
+
     private String name;
     private String cpf;
     private String phone;

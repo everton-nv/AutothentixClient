@@ -2,6 +2,30 @@ package com.ufrpe.autothentixclient.usuario.dominio;
 
 public class Documento {
 
+    public Documento(String nomeContratante, String cpfContratante , String rgContratante, String nacContratante, String nomeEmpresa ,
+                     String nomeContratado, String cnpjContratado, String nacContratado, String cpfContratado, String profContratado,
+                     String valorNumerico, String valorExtenso, String cidade, String estado, String dataAtual, String nomeDocumento){
+
+        setContratantenome(nomeContratante);
+        setContratantecpf(cpfContratante);
+        setContratanterg(rgContratante);
+        setContratatantenacionalidade(nacContratante);
+        setContratadanomeEmpresa(nomeEmpresa);
+        setContratadanome(nomeContratado);
+        setContratadacnpj(cnpjContratado);
+        setContratadanacionalidade(nacContratado);
+        setContratadacpf(cpfContratado);
+        setContratadaprofissao(profContratado);
+        setValor(valorNumerico);
+        setValorExtenso(valorExtenso);
+        setCidade(cidade);
+        setEstado(estado);
+        setDatatual(dataAtual);
+        setNomedoc(nomeDocumento);
+    }
+
+    public Documento(){}
+
     private String id;
     private String nomedoc;
     private String contratantenome;

@@ -11,7 +11,9 @@ import android.widget.EditText;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
+import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.infra.ValidacaoService;
+import com.ufrpe.autothentixclient.usuario.dominio.Documento;
 import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
@@ -235,9 +237,16 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         }
 
         if (valid){
+            Documento documento = new Documento(nomeContratante, cpfContratante, rgContratante,
+                    nacContratante, nomeEmpresa, nomeContratado, cnpjContratado, nacContratado,
+                    cpfContratado, profContratado, valorNumerico, valorExtenso, cidade, estado,
+                    validacaoCadastro.dataFormatoBanco(dataAtual), nomeDocumento);
+
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+            String token = sharedPreferencesServices.getTokenPreferences();
+
             UsuarioService usuarioService = new UsuarioService();
-            usuarioService.inserirDocumento(nomeContratante , cpfContratante , rgContratante, nacContratante,  nomeEmpresa , nomeContratado,
-                                            cnpjContratado,nacContratado,cpfContratado,  profContratado, valorNumerico, valorExtenso, cidade, estado, validacaoCadastro.dataFormatoBanco(dataAtual), nomeDocumento, conexaoServidor );
+            usuarioService.inserirDocumento(documento, conexaoServidor, token);
         }
 
     }
