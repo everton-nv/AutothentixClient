@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_LOGIN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_PASSWORD_PREFERENCES;
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.AUTO_LOGIN;
 
 
 public class LoginActivity extends AppCompatActivity implements AsyncResposta {
@@ -145,14 +146,13 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
 
     @Override
     public void processFinish(String output) {
-        if(output == null){
+        if(output == null || output.contains("error")){
             GuiUtil.myToast(getApplicationContext(), getString(R.string.msg_erro_login_or_password_wrong));
             showLoginLayout();
             Intent intent = new Intent(this, LoginActivity.class);
-            intent.putExtra("autoLogin", true);
+            intent.putExtra(AUTO_LOGIN.getValue(), true);
             startActivity(intent);
             finish();
-            //changeActivity(LoginActivity.class);
         }
         else{
             UsuarioService usuarioService = new UsuarioService();

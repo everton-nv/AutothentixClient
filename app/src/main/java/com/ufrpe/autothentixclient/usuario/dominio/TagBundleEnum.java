@@ -2,7 +2,7 @@ package com.ufrpe.autothentixclient.usuario.dominio;
 
 
 public enum TagBundleEnum {
-    URL_PREVIEW("url_preview");
+    URL_PREVIEW("url_preview"), AUTO_LOGIN("autoLogin");
 
     private String value;
 

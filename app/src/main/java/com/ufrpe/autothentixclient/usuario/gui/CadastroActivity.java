@@ -309,8 +309,8 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
     public void processFinish(String output) {
         progressBar.setVisibility(View.GONE);
         if(output == null || output.contains("error")){
-            String message = (output==null) ? "Não foi possível efetuar o cadastro" : output;
-            GuiUtil.myAlertDialog(getApplicationContext(), message);
+            String message = (output==null) ? "Não foi possível efetuar o cadastro." : output;
+            GuiUtil.myToast(this, message);
             changeActivity(CadastroActivity.class);
         }
         else{
