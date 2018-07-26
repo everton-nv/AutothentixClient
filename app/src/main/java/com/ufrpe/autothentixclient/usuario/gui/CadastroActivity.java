@@ -294,7 +294,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         }
         if (valid) {
             Usuario usuario = new Usuario(email, senha);
-            PessoaJuridica pessoaJuridica = new PessoaJuridica(razaoSocial, cnpj, telefone);
+            PessoaJuridica pessoaJuridica = new PessoaJuridica(cnpj, telefone);
             UsuarioService service = new UsuarioService();
             service.inserirCadastroPj(usuario, pessoaJuridica, conexaoServidor);
         }

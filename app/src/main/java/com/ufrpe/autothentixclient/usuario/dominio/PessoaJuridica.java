@@ -2,10 +2,9 @@ package com.ufrpe.autothentixclient.usuario.dominio;
 
 public class PessoaJuridica {
 
-    public PessoaJuridica(String razaoSocial, String cnpj, String telefone){
-        setRazaoSocial(razaoSocial);
+    public PessoaJuridica(String cnpj, String telefone){
         setCnpj(cnpj);
-        setTelefone(telefone);
+        setPhone(telefone);
     }
 
     public PessoaJuridica(){}

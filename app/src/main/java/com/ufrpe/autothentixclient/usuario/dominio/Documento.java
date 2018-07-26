@@ -4,7 +4,7 @@ public class Documento {
 
     public Documento(String nomeContratante, String cpfContratante , String rgContratante, String nacContratante, String nomeEmpresa ,
                      String nomeContratado, String cnpjContratado, String nacContratado, String cpfContratado, String profContratado,
-                     String valorNumerico, String valorExtenso, String cidade, String estado, String dataAtual, String nomeDocumento){
+                     String valorNumerico, String valorExtenso, String cidade, String dataAtual, String nomeDocumento){
 
         setContratantenome(nomeContratante);
         setContratantecpf(cpfContratante);
@@ -19,7 +19,6 @@ public class Documento {
         setValor(valorNumerico);
         setValorExtenso(valorExtenso);
         setCidade(cidade);
-        setEstado(estado);
         setDatatual(dataAtual);
         setNomedoc(nomeDocumento);
     }
@@ -162,17 +161,6 @@ public class Documento {
     public void setDatatual(String datatual) {
         this.datatual = datatual;
     }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    private String estado;
-
 
     public String getId() {
         return id;

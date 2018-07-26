@@ -239,7 +239,7 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         if (valid){
             Documento documento = new Documento(nomeContratante, cpfContratante, rgContratante,
                     nacContratante, nomeEmpresa, nomeContratado, cnpjContratado, nacContratado,
-                    cpfContratado, profContratado, valorNumerico, valorExtenso, cidade, estado,
+                    cpfContratado, profContratado, valorNumerico, valorExtenso, cidade,
                     validacaoCadastro.dataFormatoBanco(dataAtual), nomeDocumento);
 
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
