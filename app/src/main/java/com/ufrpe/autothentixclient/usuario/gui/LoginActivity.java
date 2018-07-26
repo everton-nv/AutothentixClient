@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
         Bundle bundle = getIntent().getExtras();
 
         try{
-            isAutologged = bundle.getBoolean("autoLogin");
+            isAutologged = bundle.getBoolean(AUTO_LOGIN.getValue());
         } catch(Exception e){
             isAutologged = false;
         }
