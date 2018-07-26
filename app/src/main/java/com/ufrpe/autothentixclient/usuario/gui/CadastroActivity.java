@@ -28,8 +28,8 @@ import java.util.Objects;
 
 public class CadastroActivity extends AppCompatActivity implements AsyncResposta{
     private AlertDialog alerta;
-    private EditText edtNome, edtCpf, edtDataNasc, edtSexo, edtTelefone, edtEmail, edtSenha, edtRepetirSenha, edtCnpj, edtRazaoSocial;
-    private TextInputLayout layoutTextNome, layoutTextCpf, layoutTextRazaoSocial, layoutTextCnpj, layoutTextSexo, layoutTextDataNasc;
+    private EditText edtNome, edtCpf, edtDataNasc, edtSexo, edtTelefone, edtEmail, edtSenha, edtRepetirSenha, edtCnpj;
+    private TextInputLayout layoutTextNome, layoutTextCpf, layoutTextCnpj, layoutTextSexo, layoutTextDataNasc;
     private Switch switchTipoCadastro;
 
     private static final int ZERO = 0;
@@ -50,28 +50,11 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         } catch (Exception e) {
             Log.e(getString(R.string.log_screen_signup), e.getMessage());
             GuiUtil.myToastShort(this, getString(R.string.msg_error_open_activity));
-            this.returnLoginActivity();
+            changeActivity(LoginActivity.class);
         }
 
-        progressBar = (ProgressBar) findViewById(R.id.login_progress);
-        switchTipoCadastro = findViewById(R.id.switchTipoCadastro);
-        edtNome = findViewById(R.id.editTextNome);
-        edtCpf = findViewById(R.id.editTextCpf);
-        edtDataNasc = findViewById(R.id.editTextDataNasc);
-        edtSexo = findViewById(R.id.editTextSexo);
-        edtTelefone = findViewById(R.id.editTextTelef);
-        edtEmail = findViewById(R.id.editTextEmail);
-        edtSenha = findViewById(R.id.editTextSenha);
-        edtRepetirSenha = findViewById(R.id.editTextConfirmaSenha);
-        edtCnpj = findViewById(R.id.editTextCnpj);
-        edtRazaoSocial = findViewById(R.id.editTextRazaoSocial);
-
-        layoutTextNome = findViewById(R.id.layoutTextNome);
-        layoutTextCpf = findViewById(R.id.layoutTextCpf);
-        layoutTextRazaoSocial = findViewById(R.id.layoutTextRazaoSocial);
-        layoutTextCnpj = findViewById(R.id.layoutTextCnpj);
-        layoutTextSexo = findViewById(R.id.layoutTextSexo);
-        layoutTextDataNasc = findViewById(R.id.layoutTextDataNasc);
+        findScreenInputs();
+        findScreenLayouts();
 
         edtSexo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -82,66 +65,91 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
             }
         });
 
-
         switchTipoCadastro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
                 if (bChecked) {
-                    switchTipoCadastro.setText(R.string.switch_tipo_cadastro_pessoa_juridica);
-                    edtCnpj.setVisibility(View.VISIBLE);
-                    edtRazaoSocial.setVisibility(View.VISIBLE);
-
-                    layoutTextCnpj.setVisibility(View.VISIBLE);
-                    layoutTextRazaoSocial.setVisibility(View.VISIBLE);
-
-                    edtNome.setVisibility(View.GONE);
-                    edtCpf.setVisibility(View.GONE);
-                    edtDataNasc.setVisibility(View.GONE);
-                    edtSexo.setVisibility(View.GONE);
-
-                    layoutTextNome.setVisibility(View.GONE);
-                    layoutTextCpf.setVisibility(View.GONE);
-                    layoutTextDataNasc.setVisibility(View.GONE);
-                    layoutTextSexo.setVisibility(View.GONE);
+                    showLegalPersonLayout();
                 } else {
-                    switchTipoCadastro.setText(R.string.switch_tipo_cadastro_pessoa_fisica);
-                    edtNome.setVisibility(View.VISIBLE);
-                    edtCpf.setVisibility(View.VISIBLE);
-                    edtDataNasc.setVisibility(View.VISIBLE);
-                    edtSexo.setVisibility(View.VISIBLE);
-
-                    layoutTextNome.setVisibility(View.VISIBLE);
-                    layoutTextCpf.setVisibility(View.VISIBLE);
-                    layoutTextDataNasc.setVisibility(View.VISIBLE);
-                    layoutTextSexo.setVisibility(View.VISIBLE);
-
-                    edtCnpj.setVisibility(View.GONE);
-                    edtRazaoSocial.setVisibility(View.GONE);
-
-                    layoutTextCnpj.setVisibility(View.GONE);
-                    layoutTextRazaoSocial.setVisibility(View.GONE);
-
+                    showNaturalPersonLayout();
                 }
             }
         });
     }
 
-    private void returnLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+    private void showNaturalPersonLayout() {
+        switchTipoCadastro.setText(R.string.switch_tipo_cadastro_pessoa_fisica);
+        edtNome.setVisibility(View.VISIBLE);
+        edtCpf.setVisibility(View.VISIBLE);
+        edtDataNasc.setVisibility(View.VISIBLE);
+        edtSexo.setVisibility(View.VISIBLE);
+
+        layoutTextNome.setVisibility(View.VISIBLE);
+        layoutTextCpf.setVisibility(View.VISIBLE);
+        layoutTextDataNasc.setVisibility(View.VISIBLE);
+        layoutTextSexo.setVisibility(View.VISIBLE);
+
+        edtCnpj.setVisibility(View.GONE);
+
+        layoutTextCnpj.setVisibility(View.GONE);
+    }
+
+    private void showLegalPersonLayout() {
+        switchTipoCadastro.setText(R.string.switch_tipo_cadastro_pessoa_juridica);
+        edtCnpj.setVisibility(View.VISIBLE);
+
+        layoutTextCnpj.setVisibility(View.VISIBLE);
+
+        edtNome.setVisibility(View.GONE);
+        edtCpf.setVisibility(View.GONE);
+        edtDataNasc.setVisibility(View.GONE);
+        edtSexo.setVisibility(View.GONE);
+
+        layoutTextNome.setVisibility(View.GONE);
+        layoutTextCpf.setVisibility(View.GONE);
+        layoutTextDataNasc.setVisibility(View.GONE);
+        layoutTextSexo.setVisibility(View.GONE);
+    }
+
+    private void findScreenLayouts() {
+        layoutTextNome = findViewById(R.id.layoutTextNome);
+        layoutTextCpf = findViewById(R.id.layoutTextCpf);
+        layoutTextCnpj = findViewById(R.id.layoutTextCnpj);
+        layoutTextSexo = findViewById(R.id.layoutTextSexo);
+        layoutTextDataNasc = findViewById(R.id.layoutTextDataNasc);
+    }
+
+    private void findScreenInputs() {
+        progressBar = findViewById(R.id.login_progress);
+        switchTipoCadastro = findViewById(R.id.switchTipoCadastro);
+        edtNome = findViewById(R.id.editTextNome);
+        edtCpf = findViewById(R.id.editTextCpf);
+        edtDataNasc = findViewById(R.id.editTextDataNasc);
+        edtSexo = findViewById(R.id.editTextSexo);
+        edtTelefone = findViewById(R.id.editTextTelef);
+        edtEmail = findViewById(R.id.editTextEmail);
+        edtSenha = findViewById(R.id.editTextSenha);
+        edtRepetirSenha = findViewById(R.id.editTextConfirmaSenha);
+        edtCnpj = findViewById(R.id.editTextCnpj);
+    }
+
+    private void changeActivity(Class screenClass){
+        Intent intent = new Intent(this, screenClass);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        this.returnLoginActivity();
+        changeActivity(LoginActivity.class);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        changeActivity(LoginActivity.class);
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.returnLoginActivity();
+                changeActivity(LoginActivity.class);
                 break;
         }
 
@@ -149,7 +157,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
     }
 
     public void onClickCancel(View view) {
-        this.returnLoginActivity();
+        changeActivity(LoginActivity.class);
     }
 
     private void setarGeneroEditText() {
@@ -178,7 +186,6 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
 
     public void verificarTipoCadastro(View view) throws IOException {
         boolean verificador = switchTipoCadastro.isChecked();
-        processStart();
 
         if (verificador) {
             validarCadastroPj();
@@ -247,7 +254,6 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
     }
 
     public void validarCadastroPj() {
-        String razaoSocial = edtRazaoSocial.getText().toString();
         String cnpj = edtCnpj.getText().toString();
         String email = edtEmail.getText().toString();
         String telefone = edtTelefone.getText().toString();
@@ -267,9 +273,10 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
             edtRepetirSenha.setError(getString(R.string.msg_senha_nao_confere_com_anterior));
             valid = false;
         }
-        if (validacaoCadastro.isCampoVazio(razaoSocial)) {
-            edtRazaoSocial.requestFocus();
-            edtRazaoSocial.setError(getString(R.string.msg_razao_social_invalida));
+        if (!validacaoCadastro.isTelefoneValido(telefone)) {
+            edtTelefone.requestFocus();
+            edtTelefone.setError(getString(R.string.msg_telefone_invalido));
+            valid = false;
         }
         if (!validacaoCadastro.isEmailValido(email)) {
             edtEmail.requestFocus();
@@ -281,21 +288,10 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
             edtCnpj.setError(getString(R.string.msg_cnpj_invalido));
             valid = false;
         }
-        if (!validacaoCadastro.isTelefoneValido(telefone)) {
-            edtTelefone.requestFocus();
-            edtTelefone.setError(getString(R.string.msg_telefone_invalido));
-            valid = false;
-        }
         if (valid) {
             UsuarioService service = new UsuarioService();
-            service.inserirCadastroPj(razaoSocial, cnpj, email, telefone, senha, conexaoServidor);
+            service.inserirCadastroPj(cnpj, email, telefone, senha, conexaoServidor);
         }
-    }
-
-    public void changeActivity(Class screenClass){
-        Intent intent = new Intent(this, screenClass);
-        startActivity(intent);
-        finish();
     }
 
     @Override
@@ -305,8 +301,10 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
 
     @Override
     public void processFinish(String output) {
+        progressBar.setVisibility(View.GONE);
         if(output == null || output.contains("error")){
-            GuiUtil.myToast(getApplicationContext(), "Usuário já existe.");
+            String message = (output==null) ? "Não foi possível efetuar o cadastro" : output;
+            GuiUtil.myAlertDialog(getApplicationContext(), message);
             changeActivity(CadastroActivity.class);
         }
         else{

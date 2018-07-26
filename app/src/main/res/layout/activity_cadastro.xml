@@ -7,9 +7,20 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/login_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:progressBarStyleHorizontal"
+            android:indeterminate="true"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
+
     <ScrollView
+        android:id="@+id/scrollViewSignUp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/login_progress">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -24,14 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <ProgressBar
-                    android:id="@+id/login_progress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_gravity="center"
-                    android:visibility="gone" />
 
                 <Switch
                     android:id="@+id/switchTipoCadastro"
@@ -82,24 +85,6 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/edt_cpf"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layoutTextRazaoSocial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-                    android:layout_marginEnd="@dimen/edit_text_margin_end"
-                    android:layout_marginStart="@dimen/edit_text_margin_start"
-                    android:visibility="gone">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editTextRazaoSocial"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edt_razao_social"
-                        android:inputType="textPersonName"
-                        android:visibility="gone" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout

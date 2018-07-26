@@ -49,4 +49,5 @@
     <dimen name="login_activity_margin_bottom_last_button">24dp</dimen>
     <dimen name="login_activity_margin_top_last_button">8dp</dimen>
     <dimen name="login_activity_sw600dp_margin_top_last_button">16dp</dimen>
+    <dimen name="margin_top_scrollview_above_horizontal_progressbar">18dp</dimen>
 </resources>

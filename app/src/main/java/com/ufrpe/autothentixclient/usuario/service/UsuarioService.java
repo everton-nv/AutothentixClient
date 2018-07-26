@@ -11,7 +11,7 @@ public class UsuarioService {
 
     private static final String URLBASE = "https://app-autothentix.herokuapp.com/";
     private static final String ROTACADASTROPF = URLBASE + "registra/pfisica";
-    private static final String ROTACADASTROPJ = URLBASE + "registra/pjurudica";
+    private static final String ROTACADASTROPJ = URLBASE + "registra/pjuridica";
     private static final String ROTALOGAR = URLBASE + "auth/login";
     private static  final String ROTAGERARDOC = URLBASE + "geradocumento/html";
     private static final String METODOGET = "GET";
@@ -41,11 +41,10 @@ public class UsuarioService {
         return pessoaFisica;
     }
 
-    public PessoaJuridica criarObjPessoaJuridica(String razaoSocial, String cnpj, String telefone){
+    public PessoaJuridica criarObjPessoaJuridica(String cnpj, String telefone){
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
-        pessoaJuridica.setRazaoSocial(razaoSocial);
         pessoaJuridica.setCnpj(cnpj);
-        pessoaJuridica.setTelefone(telefone);
+        pessoaJuridica.setPhone(telefone);
         return pessoaJuridica;
     }
 
@@ -82,9 +81,9 @@ public class UsuarioService {
         String novoJson = juntarJsonPf(jsonUser,jsonPf);
         conexaoServidor.execute(novoJson, ROTACADASTROPF, METODOPOST);
    }
-   public void inserirCadastroPj(String razaoSocial, String cnpj, String email, String telefone, String senha, ConexaoServidor conexaoServidor){
+   public void inserirCadastroPj(String cnpj, String email, String telefone, String senha, ConexaoServidor conexaoServidor){
         String jsonUser = criarJsonObjeto(criarObjUsuario(email, senha));
-        String jsonPj = criarJsonObjeto(criarObjPessoaJuridica(razaoSocial, cnpj, telefone));
+        String jsonPj = criarJsonObjeto(criarObjPessoaJuridica(cnpj, telefone));
         String novoJson = juntarJsonPf(jsonUser, jsonPj);
         conexaoServidor.execute(novoJson, ROTACADASTROPJ, METODOPOST);
    }

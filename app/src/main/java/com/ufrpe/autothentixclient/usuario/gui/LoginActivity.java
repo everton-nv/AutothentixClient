@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
         }
     }
 
-    public void changeActivity(Class screenClass){
+    private void changeActivity(Class screenClass){
         Intent intent = new Intent(this, screenClass);
         startActivity(intent);
         finish();
