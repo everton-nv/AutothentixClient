@@ -29,12 +29,6 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onCancelled(){
-        delegate.processCancelled();
-
-    }
-
-    @Override
     protected String doInBackground(String... strings) {
         String jsonResposta = null;
         if(Objects.equals(strings[UM], usuarioService.getRotalogar())){

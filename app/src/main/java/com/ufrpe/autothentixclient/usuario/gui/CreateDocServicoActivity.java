@@ -247,7 +247,6 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
             String token = sharedPreferencesServices.getTokenPreferences();
 
-           // UsuarioService usuarioService = new UsuarioService();
             usuarioService.inserirDocumento(documento, conexaoServidor, token);
 
         }
@@ -266,11 +265,6 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
 
     @Override
     public void processStart() {
-
-    }
-
-    @Override
-    public void processCancelled() {
 
     }
 }

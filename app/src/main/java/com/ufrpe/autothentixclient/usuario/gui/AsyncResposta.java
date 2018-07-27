@@ -4,5 +4,4 @@ public interface AsyncResposta {
     void processFinish(String output);
     void processStart();
 
-    void processCancelled();
 }

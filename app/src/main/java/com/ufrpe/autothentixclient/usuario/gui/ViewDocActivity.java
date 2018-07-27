@@ -87,9 +87,4 @@ public class ViewDocActivity extends AppCompatActivity implements AsyncResposta 
     public void processStart() {
 
     }
-
-    @Override
-    public void processCancelled() {
-
-    }
 }
