@@ -78,7 +78,8 @@ public class ViewDocActivity extends AppCompatActivity implements AsyncResposta 
     @Override
     public void processFinish(String output) {
         WebView myWebView = findViewById(R.id.webview);
-        myWebView.loadUrl(output);
+        myWebView.getSettings().setUseWideViewPort(true);
+        myWebView.loadData(output,"text/html","UTF-8");
 
     }
 

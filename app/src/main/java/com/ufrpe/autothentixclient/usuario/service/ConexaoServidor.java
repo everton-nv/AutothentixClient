@@ -5,11 +5,12 @@ import android.os.AsyncTask;
 
 import com.ufrpe.autothentixclient.usuario.gui.AsyncResposta;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
-import java.util.Scanner;
 
 
 public class ConexaoServidor extends AsyncTask<String, String, String> {
@@ -81,8 +82,14 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
             conexao.connect();
 
-            jsonResposta = new Scanner(conexao.getInputStream()).next();
-            conexao.disconnect();
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -111,7 +118,14 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
             conexao.connect();
 
-            jsonResposta = new Scanner(conexao.getInputStream()).next();
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -139,7 +153,14 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
             conexao.connect();
 
-            jsonResposta = new Scanner(conexao.getInputStream()).next();
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
 
         }catch(Exception e){
             e.printStackTrace();
