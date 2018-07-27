@@ -8,16 +8,23 @@ import android.webkit.WebView;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
+import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
+import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
+import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.Objects;
 
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
 
-public class ViewDocActivity extends AppCompatActivity {
+public class ViewDocActivity extends AppCompatActivity implements AsyncResposta {
+
+    ConexaoServidor conexaoServidor = new ConexaoServidor();
+    UsuarioService usuarioService = new UsuarioService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        conexaoServidor.delegate = this;
         setContentView(R.layout.activity_view_doc);
 
         try {
@@ -55,13 +62,33 @@ public class ViewDocActivity extends AppCompatActivity {
     private void initVlisualizarDoc(){
         try {
             Bundle bundle = getIntent().getExtras();
-            String link = bundle.getString(URL_PREVIEW.getValue());
+            String jason = bundle.getString(URL_PREVIEW.getValue());
 
-            WebView myWebView = findViewById(R.id.webview);
-            myWebView.loadUrl(link);
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+            String token = sharedPreferencesServices.getTokenPreferences();
+
+            usuarioService.gerarHtmlDoc(jason,conexaoServidor,token);
+
         } catch (Exception e){
             Log.e("ViewDocActivity",e.getMessage());
             GuiUtil.myToast(this,"Ocorreu um erro ao conectar com o servidor, tente novamente.");
         }
+    }
+
+    @Override
+    public void processFinish(String output) {
+        WebView myWebView = findViewById(R.id.webview);
+        myWebView.loadUrl(output);
+
+    }
+
+    @Override
+    public void processStart() {
+
+    }
+
+    @Override
+    public void processCancelled() {
+
     }
 }

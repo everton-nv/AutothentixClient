@@ -104,12 +104,12 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
     public void  onClickCreateDoc(View view){
 
         edtNomeContratante.setText("Jadiel");
-        edtCpfContratante.setText("11122233344");
-        edtRgContratante.setText("1234567");
+        edtCpfContratante.setText("11144433388");
+        edtRgContratante.setText("235");
         edtNacContratante.setText("Brasileiro");
         edtNomeEmpresa.setText("Jadiel Company");
         edtNomeContratado.setText("Outro");
-        edtCnpjContratado.setText("12345678912345");
+        edtCnpjContratado.setText("1234567874");
         edtNacContratado.setText("Brasileiro");
         edtProfContratado.setText("babá");
         edtValorNumerico.setText("150");
@@ -117,7 +117,7 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         edtCidade.setText("Hellcife");
         edtEstado.setText("PE");
         edtDataAtual.setText("25/08/2018");
-        edtCpfContratado.setText("99988877766");
+        edtCpfContratado.setText("99988855423");
         edtNomeDoc.setText("Teste");
 
         String nomeContratante = edtNomeContratante.getText().toString();
@@ -256,15 +256,10 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
 
     @Override
     public void processFinish(String output) {
-        if (!output.equals(usuarioService.getRotagerarhtmldoc())) {
-            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
-            String token = sharedPreferencesServices.getTokenPreferences();
-            processCancelled();
-            usuarioService.gerarHtmlDoc(usuarioService.getJSONDOC(), conexaoServidor, token);
-
-        }else {
-
+        if (output.equals(usuarioService.getJSONDOC())) {
             initPreview(output);
+        }else {
+            initPreview(usuarioService.getJSONDOC());
         }
 
     }

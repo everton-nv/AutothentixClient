@@ -9,7 +9,7 @@ public class Documento {
         setContratantenome(nomeContratante);
         setContratantecpf(cpfContratante);
         setContratanterg(rgContratante);
-        setContratatantenacionalidade(nacContratante);
+        setContratantenacionalidade(nacContratante);
         setContratadanomeEmpresa(nomeEmpresa);
         setContratadanome(nomeContratado);
         setContratadacnpj(cnpjContratado);
@@ -28,7 +28,7 @@ public class Documento {
     private String id;
     private String nomedoc;
     private String contratantenome;
-    private String contratatantenacionalidade;
+    private String contratantenacionalidade;
     private String contratanterg;
     private String contratantecpf;
     private String contratadanomeEmpresa;
@@ -58,12 +58,12 @@ public class Documento {
         this.contratantenome = contratantenome;
     }
 
-    public String getContratatantenacionalidade() {
-        return contratatantenacionalidade;
+    public String getContratantenacionalidade() {
+        return contratantenacionalidade;
     }
 
-    public void setContratatantenacionalidade(String contratatantenacionalidade) {
-        this.contratatantenacionalidade = contratatantenacionalidade;
+    public void setContratantenacionalidade(String contratantenacionalidade) {
+        this.contratantenacionalidade = contratantenacionalidade;
     }
 
     public String getContratanterg() {

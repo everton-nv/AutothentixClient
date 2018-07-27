@@ -8,7 +8,6 @@ import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
 import java.util.Map;
 
-
 public class UsuarioService {
 
     private static final String URLBASE = "https://app-autothentix.herokuapp.com/";

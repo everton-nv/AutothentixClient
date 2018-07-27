@@ -101,7 +101,6 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
             conexao.setRequestMethod(strings[DOIS]);
             conexao.addRequestProperty("Content-type", "application/json");
-            //conexao.addRequestProperty("authorization",strings[3]);
             conexao.setRequestProperty("authorization",strings[3]);
 
             conexao.setDoOutput(true);
