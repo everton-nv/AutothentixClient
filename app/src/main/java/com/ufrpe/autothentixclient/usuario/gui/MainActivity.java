@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +17,7 @@ import android.view.View;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
+import com.ufrpe.autothentixclient.usuario.gui.fragment.DocumentoFragment;
 
 import static com.ufrpe.autothentixclient.infra.GuiUtil.myToastShort;
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //startPatientFragment();
+        startPatientFragment();
     }
 
     @Override
@@ -59,15 +61,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    private void startPatientFragment(){
-//        DocumentoFragment mFragment = (DocumentoFragment) getSupportFragmentManager().findFragmentByTag("lista de consultas");
-//        if(mFragment == null) {
-//            mFragment = new DocumentoFragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.rl_fragment_container, mFragment, "Documents List");
-//            ft.commit();
-//        }
-//    }
+    private void startPatientFragment(){
+        DocumentoFragment mFragment = (DocumentoFragment) getSupportFragmentManager().findFragmentByTag("lista de consultas");
+        if(mFragment == null) {
+            mFragment = new DocumentoFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.rl_fragment_container, mFragment, "Documents List");
+            ft.commit();
+        }
+    }
 
 
     @Override

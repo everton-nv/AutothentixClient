@@ -64,15 +64,6 @@ public class DocumentoRecyclerAdapter extends RecyclerView.Adapter<DocumentoRecy
     }
 
     /**
-     * Atualiza item da lista quando o usuário segue ou dessegue ao click no botão no @see {@link android.support.v7.widget.CardView}.
-     * @param position - Posição.
-     */
-
-    public void atualizarSeguir(int position){
-        notifyItemChanged(position);
-    }
-
-    /**
      * Método remove um @see {@link Documento} da lista.
      * @param position - Posição.
      */

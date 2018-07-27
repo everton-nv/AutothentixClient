@@ -12,26 +12,35 @@ import android.view.ViewGroup;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
+import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.usuario.dominio.Documento;
+import com.ufrpe.autothentixclient.usuario.gui.AsyncResposta;
 import com.ufrpe.autothentixclient.usuario.gui.ViewDocActivity;
+import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
+import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
 
 /**
  * Classe que exibirá @see {@link android.support.v7.widget.CardView} com os dados do @see {@link com.ufrpe.autothentixclient.usuario.dominio.Documento}
  * em um @see {@link DocumentoRecyclerAdapter}.
  */
 
-public class DocumentoFragment extends Fragment implements RecyclerViewOnClickListenerhack {
+public class DocumentoFragment extends Fragment implements RecyclerViewOnClickListenerhack, AsyncResposta {
     private RecyclerView mRecyclerView;
     private List<Documento> mList = new ArrayList<>();
     private DocumentoRecyclerAdapter adapter;
+    UsuarioService usuarioService = new UsuarioService();
+    ConexaoServidor conexaoServidor = new ConexaoServidor();
 
     //Setando o RecyclerView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post, container, false);
+        conexaoServidor.delegate = this;
 
         mRecyclerView = view.findViewById(R.id.rv_list);
         mRecyclerView.setHasFixedSize(true);
@@ -49,12 +58,9 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
                 PostRecyclerAdapter adapter = (PostRecyclerAdapter) mRecyclerView.getAdapter();
 
                 if(mList.size() == mLinearLayoutManager.findLastCompletelyVisibleItemPosition() + 1){
-                    List<Post> listaAux = redeServices.exibirPosts();
+                    List<Post> listAux = redeServices.exibirPosts();
 
-                    for (int i = 0; i < listaAux.size(); i++){
-                        adapter.addListItem(listaAux.get(i), mList.size() );
-
-                    }
+                    addNewItens(listAux);
 
                 }
             }*/
@@ -65,13 +71,16 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         try{
-            //**mList = mainServices.getAppointmentsDoctorLogged();
+
         }catch (Exception e) {
             GuiUtil.myToast(getActivity(), e);
             Log.e(getString(R.string.log_screen_doc_fragment), e.getMessage());
         }
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getActivity());
+        String token = sharedPreferencesServices.getTokenPreferences();
 
-        //**adapter = new DocumentoRecyclerAdapter(getActivity(), mList);
+        usuarioService.listarDocs(conexaoServidor,token);
+        adapter = new DocumentoRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);
 
@@ -91,7 +100,8 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
         */
         try{
             Intent intent = new Intent(getActivity(), ViewDocActivity.class);
-            intent.putExtra("IdDoc", mList.get(position).getId());
+            String json = usuarioService.criarJsonObjeto(mList.get(position));
+            intent.putExtra(URL_PREVIEW.getValue(), json);
             startActivity(intent);
         } catch (Exception e){
             GuiUtil.myToastShort(getActivity(), e);
@@ -106,5 +116,22 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
         adapter.removeListItem(position);
         */
         GuiUtil.myToastShort(getActivity(), "Doc - Click longo Item: " + position);
+    }
+
+    private void addNewItens(List<Documento> listAux){
+        for (int i = 0; i < listAux.size(); i++){
+            adapter.addListItem(listAux.get(i), mList.size() );
+        }
+    }
+
+    @Override
+    public void processFinish(String output) {
+        List<Documento> listAux = usuarioService.docJsontoObject(output);
+        addNewItens(listAux);
+    }
+
+    @Override
+    public void processStart() {
+
     }
 }

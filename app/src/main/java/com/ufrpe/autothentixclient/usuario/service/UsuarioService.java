@@ -1,11 +1,14 @@
 package com.ufrpe.autothentixclient.usuario.service;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ufrpe.autothentixclient.usuario.dominio.Documento;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
 import com.ufrpe.autothentixclient.usuario.dominio.Usuario;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class UsuarioService {
@@ -14,8 +17,9 @@ public class UsuarioService {
     private static final String ROTACADASTROPF = URLBASE + "registra/pfisica";
     private static final String ROTACADASTROPJ = URLBASE + "registra/pjuridica";
     private static final String ROTALOGAR = URLBASE + "auth/login";
-    private static  final String ROTAGERARDOC = URLBASE + "geradocumento/salva";
+    private static final String ROTAGERARDOC = URLBASE + "geradocumento/salva";
     private static final String ROTAGERARHTMLDOC = URLBASE + "geradocumento/html";
+    private static final String ROTAGERARLISTADOC = URLBASE + "geradocumento";
     private static final String METODOGET = "GET";
     private static final String METODOPOST = "POST";
     private String JSONDOC;
@@ -24,9 +28,8 @@ public class UsuarioService {
     private String respostaServidor;
 
 
-    public UsuarioService(){
+    public UsuarioService(){}
 
-    }
     public String getJSONDOC() {
         return JSONDOC;
     }
@@ -55,7 +58,9 @@ public class UsuarioService {
         return ROTAGERARHTMLDOC;
     }
 
-    private String criarJsonObjeto(Object objeto){
+    public String getRotagerarlistadoc(){return ROTAGERARLISTADOC;}
+
+    public String criarJsonObjeto(Object objeto){
         return gson.toJson(objeto);
     }
 
@@ -82,9 +87,6 @@ public class UsuarioService {
         conexaoServidor.execute(json, ROTAGERARHTMLDOC, METODOPOST, token);
     }
 
-
-
-
     public void logar(Usuario usuario, ConexaoServidor conexaoServidor){
         String jsonUser = criarJsonObjeto(usuario);
         conexaoServidor.execute(jsonUser,ROTALOGAR, METODOPOST);
@@ -107,6 +109,15 @@ public class UsuarioService {
        Map<String,Object> jsonNodes = gson.fromJson(json, Map.class);
        String resultado = jsonNodes.get("token").toString();
        return resultado;
+   }
 
+   public void listarDocs(ConexaoServidor conexaoServidor, String token){
+       conexaoServidor.execute(ROTAGERARLISTADOC,METODOGET,token);
+   }
+
+   public List docJsontoObject(String json){
+       String novoJson = json.substring(8,json.length()-1);
+       ArrayList<Documento> listaDocs = gson.fromJson(novoJson, new TypeToken<List<Documento>>(){}.getType());
+       return listaDocs;
    }
 }

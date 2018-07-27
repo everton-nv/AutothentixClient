@@ -17,15 +17,14 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
     private static final int ZERO = 0;
     private static final int UM = 1;
     private static final int DOIS = 2;
+    private static final int TRES = 3;
     public AsyncResposta delegate = null;
     private UsuarioService usuarioService = new UsuarioService();
-
 
 
     @Override
     protected void onPreExecute(){
         delegate.processStart();
-
     }
 
     @Override
@@ -49,6 +48,10 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
         if (Objects.equals(strings[UM], usuarioService.getRotagerarhtmldoc())){
             jsonResposta = getHtmlDoc(strings);
+        }
+
+        if (Objects.equals(strings[ZERO], usuarioService.getRotagerarlistadoc())){
+            jsonResposta = getListarDocs(strings);
         }
 
         return jsonResposta;
@@ -79,6 +82,7 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
             StringBuilder sbHtml = new StringBuilder();
             String linha;
+
             while( ( linha = reader.readLine() ) != null )
             {
                 sbHtml.append (linha);
@@ -102,7 +106,7 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
             conexao.setRequestMethod(strings[DOIS]);
             conexao.addRequestProperty("Content-type", "application/json");
-            conexao.setRequestProperty("authorization",strings[3]);
+            conexao.setRequestProperty("authorization",strings[TRES]);
 
             conexao.setDoOutput(true);
             conexao.setDoInput(true);
@@ -115,6 +119,7 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
             StringBuilder sbHtml = new StringBuilder();
             String linha;
+
             while( ( linha = reader.readLine() ) != null )
             {
                 sbHtml.append (linha);
@@ -137,7 +142,7 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
             conexao.setRequestMethod(strings[DOIS]);
             conexao.addRequestProperty("Content-type", "application/json");
-            conexao.setRequestProperty("authorization",strings[3]);
+            conexao.setRequestProperty("authorization",strings[TRES]);
 
             conexao.setDoOutput(true);
             conexao.setDoInput(true);
@@ -150,6 +155,39 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
             StringBuilder sbHtml = new StringBuilder();
             String linha;
+
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
+
+    private String getListarDocs(String... strings){
+        String jsonResposta = null;
+        try{
+            URL url = new URL(strings[ZERO]);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod(strings[UM]);
+            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.setRequestProperty("authorization",strings[DOIS]);
+
+            conexao.setDoInput(true);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
             while( ( linha = reader.readLine() ) != null )
             {
                 sbHtml.append (linha);
