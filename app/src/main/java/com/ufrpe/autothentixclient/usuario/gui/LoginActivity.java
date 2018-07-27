@@ -145,6 +145,11 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
     }
 
     @Override
+    public void processCancelled() {
+
+    }
+
+    @Override
     public void processFinish(String output) {
         if(output == null || output.contains("error")){
             GuiUtil.myToast(getApplicationContext(), getString(R.string.msg_erro_login_or_password_wrong));

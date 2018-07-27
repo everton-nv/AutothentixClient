@@ -18,6 +18,7 @@ import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.Objects;
+import java.util.TimerTask;
 
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
 
@@ -27,6 +28,7 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
     private EditText edtNomeEmpresa, edtCnpjContratado, edtNomeContratado, edtNacContratado, edtProfContratado, edtCpfContratado;
     private EditText edtValorNumerico , edtValorExtenso, edtNomeDoc , edtCidade, edtEstado, edtDataAtual;
     ConexaoServidor conexaoServidor = new ConexaoServidor();
+    UsuarioService usuarioService = new UsuarioService();
 
 
     @Override
@@ -245,20 +247,35 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
             String token = sharedPreferencesServices.getTokenPreferences();
 
-            UsuarioService usuarioService = new UsuarioService();
+           // UsuarioService usuarioService = new UsuarioService();
             usuarioService.inserirDocumento(documento, conexaoServidor, token);
+
         }
 
     }
 
     @Override
     public void processFinish(String output) {
-        initPreview(output);
+        if (!output.equals(usuarioService.getRotagerarhtmldoc())) {
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+            String token = sharedPreferencesServices.getTokenPreferences();
+            processCancelled();
+            usuarioService.gerarHtmlDoc(usuarioService.getJSONDOC(), conexaoServidor, token);
+
+        }else {
+
+            initPreview(output);
+        }
 
     }
 
     @Override
     public void processStart() {
+
+    }
+
+    @Override
+    public void processCancelled() {
 
     }
 }

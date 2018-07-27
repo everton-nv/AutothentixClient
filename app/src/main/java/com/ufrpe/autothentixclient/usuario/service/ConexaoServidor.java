@@ -19,9 +19,18 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
     public AsyncResposta delegate = null;
     private UsuarioService usuarioService = new UsuarioService();
 
+
+
     @Override
     protected void onPreExecute(){
         delegate.processStart();
+
+    }
+
+    @Override
+    protected void onCancelled(){
+        delegate.processCancelled();
+
     }
 
     @Override
@@ -42,6 +51,11 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
         if (Objects.equals(strings[UM], usuarioService.getRotagerardoc())){
             jsonResposta = inserirDocServer(strings);
         }
+
+        if (Objects.equals(strings[UM], usuarioService.getRotagerarhtmldoc())){
+            jsonResposta = getHtmlDoc(strings);
+        }
+
         return jsonResposta;
     }
 
@@ -68,6 +82,7 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             conexao.connect();
 
             jsonResposta = new Scanner(conexao.getInputStream()).next();
+            conexao.disconnect();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -79,6 +94,7 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
     private String inserirDocServer(String... strings){
         String jsonResposta = null;
+
         try{
             URL url = new URL(strings[UM]);
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -86,6 +102,34 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             conexao.setRequestMethod(strings[DOIS]);
             conexao.addRequestProperty("Content-type", "application/json");
             //conexao.addRequestProperty("authorization",strings[3]);
+            conexao.setRequestProperty("authorization",strings[3]);
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(strings[ZERO]);
+
+            conexao.connect();
+
+            jsonResposta = new Scanner(conexao.getInputStream()).next();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
+
+    private String getHtmlDoc(String... strings){
+        String jsonResposta = null;
+        try{
+            URL url = new URL(strings[UM]);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod(strings[DOIS]);
+            conexao.addRequestProperty("Content-type", "application/json");
             conexao.setRequestProperty("authorization",strings[3]);
 
             conexao.setDoOutput(true);

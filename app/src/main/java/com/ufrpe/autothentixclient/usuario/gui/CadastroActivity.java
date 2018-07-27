@@ -306,6 +306,11 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
     }
 
     @Override
+    public void processCancelled() {
+
+    }
+
+    @Override
     public void processFinish(String output) {
         progressBar.setVisibility(View.GONE);
         if(output == null || output.contains("error")){

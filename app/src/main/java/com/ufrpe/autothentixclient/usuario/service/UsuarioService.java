@@ -16,8 +16,10 @@ public class UsuarioService {
     private static final String ROTACADASTROPJ = URLBASE + "registra/pjuridica";
     private static final String ROTALOGAR = URLBASE + "auth/login";
     private static  final String ROTAGERARDOC = URLBASE + "geradocumento/salva";
+    private static final String ROTAGERARHTMLDOC = URLBASE + "geradocumento/html";
     private static final String METODOGET = "GET";
     private static final String METODOPOST = "POST";
+    private String JSONDOC;
     private static final int UM = 1;
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -25,6 +27,13 @@ public class UsuarioService {
 
     public UsuarioService(){
 
+    }
+    public String getJSONDOC() {
+        return JSONDOC;
+    }
+
+    public void setJSONDOC(String JSONDOC) {
+        this.JSONDOC = JSONDOC;
     }
 
     public String getRotalogar(){
@@ -41,6 +50,10 @@ public class UsuarioService {
 
     public String getRotacadastropj(){
         return ROTACADASTROPJ;
+    }
+
+    public String getRotagerarhtmldoc(){
+        return ROTAGERARHTMLDOC;
     }
 
     private String criarJsonObjeto(Object objeto){
@@ -62,8 +75,15 @@ public class UsuarioService {
 
    public void inserirDocumento(Documento documento, ConexaoServidor conexaoServidor, String token ) {
         String jsonDoc = criarJsonObjeto(documento);
+        setJSONDOC(jsonDoc);
         conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST, token);
    }
+
+    public void gerarHtmlDoc(String json, ConexaoServidor conexaoServidor, String token ) {
+        conexaoServidor.execute(json, ROTAGERARHTMLDOC, METODOPOST, token);
+    }
+
+
 
 
     public void logar(Usuario usuario, ConexaoServidor conexaoServidor){
