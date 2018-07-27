@@ -162,7 +162,7 @@
     <string name="lbl_hired_data">Dados do Contratado</string>
     <string name="lbl_values">Valores</string>
     <string name="lbl_local">Local e Data</string>
-    <string name="msg_sucess_logoff">Deslogado com Sucesso</string>
+    <string name="msg_success_logoff">Deslogado com Sucesso</string>
     <string name="msg_erro_login_or_password_wrong">Email ou senha incorretos.</string>
     <string name="logging_in">Logando...</string>
 </resources>

@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ufrpe.autothentixclient.R;
-import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 
 import static com.ufrpe.autothentixclient.infra.GuiUtil.myToastShort;
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity
                 SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
                 sharedPreferencesServices.clearPreferences();
                 changeActivity(LoginActivity.class);
-                myToastShort(this, getString(R.string.msg_sucess_logoff));
+                myToastShort(this, getString(R.string.msg_success_logoff));
                 break;
         }
 
