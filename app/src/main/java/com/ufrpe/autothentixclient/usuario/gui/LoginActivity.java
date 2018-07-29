@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -26,17 +27,20 @@ import java.io.IOException;
 
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_LOGIN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_PASSWORD_PREFERENCES;
-import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.AUTO_LOGIN;
+import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getAnimationFadeIn;
+import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getAnimationFadeOut;
 
 
 public class LoginActivity extends AppCompatActivity implements AsyncResposta {
     private EditText edtEmail, edtPassword;
-    ConexaoServidor conexaoServidor = new ConexaoServidor();
+    ConexaoServidor conexaoServidor;// = new ConexaoServidor();
+    LinearLayout linearLayout;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        conexaoServidor.delegate = this;
+//        conexaoServidor.delegate = this;
         setContentView(R.layout.activity_login);
 
         try {
@@ -65,10 +69,57 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
     }
 
     private void showLoginLayout() {
-        LinearLayout linearLayout = findViewById(R.id.layoutProgressBar);
-        linearLayout.setVisibility(View.GONE);
+        Animation animationFadeOut = getAnimationFadeOut(this);
+
+        linearLayout = findViewById(R.id.layoutProgressBar);
+        animationFadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linearLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        linearLayout.startAnimation(animationFadeOut);
+
         ScrollView scrollView = findViewById(R.id.scrollViewLogin);
         scrollView.setVisibility(View.VISIBLE);
+        scrollView.startAnimation(getAnimationFadeIn(this));
+    }
+
+    private void showLoadLayout() {
+        Animation animationFadeOut = getAnimationFadeOut(this);
+
+        scrollView = findViewById(R.id.scrollViewLogin);
+        animationFadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                scrollView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        scrollView.startAnimation(animationFadeOut);
+
+        linearLayout = findViewById(R.id.layoutProgressBar);
+        linearLayout.setVisibility(View.VISIBLE);
+        linearLayout.startAnimation(getAnimationFadeIn(this));
     }
 
     public void cadastrar(View view){
@@ -94,6 +145,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
             valid = false;
         }
         if(valid){
+            connectToServer();
             Usuario usuario = new Usuario(email, password);
             UsuarioService usuarioService = new UsuarioService();
             usuarioService.logar(usuario, conexaoServidor);
@@ -109,27 +161,13 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
         String login = sharedPreferencesServices.getLoginPreferences();
         String password = sharedPreferencesServices.getPasswordPreferences();
 
-        Boolean isAutologged;
-        Bundle bundle = getIntent().getExtras();
-
-        try{
-            isAutologged = bundle.getBoolean(AUTO_LOGIN.getValue());
-        } catch(Exception e){
-            isAutologged = false;
-        }
-
         if(login.equals(DEFAULT_LOGIN_PREFERENCES) && password.equals(DEFAULT_PASSWORD_PREFERENCES)){
             showLoginLayout();
-        } else if(!isAutologged) {
-            findScreenInputs();
-            edtEmail.setText(login);
-            edtPassword.setText(password);
-            logar();
         } else{
             findScreenInputs();
             edtEmail.setText(login);
             edtPassword.setText(password);
-            showLoginLayout();
+            logar();
         }
     }
 
@@ -141,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
 
     @Override
     public  void processStart(){
-
+        showLoadLayout();
     }
 
     @Override
@@ -149,10 +187,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
         if(output == null || output.contains("error")){
             GuiUtil.myToast(getApplicationContext(), getString(R.string.msg_erro_login_or_password_wrong));
             showLoginLayout();
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.putExtra(AUTO_LOGIN.getValue(), true);
-            startActivity(intent);
-            finish();
         }
         else{
             UsuarioService usuarioService = new UsuarioService();
@@ -162,5 +196,10 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
             sharedPreferencesServices.setPasswordPreferences(edtPassword.getText().toString());
             changeActivity(MainActivity.class);
         }
+    }
+
+    private void connectToServer(){
+        conexaoServidor = new ConexaoServidor();
+        conexaoServidor.delegate = this;
     }
 }

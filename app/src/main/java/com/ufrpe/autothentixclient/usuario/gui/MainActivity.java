@@ -11,15 +11,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.ufrpe.autothentixclient.R;
+import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.usuario.gui.fragment.DocumentoFragment;
 
 import static com.ufrpe.autothentixclient.infra.GuiUtil.myToastShort;
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOCS_LIST;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +33,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        try {
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+            getSupportActionBar().setTitle(sharedPreferencesServices.getLoginPreferences());
+        } catch (Exception e) {
+            Log.e(getString(R.string.log_screen_main), e.getMessage());
+            GuiUtil.myToastShort(this, getString(R.string.msg_error_open_activity));
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        startPatientFragment();
+        startDocumentoFragment();
     }
 
     @Override
@@ -61,13 +72,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void startPatientFragment(){
-        DocumentoFragment mFragment = (DocumentoFragment) getSupportFragmentManager().findFragmentByTag("lista de consultas");
+    private void startDocumentoFragment(){
+        DocumentoFragment mFragment = (DocumentoFragment) getSupportFragmentManager().findFragmentByTag(DOCS_LIST.getValue());
         if(mFragment == null) {
             mFragment = new DocumentoFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.rl_fragment_container, mFragment, "Documents List");
-            ft.commit();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.rl_fragment_container, mFragment, DOCS_LIST.getValue());
+            fragmentTransaction.commit();
         }
     }
 

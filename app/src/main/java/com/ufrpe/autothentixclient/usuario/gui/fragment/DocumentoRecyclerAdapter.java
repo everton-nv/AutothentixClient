@@ -5,6 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ufrpe.autothentixclient.R;
@@ -73,6 +76,11 @@ public class DocumentoRecyclerAdapter extends RecyclerView.Adapter<DocumentoRecy
         notifyItemRemoved(position);
     }
 
+    public void clearList(){
+        mList.clear();
+        notifyDataSetChanged();
+    }
+
     //Autaliza os itens da lista (Os que não estão visíveis)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
@@ -81,22 +89,30 @@ public class DocumentoRecyclerAdapter extends RecyclerView.Adapter<DocumentoRecy
 
         holder.nomeDoc.setText(documento.getNomedoc());
 
+        Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), android.R.anim.fade_in);
+        holder.itemView.startAnimation(animation);
+
+
     }
 
     /**
      * Classe que personaliza o @see {@link RecyclerView.ViewHolder}
      */
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         public TextView nomeDoc;
+        ImageView ivContextMenu;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
 
             nomeDoc = itemView.findViewById(R.id.txtNomeDoc);
+            ivContextMenu = itemView.findViewById(R.id.iv_context_menu);
 
+            ivContextMenu.setOnClickListener(this);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+
         }
 
         @Override

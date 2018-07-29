@@ -119,9 +119,11 @@
     <string name="switch_tipo_cadastro_pessoa_juridica">Pessoa Jurídica:&#160;&#160;</string>
     <string name="content_description_logo_autothentix">Logo Autothentix</string>
     <string name="content_description_doc_icon">Ícone do documento</string>
+    <string name="content_description_option_icon">Ícone do documento</string>
     <string name="screen_name_signup">Cadastro</string>
     <string name="screen_name_create_doc">Novo Documento</string>
     <string name="log_screen_signup">SignUpScreen</string>
+    <string name="log_screen_main">SignUpScreen</string>
     <string name="log_screen_create_doc_service">CreateDocSer</string>
     <string name="log_screen_view_doc">viewDoc</string>
     <string name="log_screen_doc_fragment">DocFragment</string>

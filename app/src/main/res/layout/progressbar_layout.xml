@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/progressBarLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/load_background"
+    android:focusable="true"
+    android:clickable="true"
+    android:visibility="gone">
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLargeInverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center" />
+        <!--android:indeterminate="true"-->
+        <!--android:indeterminateTintMode="src_atop"-->
+        <!--android:indeterminateTint="@color/colorItemBackground"-->
+</LinearLayout>

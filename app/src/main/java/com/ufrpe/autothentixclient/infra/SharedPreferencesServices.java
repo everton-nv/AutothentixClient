@@ -6,10 +6,12 @@ import android.content.SharedPreferences;
 
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_ID_USER_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_LOGIN_PREFERENCES;
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_NEED_UPDATE_DOC_LIST_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_PASSWORD_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_TOKEN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.ID_USER_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.LOGIN_PREFERENCES;
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.NEED_UPDATE_DOC_LIST_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.PASSWORD_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.TITLE_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.TOKEN_PREFERENCES;
@@ -34,6 +36,11 @@ public class SharedPreferencesServices {
         editor.commit();
     }
 
+    private void setBoolean(String preferenceTag, boolean value){
+        editor.putBoolean(preferenceTag, value);
+        editor.commit();
+    }
+
     public void setIdUserPreferences(long idUser){
         setLong(ID_USER_PREFERENCES, idUser);
     }
@@ -44,6 +51,14 @@ public class SharedPreferencesServices {
 
     public void setPasswordPreferences(String password){
         setString(PASSWORD_PREFERENCES, password);
+    }
+
+    public void needUpdateDocList(){
+        setBoolean(NEED_UPDATE_DOC_LIST_PREFERENCES, true);
+    }
+
+    public void noNeedUpdateDocList(){
+        setBoolean(NEED_UPDATE_DOC_LIST_PREFERENCES, DEFAULT_NEED_UPDATE_DOC_LIST_PREFERENCES);
     }
 
     public void setTokenPreferences(String token){
@@ -66,6 +81,9 @@ public class SharedPreferencesServices {
         return sharedPreferences.getString(TOKEN_PREFERENCES, DEFAULT_TOKEN_PREFERENCES);
     }
 
+    public boolean getNeedUpdateDocList(){
+        return sharedPreferences.getBoolean(NEED_UPDATE_DOC_LIST_PREFERENCES, DEFAULT_NEED_UPDATE_DOC_LIST_PREFERENCES);
+    }
 
     public void clearPreferences(){
         editor.clear();

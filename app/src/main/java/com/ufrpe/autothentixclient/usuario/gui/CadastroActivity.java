@@ -1,6 +1,7 @@
 package com.ufrpe.autothentixclient.usuario.gui;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.ufrpe.autothentixclient.R;
@@ -28,6 +30,9 @@ import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getAnimationSlideIn;
+import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getAnimationSlideOut;
+
 
 public class CadastroActivity extends AppCompatActivity implements AsyncResposta{
     private AlertDialog alerta;
@@ -37,15 +42,12 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
 
     private static final int ZERO = 0;
     private static final int UM = 1;
-    ConexaoServidor conexaoServidor = new ConexaoServidor();
-    ProgressBar progressBar;
-
+    ConexaoServidor conexaoServidor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        conexaoServidor.delegate = this;
 
         try {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -82,6 +84,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
 
     private void showNaturalPersonLayout() {
         switchTipoCadastro.setText(R.string.switch_tipo_cadastro_pessoa_fisica);
+
         edtNome.setVisibility(View.VISIBLE);
         edtCpf.setVisibility(View.VISIBLE);
         edtDataNasc.setVisibility(View.VISIBLE);
@@ -92,16 +95,24 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         layoutTextDataNasc.setVisibility(View.VISIBLE);
         layoutTextSexo.setVisibility(View.VISIBLE);
 
+        layoutTextNome.startAnimation(getAnimationSlideIn(this));
+        layoutTextCpf.startAnimation(getAnimationSlideIn(this));
+        layoutTextDataNasc.startAnimation(getAnimationSlideIn(this));
+        layoutTextSexo.startAnimation(getAnimationSlideIn(this));
+
         edtCnpj.setVisibility(View.GONE);
 
+        layoutTextCnpj.startAnimation(getAnimationSlideOut(this));
         layoutTextCnpj.setVisibility(View.GONE);
     }
 
     private void showLegalPersonLayout() {
         switchTipoCadastro.setText(R.string.switch_tipo_cadastro_pessoa_juridica);
+
         edtCnpj.setVisibility(View.VISIBLE);
 
         layoutTextCnpj.setVisibility(View.VISIBLE);
+        layoutTextCnpj.startAnimation(getAnimationSlideIn(this));
 
         edtNome.setVisibility(View.GONE);
         edtCpf.setVisibility(View.GONE);
@@ -112,6 +123,12 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         layoutTextCpf.setVisibility(View.GONE);
         layoutTextDataNasc.setVisibility(View.GONE);
         layoutTextSexo.setVisibility(View.GONE);
+
+        layoutTextNome.startAnimation(getAnimationSlideOut(this));
+        layoutTextCpf.startAnimation(getAnimationSlideOut(this));
+        layoutTextDataNasc.startAnimation(getAnimationSlideOut(this));
+        layoutTextSexo.startAnimation(getAnimationSlideOut(this));
+
     }
 
     private void findScreenLayouts() {
@@ -123,7 +140,6 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
     }
 
     private void findScreenInputs() {
-        progressBar = findViewById(R.id.login_progress);
         switchTipoCadastro = findViewById(R.id.switchTipoCadastro);
         edtNome = findViewById(R.id.editTextNome);
         edtCpf = findViewById(R.id.editTextCpf);
@@ -252,6 +268,7 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         if (valid) {
             Usuario usuario = new Usuario(email,senha);
             PessoaFisica pessoaFisica = new PessoaFisica(nome, cpf, telefone, sexo.substring(ZERO, UM), validacaoCadastro.dataFormatoBanco(nasc));
+            connectToServer();
             UsuarioService service = new UsuarioService();
             service.inserirCadastroPf(usuario, pessoaFisica, conexaoServidor);
         }
@@ -295,29 +312,44 @@ public class CadastroActivity extends AppCompatActivity implements AsyncResposta
         if (valid) {
             Usuario usuario = new Usuario(email, senha);
             PessoaJuridica pessoaJuridica = new PessoaJuridica(cnpj, telefone);
+            connectToServer();
             UsuarioService service = new UsuarioService();
             service.inserirCadastroPj(usuario, pessoaJuridica, conexaoServidor);
         }
     }
 
+    private void closeKeyboard(){
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            Objects.requireNonNull(imm).hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            getCurrentFocus().clearFocus();
+        }
+
+    }
+
     @Override
-    public  void processStart(){
-        progressBar.setVisibility(View.VISIBLE);
+    public void processStart(){
+        closeKeyboard();
+        LoadScreen.loadOn(this, (LinearLayout) findViewById(R.id.progressBarLayout));
     }
 
     @Override
     public void processFinish(String output) {
-        progressBar.setVisibility(View.GONE);
+        LoadScreen.loadOut(this, (LinearLayout) findViewById(R.id.progressBarLayout));
+
         if(output == null || output.contains("error")){
             String message = (output==null) ? "Não foi possível efetuar o cadastro." : output;
             GuiUtil.myToast(this, message);
-            changeActivity(CadastroActivity.class);
-        }
-        else{
+        } else{
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getApplicationContext());
             sharedPreferencesServices.setTokenPreferences(output);
             GuiUtil.myToast(getApplicationContext(), "Cadastrado com sucesso.");
             changeActivity(LoginActivity.class);
         }
+    }
+
+    private void connectToServer(){
+        conexaoServidor = new ConexaoServidor();
+        conexaoServidor.delegate = this;
     }
 }

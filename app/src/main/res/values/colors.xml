@@ -58,5 +58,8 @@
     <color name="activity_login_gradient_center">#302b63</color>
     <color name="activity_login_gradient_end">#24243e</color>
 
+    <color name="load_background">#5524243e</color>
+
+
     <color name="divider">#afafaf</color>
 </resources>

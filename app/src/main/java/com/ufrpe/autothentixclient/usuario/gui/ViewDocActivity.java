@@ -1,10 +1,11 @@
 package com.ufrpe.autothentixclient.usuario.gui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 
 import com.ufrpe.autothentixclient.R;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
@@ -14,6 +15,7 @@ import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.Objects;
 
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_NAME_TITLE;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
 
 public class ViewDocActivity extends AppCompatActivity implements AsyncResposta {
@@ -29,7 +31,7 @@ public class ViewDocActivity extends AppCompatActivity implements AsyncResposta 
 
         try {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Nome do Documento");
+            getSupportActionBar().setTitle(getIntent().getStringExtra(DOC_NAME_TITLE.getValue()));
         } catch (Exception e) {
             Log.e(getString(R.string.log_screen_create_doc_service), e.getMessage());
             GuiUtil.myToastShort(this, getString(R.string.msg_error_open_activity));
@@ -61,8 +63,7 @@ public class ViewDocActivity extends AppCompatActivity implements AsyncResposta 
 
     private void initVlisualizarDoc(){
         try {
-            Bundle bundle = getIntent().getExtras();
-            String jason = bundle.getString(URL_PREVIEW.getValue());
+            String jason = getIntent().getStringExtra(URL_PREVIEW.getValue());
 
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
             String token = sharedPreferencesServices.getTokenPreferences();
@@ -76,15 +77,16 @@ public class ViewDocActivity extends AppCompatActivity implements AsyncResposta 
     }
 
     @Override
+    public void processStart() {
+        LoadScreen.loadOn(this, (LinearLayout) findViewById(R.id.progressBarLayout));
+    }
+
+    @Override
     public void processFinish(String output) {
         WebView myWebView = findViewById(R.id.webview);
         myWebView.getSettings().setUseWideViewPort(true);
         myWebView.loadData(output,"text/html","UTF-8");
 
-    }
-
-    @Override
-    public void processStart() {
-
+        LoadScreen.loadOut(this, (LinearLayout) findViewById(R.id.progressBarLayout));
     }
 }
