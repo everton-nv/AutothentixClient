@@ -102,6 +102,7 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         intent.putExtra(URL_PREVIEW.getValue(), link);
         intent.putExtra(DOC_NAME_TITLE.getValue(), nomeDocumento);
         startActivity(intent);
+        finish();
     }
 
     public void  onClickCreateDoc(View view){
