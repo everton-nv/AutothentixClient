@@ -69,7 +69,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
-                    android:layout_marginTop="@dimen/edit_text_margin_top"
+                    android:layout_marginTop="@dimen/edit_text_margin_top_tablet"
                     android:text="@string/lbl_contractor_data"
                     android:textStyle="bold" />
 
@@ -170,7 +170,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
-                    android:layout_marginTop="@dimen/edit_text_margin_top"
+                    android:layout_marginTop="@dimen/edit_text_margin_top_tablet"
                     android:text="@string/lbl_hired_data"
                     android:textStyle="bold" />
 
@@ -308,7 +308,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
-                    android:layout_marginTop="@dimen/edit_text_margin_top"
+                    android:layout_marginTop="@dimen/edit_text_margin_top_tablet"
                     android:text="@string/lbl_values"
                     android:textStyle="bold" />
 
@@ -370,7 +370,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
-                    android:layout_marginTop="@dimen/edit_text_margin_top"
+                    android:layout_marginTop="@dimen/edit_text_margin_top_tablet"
                     android:text="@string/lbl_local"
                     android:textStyle="bold" />
 
