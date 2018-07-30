@@ -20,15 +20,17 @@
             app:cardCornerRadius="@dimen/card_border"
             app:cardElevation="@dimen/card_elevation">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content" >
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layoutTextDocNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -41,9 +43,30 @@
                         android:inputType="textPersonName" />
                 </android.support.design.widget.TextInputLayout>
 
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_thickness"
+                    android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
+                    android:layout_below="@id/layoutTextDocNome"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/divider" />
+
+                <View
+                    android:id="@+id/centerView1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@id/view1"
+                    android:layout_centerInParent="true" />
+
                 <TextView
+                    android:id="@+id/labelDadosDoContratante"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/view1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:layout_marginTop="@dimen/edit_text_margin_top"
@@ -51,8 +74,12 @@
                     android:textStyle="bold" />
 
                 <View
+                    android:id="@+id/dividerDadosDoContratante"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/divider_thickness"
+                    android:layout_below="@id/labelDadosDoContratante"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/divider_horizontal_margin_top_legend"
                     android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
                     android:background="@color/divider" />
@@ -61,6 +88,9 @@
                     android:id="@+id/layoutTextContratanteNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/dividerDadosDoContratante"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -78,6 +108,9 @@
                     android:id="@+id/layoutTextContratanteNacionalidade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/dividerDadosDoContratante"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -94,6 +127,9 @@
                     android:id="@+id/layoutTextContratanteRG"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratanteNacionalidade"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -110,6 +146,9 @@
                     android:id="@+id/layoutTextContratanteCPF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratanteNacionalidade"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -123,8 +162,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/labelDadosDoContratado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratanteRG"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:layout_marginTop="@dimen/edit_text_margin_top"
@@ -132,8 +175,12 @@
                     android:textStyle="bold" />
 
                 <View
+                    android:id="@+id/dividerDadosDoContratado"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/divider_thickness"
+                    android:layout_below="@id/labelDadosDoContratado"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/divider_horizontal_margin_top_legend"
                     android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
                     android:background="@color/divider" />
@@ -142,6 +189,9 @@
                     android:id="@+id/layoutTextContratadaNomeEmpresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/dividerDadosDoContratado"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -158,6 +208,9 @@
                     android:id="@+id/layoutTextContratadaCNPJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/dividerDadosDoContratado"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -174,6 +227,9 @@
                     android:id="@+id/layoutTextContratadaNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratadaCNPJ"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -190,6 +246,9 @@
                     android:id="@+id/layoutTextContratadaNacionalidade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratadaCNPJ"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -206,6 +265,9 @@
                     android:id="@+id/layoutTextContratadaProfissao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratadaNacionalidade"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -222,6 +284,9 @@
                     android:id="@+id/layoutTextContratadaCPF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratadaNacionalidade"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -235,8 +300,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/labelValores"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextContratadaProfissao"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:layout_marginTop="@dimen/edit_text_margin_top"
@@ -244,8 +313,12 @@
                     android:textStyle="bold" />
 
                 <View
+                    android:id="@+id/dividerValores"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/divider_thickness"
+                    android:layout_below="@id/labelValores"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/divider_horizontal_margin_top_legend"
                     android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
                     android:background="@color/divider" />
@@ -254,6 +327,9 @@
                     android:id="@+id/layoutTextValor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/dividerValores"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -270,6 +346,9 @@
                     android:id="@+id/layoutTextValorExtenso"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/dividerValores"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -283,8 +362,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/labelLocalData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutTextValor"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start"
                     android:layout_marginTop="@dimen/edit_text_margin_top"
@@ -292,7 +375,11 @@
                     android:textStyle="bold" />
 
                 <View
+                    android:id="@+id/DividerLocalData"
                     android:layout_width="match_parent"
+                    android:layout_below="@id/labelLocalData"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_height="@dimen/divider_thickness"
                     android:layout_marginTop="@dimen/divider_horizontal_margin_top_legend"
                     android:layout_marginBottom="@dimen/divider_horizontal_margin_bottom"
@@ -302,6 +389,9 @@
                     android:id="@+id/layoutTextCidade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/DividerLocalData"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignEnd="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -318,6 +408,9 @@
                     android:id="@+id/layoutTextDataAtual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/DividerLocalData"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/centerView1"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
@@ -333,6 +426,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_below="@id/layoutTextCidade"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
@@ -376,7 +472,7 @@
                 </LinearLayout>
 
 
-            </LinearLayout>
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
     </ScrollView>
 
