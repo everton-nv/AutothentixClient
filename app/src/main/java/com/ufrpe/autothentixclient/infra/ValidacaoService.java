@@ -15,7 +15,9 @@ public class ValidacaoService {
     private static final int TAMTEL = 11;
     private static final int ZERO = 0;
     private static final int DOIS = 2;
+    private static final int TRES = 3;
     private static final int QUATRO = 4;
+    private static final int SEIS = 6;
     private static final int TAMANHO_DATA_CB = 10;
     private static final int TAMANHO_DATA_SB = 8;
 
@@ -109,7 +111,7 @@ public class ValidacaoService {
         if (data.contains("/")){
            // String dataReversa = new StringBuilder(data).reverse().toString();
             String dataNova = data.replace("/","");
-            dataFormatada = dataNova.substring(QUATRO,TAMANHO_DATA_SB) + "-" + dataNova.substring(DOIS,QUATRO) + "-" + dataNova.substring(ZERO,DOIS);
+            dataFormatada = data.substring(QUATRO,TAMANHO_DATA_SB) + "-" + data.substring(DOIS,QUATRO) + "-" + data.substring(ZERO,DOIS);
 
         }else{
             dataFormatada = data.substring(QUATRO,TAMANHO_DATA_SB) + "-" + data.substring(DOIS,QUATRO) + "-" + data.substring(ZERO,DOIS);
@@ -119,6 +121,11 @@ public class ValidacaoService {
     }
     public boolean isDataDoc(String data){
         return(dataExiste(data) && (data.length() == TAMANHO_DATA_CB) || data.length() == TAMANHO_DATA_SB);
+    }
 
+    public String dataExibicao(String data){
+        String dataNova = data.replace("-","");
+        String dataFormatada = dataNova.substring(SEIS,TAMANHO_DATA_SB) + "/" + dataNova.substring(QUATRO, SEIS) + "/" + dataNova.substring(ZERO,QUATRO);
+        return dataFormatada;
     }
 }

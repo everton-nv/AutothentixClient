@@ -20,10 +20,13 @@ public class UsuarioService {
     private static final String ROTAGERARDOC = URLBASE + "geradocumento/salva";
     private static final String ROTAGERARHTMLDOC = URLBASE + "geradocumento/html";
     private static final String ROTAGERARLISTADOC = URLBASE + "geradocumento";
+    private static final String ROTAATUALIZARDOC = URLBASE + "geradocumento/";
     private static final String METODOGET = "GET";
     private static final String METODOPOST = "POST";
+    private static final String METODOPUT = "PUT";
     private String JSONDOC;
     private static final int UM = 1;
+    private static final int OITO = 8;
     private Gson gson = new Gson();
     private String respostaServidor;
 
@@ -34,31 +37,34 @@ public class UsuarioService {
         return JSONDOC;
     }
 
-    public void setJSONDOC(String JSONDOC) {
+    private void setJSONDOC(String JSONDOC) {
         this.JSONDOC = JSONDOC;
     }
 
-    public String getRotalogar(){
+    String getRotalogar(){
         return ROTALOGAR;
     }
 
-    public String getRotagerardoc(){
+    String getRotagerardoc(){
         return ROTAGERARDOC;
     }
 
-    public  String getRotacadastropf(){
+    String getRotacadastropf(){
         return ROTACADASTROPF;
     }
 
-    public String getRotacadastropj(){
+    String getRotacadastropj(){
         return ROTACADASTROPJ;
     }
 
-    public String getRotagerarhtmldoc(){
+    String getRotagerarhtmldoc(){
         return ROTAGERARHTMLDOC;
     }
 
-    public String getRotagerarlistadoc(){return ROTAGERARLISTADOC;}
+    String getRotagerarlistadoc(){return ROTAGERARLISTADOC;}
+
+    String getMetodoput(){return METODOPUT;}
+
 
     public String criarJsonObjeto(Object objeto){
         return gson.toJson(objeto);
@@ -81,6 +87,12 @@ public class UsuarioService {
         String jsonDoc = criarJsonObjeto(documento);
         setJSONDOC(jsonDoc);
         conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST, token);
+   }
+
+   public void atualizarDocumento(Documento documento, ConexaoServidor conexaoServidor, String token){
+       String novaRotaAtt = ROTAATUALIZARDOC + documento.getId();
+       String jsonDocAtt = criarJsonObjeto(documento);
+       conexaoServidor.execute(jsonDocAtt,novaRotaAtt,METODOPUT,token);
    }
 
     public void gerarHtmlDoc(String json, ConexaoServidor conexaoServidor, String token ) {
@@ -115,9 +127,14 @@ public class UsuarioService {
        conexaoServidor.execute(ROTAGERARLISTADOC,METODOGET,token);
    }
 
-   public List docJsontoObject(String json){
-       String novoJson = json.substring(8,json.length()-1);
+   public List docServerJsontoObject(String json){
+       String novoJson = json.substring(OITO,json.length()-UM);
        ArrayList<Documento> listaDocs = gson.fromJson(novoJson, new TypeToken<List<Documento>>(){}.getType());
        return listaDocs;
+   }
+
+   public Documento docAppJsontoObject(String json){
+        Documento documento = gson.fromJson(json, new TypeToken<Documento>(){}.getType());
+       return documento;
    }
 }

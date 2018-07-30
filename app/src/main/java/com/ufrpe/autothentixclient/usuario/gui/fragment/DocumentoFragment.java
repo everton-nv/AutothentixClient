@@ -27,6 +27,7 @@ import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_JSON;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_NAME_TITLE;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
 
@@ -134,9 +135,11 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     }
 
     private void editDoc(int position) {
-        //connectToServer();
-        GuiUtil.myToastShort(getContext(), "Editar " + Integer.toString(position));
-        startActivity(new Intent(getActivity(), EditDocServicoActivity.class));
+        Documento documento = mList.get(position);
+        String jsonDoc = usuarioService.criarJsonObjeto(documento);
+        Intent intent = new Intent(getActivity(),EditDocServicoActivity.class);
+        intent.putExtra(DOC_JSON.getValue(),jsonDoc);
+        startActivity(intent);
     }
 
     private void deleteDoc(int position) {
@@ -186,7 +189,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
         LoadScreen.loadOut(getContext(), (LinearLayout) getActivity().findViewById(R.id.progressBarLayout));
 
         if(output != null) {
-            List<Documento> listAux = usuarioService.docJsontoObject(output);
+            List<Documento> listAux = usuarioService.docServerJsontoObject(output);
             adapter.clearList();
             addNewItens(listAux);
         }

@@ -27,7 +27,7 @@ import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREV
 public class CreateDocServicoActivity extends AppCompatActivity implements AsyncResposta {
     private EditText edtNomeContratante, edtNacContratante, edtRgContratante, edtCpfContratante;
     private EditText edtNomeEmpresa, edtCnpjContratado, edtNomeContratado, edtNacContratado, edtProfContratado, edtCpfContratado;
-    private EditText edtValorNumerico , edtValorExtenso, edtNomeDoc , edtCidade, edtEstado, edtDataAtual;
+    private EditText edtValorNumerico , edtValorExtenso, edtNomeDoc , edtCidade, edtDataAtual;
     ConexaoServidor conexaoServidor;
     UsuarioService usuarioService = new UsuarioService();
 
@@ -61,7 +61,6 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         edtValorNumerico = findViewById(R.id.editTextValor);
         edtValorExtenso = findViewById(R.id.editTextValorExtenso);
         edtCidade = findViewById(R.id.editTextCidade);
-        edtEstado = findViewById(R.id.editTextEstado);
         edtDataAtual = findViewById(R.id.editTextDataAtual);
         edtCpfContratado = findViewById(R.id.editTextContratadaCPF);
         edtNomeDoc = findViewById(R.id.editTextDocNome);
@@ -119,7 +118,6 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         edtValorNumerico.setText("150");
         edtValorExtenso.setText("um,cinco,zero");
         edtCidade.setText("Hellcife");
-        edtEstado.setText("PE");
         edtDataAtual.setText("25/08/2018");
         edtCpfContratado.setText("99988855423");
         edtNomeDoc.setText("Teste");
@@ -137,7 +135,6 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         String valorNumerico = edtValorNumerico.getText().toString();
         String valorExtenso = edtValorExtenso.getText().toString();
         String cidade = edtCidade.getText().toString();
-        String estado = edtEstado.getText().toString();
         String dataAtual = edtDataAtual.getText().toString();
         String nomeDocumento = edtNomeDoc.getText().toString();
 
@@ -230,12 +227,6 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
             valid = false;
         }
 
-        if (validacaoCadastro.isCampoVazio(estado)) {
-            edtEstado.requestFocus();
-            edtEstado.setError(getString(R.string.msg_estado_invalido));
-            valid = false;
-        }
-
         if (!validacaoCadastro.isDataDoc(dataAtual)) {
             edtDataAtual.requestFocus();
             edtDataAtual.setError(getString(R.string.msg_data_invalida));
@@ -278,12 +269,12 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
 
         LoadScreen.loadOut(this, (LinearLayout) findViewById(R.id.progressBarLayout));
 
-        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
-        sharedPreferencesServices.needUpdateDocList();
-
         if (output != null && output.equals(usuarioService.getJSONDOC())) {
             initPreview(output);
         }else {
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+            sharedPreferencesServices.needUpdateDocList();
+
             initPreview(usuarioService.getJSONDOC());
         }
 
