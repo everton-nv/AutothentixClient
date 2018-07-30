@@ -22,6 +22,7 @@
     <dimen name="divider_horizontal_margin_bottom">8dp</dimen>
     <dimen name="divider_horizontal_margin_top_legend">4dp</dimen>
     <dimen name="edit_text_margin_top">8dp</dimen>
+    <dimen name="edit_text_margin_top_first_item">16dp</dimen>
     <dimen name="edit_text_margin_top_tablet">16dp</dimen>
     <dimen name="edit_text_margin_bottom">8dp</dimen>
     <dimen name="edit_text_margin_end">16dp</dimen>

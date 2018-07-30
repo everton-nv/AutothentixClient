@@ -29,6 +29,7 @@
                     android:id="@+id/layoutTextDocNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/edit_text_margin_top_first_item"
                     android:layout_marginBottom="@dimen/edit_text_margin_bottom"
                     android:layout_marginEnd="@dimen/edit_text_margin_end"
                     android:layout_marginStart="@dimen/edit_text_margin_start">
