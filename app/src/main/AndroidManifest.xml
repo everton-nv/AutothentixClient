@@ -33,7 +33,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".usuario.gui.CreateDocActivity" />
         <activity android:name=".usuario.gui.CreateDocServicoActivity" />
-        <activity android:name=".usuario.gui.ViewDocActivity"></activity>
+        <activity android:name=".usuario.gui.ViewDocActivity" />
+        <activity android:name=".usuario.gui.EditDocServicoActivity" />
+        <activity android:name=".usuario.gui.EditDocServicoActivity"></activity>
     </application>
 
 </manifest>

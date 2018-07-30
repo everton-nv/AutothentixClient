@@ -25,7 +25,6 @@ import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_NAME
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
 
 public class CreateDocServicoActivity extends AppCompatActivity implements AsyncResposta {
-
     private EditText edtNomeContratante, edtNacContratante, edtRgContratante, edtCpfContratante;
     private EditText edtNomeEmpresa, edtCnpjContratado, edtNomeContratado, edtNacContratado, edtProfContratado, edtCpfContratado;
     private EditText edtValorNumerico , edtValorExtenso, edtNomeDoc , edtCidade, edtEstado, edtDataAtual;
@@ -81,6 +80,16 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         closeActivity();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.closeActivity();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void initPreview(){
         Intent intent = new Intent(this, ViewDocActivity.class);
@@ -93,18 +102,6 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         intent.putExtra(URL_PREVIEW.getValue(), link);
         intent.putExtra(DOC_NAME_TITLE.getValue(), nomeDocumento);
         startActivity(intent);
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.closeActivity();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void  onClickCreateDoc(View view){
@@ -275,6 +272,9 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
 
     @Override
     public void processFinish(String output) {
+        //LinearLayout progressBarLayout = findViewById(R.id.progressBarLayout);
+        //progressBarLayout.setVisibility(View.GONE);
+
         LoadScreen.loadOut(this, (LinearLayout) findViewById(R.id.progressBarLayout));
 
         SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);

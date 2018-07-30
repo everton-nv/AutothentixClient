@@ -18,6 +18,7 @@ import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.usuario.dominio.Documento;
 import com.ufrpe.autothentixclient.usuario.gui.AsyncResposta;
+import com.ufrpe.autothentixclient.usuario.gui.EditDocServicoActivity;
 import com.ufrpe.autothentixclient.usuario.gui.LoadScreen;
 import com.ufrpe.autothentixclient.usuario.gui.ViewDocActivity;
 import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
@@ -135,6 +136,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     private void editDoc(int position) {
         //connectToServer();
         GuiUtil.myToastShort(getContext(), "Editar " + Integer.toString(position));
+        startActivity(new Intent(getActivity(), EditDocServicoActivity.class));
     }
 
     private void deleteDoc(int position) {

@@ -122,6 +122,7 @@
     <string name="content_description_option_icon">Ícone do documento</string>
     <string name="screen_name_signup">Cadastro</string>
     <string name="screen_name_create_doc">Novo Documento</string>
+    <string name="screen_name_edit_doc">Editar Documento</string>
     <string name="log_screen_signup">SignUpScreen</string>
     <string name="log_screen_main">SignUpScreen</string>
     <string name="log_screen_create_doc_service">CreateDocSer</string>
