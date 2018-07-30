@@ -27,6 +27,7 @@ import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_ID;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_JSON;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_NAME_TITLE;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
@@ -139,6 +140,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
         String jsonDoc = usuarioService.criarJsonObjeto(documento);
         Intent intent = new Intent(getActivity(),EditDocServicoActivity.class);
         intent.putExtra(DOC_JSON.getValue(),jsonDoc);
+        intent.putExtra(DOC_ID.getValue(),documento.getId());
         startActivity(intent);
     }
 

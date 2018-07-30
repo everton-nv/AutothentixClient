@@ -21,6 +21,7 @@ import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.Objects;
 
+import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_ID;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_JSON;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_NAME_TITLE;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.URL_PREVIEW;
@@ -173,6 +174,7 @@ public class EditDocServicoActivity extends AppCompatActivity implements AsyncRe
         String cidade = edtCidade.getText().toString();
         String dataAtual = edtDataAtual.getText().toString();
         String nomeDocumento = edtNomeDoc.getText().toString();
+        String docId = getIntent().getStringExtra(DOC_ID.getValue());
 
         boolean valid = true;
 
@@ -269,7 +271,7 @@ public class EditDocServicoActivity extends AppCompatActivity implements AsyncRe
             Documento documento = new Documento(nomeContratante, cpfContratante, rgContratante,
                     nacContratante, nomeEmpresa, nomeContratado, cnpjContratado, nacContratado,
                     cpfContratado, profContratado, valorNumerico, valorExtenso, cidade,
-                    validacaoCadastro.dataFormatoBanco(dataAtual), nomeDocumento);
+                    validacaoCadastro.dataFormatoBanco(dataAtual), nomeDocumento, docId);
 
             SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
             String token = sharedPreferencesServices.getTokenPreferences();

@@ -22,6 +22,27 @@ public class Documento {
         setDatatual(dataAtual);
         setNomedoc(nomeDocumento);
     }
+    public Documento(String nomeContratante, String cpfContratante , String rgContratante, String nacContratante, String nomeEmpresa ,
+                     String nomeContratado, String cnpjContratado, String nacContratado, String cpfContratado, String profContratado,
+                     String valorNumerico, String valorExtenso, String cidade, String dataAtual, String nomeDocumento, String id){
+
+        setContratantenome(nomeContratante);
+        setContratantecpf(cpfContratante);
+        setContratanterg(rgContratante);
+        setContratantenacionalidade(nacContratante);
+        setContratadanomeEmpresa(nomeEmpresa);
+        setContratadanome(nomeContratado);
+        setContratadacnpj(cnpjContratado);
+        setContratadanacionalidade(nacContratado);
+        setContratadacpf(cpfContratado);
+        setContratadaprofissao(profContratado);
+        setValor(valorNumerico);
+        setValorExtenso(valorExtenso);
+        setCidade(cidade);
+        setDatatual(dataAtual);
+        setNomedoc(nomeDocumento);
+        setId(id);
+    }
 
     public Documento(){}
 
