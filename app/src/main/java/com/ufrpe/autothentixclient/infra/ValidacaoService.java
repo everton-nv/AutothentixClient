@@ -111,7 +111,7 @@ public class ValidacaoService {
         if (data.contains("/")){
            // String dataReversa = new StringBuilder(data).reverse().toString();
             String dataNova = data.replace("/","");
-            dataFormatada = data.substring(QUATRO,TAMANHO_DATA_SB) + "-" + data.substring(DOIS,QUATRO) + "-" + data.substring(ZERO,DOIS);
+            dataFormatada = dataNova.substring(QUATRO,TAMANHO_DATA_SB) + "-" + dataNova.substring(DOIS,QUATRO) + "-" + dataNova.substring(ZERO,DOIS);
 
         }else{
             dataFormatada = data.substring(QUATRO,TAMANHO_DATA_SB) + "-" + data.substring(DOIS,QUATRO) + "-" + data.substring(ZERO,DOIS);
