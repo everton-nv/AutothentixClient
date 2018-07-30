@@ -217,7 +217,11 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             conexao.addRequestProperty("Content-type", "application/json");
             conexao.setRequestProperty("authorization",strings[TRES]);
 
+            conexao.setDoOutput(true);
             conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(strings[ZERO]);
 
             conexao.connect();
 

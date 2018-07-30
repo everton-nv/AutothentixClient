@@ -150,6 +150,8 @@ public class EditDocServicoActivity extends AppCompatActivity implements AsyncRe
 
         SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
         sharedPreferencesServices.needUpdateDocList();
+
+        closeActivity();
     }
 
     private void connectToServer(){
