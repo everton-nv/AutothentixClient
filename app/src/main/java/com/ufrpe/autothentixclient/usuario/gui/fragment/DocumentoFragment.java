@@ -26,6 +26,7 @@ import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_ID;
 import static com.ufrpe.autothentixclient.usuario.dominio.TagBundleEnum.DOC_JSON;
@@ -40,6 +41,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     private RecyclerView mRecyclerView;
     private List<Documento> mList = new ArrayList<>();
     private DocumentoRecyclerAdapter adapter;
+    private int posicaoDoc;
     UsuarioService usuarioService = new UsuarioService();
     ConexaoServidor conexaoServidor;
 
@@ -103,6 +105,14 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
         }
     }
 
+    private void setPosicaoDoc(int novaPosicao){
+        posicaoDoc = novaPosicao;
+    }
+
+    private int getPosicaoDoc(){
+        return posicaoDoc;
+    }
+
     private void openDoc(int position) {
         try{
             Intent intent = new Intent(getActivity(), ViewDocActivity.class);
@@ -145,7 +155,13 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     }
 
     private void deleteDoc(int position) {
-        //connectToServer();
+        connectToServer();
+        Documento documento = mList.get(position);
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getContext());
+        String token = sharedPreferencesServices.getTokenPreferences();
+        setPosicaoDoc(position);
+
+        usuarioService.deletarDocumento(documento.getId(),conexaoServidor,token);
         GuiUtil.myToastShort(getContext(), "Deletar " + Integer.toString(position));
     }
 
@@ -182,7 +198,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     }
     private void addNewItens(List<Documento> listAux){
         for (int i = 0; i < listAux.size(); i++){
-            adapter.addListItem(listAux.get(i), mList.size() );
+            adapter.addListItem(listAux.get(i), mList.size());
         }
     }
 
@@ -190,10 +206,13 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     public void processFinish(String output) {
         LoadScreen.loadOut(getContext(), (LinearLayout) getActivity().findViewById(R.id.progressBarLayout));
 
-        if(output != null) {
+        if(!Objects.equals(output, "{\"data\":\"Documento deletado \"}")) {
             List<Documento> listAux = usuarioService.docServerJsontoObject(output);
             adapter.clearList();
             addNewItens(listAux);
+        }
+        if (Objects.equals(output,"{\"data\":\"Documento deletado \"}")){
+            adapter.removeListItem(getPosicaoDoc());
         }
     }
 

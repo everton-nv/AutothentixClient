@@ -58,6 +58,10 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             jsonResposta = atualizarDoc(strings);
         }
 
+        if (Objects.equals(strings[UM], usuarioService.getMetododeletar())){
+            jsonResposta = deletarDoc(strings);
+        }
+
 
         return jsonResposta;
     }
@@ -222,6 +226,38 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
 
             PrintStream printStream = new PrintStream(conexao.getOutputStream());
             printStream.println(strings[ZERO]);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
+
+    private String deletarDoc(String... strings){
+        String jsonResposta = null;
+        try{
+            URL url = new URL(strings[ZERO]);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod(strings[UM]);
+            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.setRequestProperty("authorization",strings[DOIS]);
+
+            conexao.setDoInput(true);
 
             conexao.connect();
 

@@ -21,9 +21,11 @@ public class UsuarioService {
     private static final String ROTAGERARHTMLDOC = URLBASE + "geradocumento/html";
     private static final String ROTAGERARLISTADOC = URLBASE + "geradocumento";
     private static final String ROTAATUALIZARDOC = URLBASE + "geradocumento/";
+    private static final String ROTADELETARDOC = URLBASE + "geradocumento/";
     private static final String METODOGET = "GET";
     private static final String METODOPOST = "POST";
     private static final String METODOPUT = "PUT";
+    private static final String METODODELETAR = "DELETE";
     private String JSONDOC;
     private static final int UM = 1;
     private static final int OITO = 8;
@@ -65,6 +67,8 @@ public class UsuarioService {
 
     String getMetodoput(){return METODOPUT;}
 
+    String getMetododeletar(){ return METODODELETAR;}
+
 
     public String criarJsonObjeto(Object objeto){
         return gson.toJson(objeto);
@@ -104,9 +108,15 @@ public class UsuarioService {
         conexaoServidor.execute(jsonUser,ROTALOGAR, METODOPOST);
     }
 
+    public void deletarDocumento(String docId,ConexaoServidor conexaoServidor, String token){
+        String novaRotaAtt = ROTADELETARDOC + docId;
+        conexaoServidor.execute(novaRotaAtt, METODODELETAR, token);
+    }
+
     public String getRespostaServidor() {
         return respostaServidor;
     }
+
     public void setRespostaServidor(String respostaServidor) {
         this.respostaServidor = respostaServidor;
     }
