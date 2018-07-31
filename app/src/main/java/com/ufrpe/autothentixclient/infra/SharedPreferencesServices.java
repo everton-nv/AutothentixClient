@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.BLOCKCHAIN_PREFERENCES;
+import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_BLOCKCHAIN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_ID_USER_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_LOGIN_PREFERENCES;
 import static com.ufrpe.autothentixclient.infra.SharedPreferencesConstante.DEFAULT_NEED_UPDATE_DOC_LIST_PREFERENCES;
@@ -65,6 +67,10 @@ public class SharedPreferencesServices {
         setString(TOKEN_PREFERENCES, token);
     }
 
+    public void setBlockchainPreferences(String blockchain){
+        setString(BLOCKCHAIN_PREFERENCES, blockchain);
+    }
+
     public long getIdUserPreferences(){
         return sharedPreferences.getLong(ID_USER_PREFERENCES, DEFAULT_ID_USER_PREFERENCES);
     }
@@ -83,6 +89,10 @@ public class SharedPreferencesServices {
 
     public boolean getNeedUpdateDocList(){
         return sharedPreferences.getBoolean(NEED_UPDATE_DOC_LIST_PREFERENCES, DEFAULT_NEED_UPDATE_DOC_LIST_PREFERENCES);
+    }
+
+    public String getBlockchainPreferences(){
+        return sharedPreferences.getString(BLOCKCHAIN_PREFERENCES, DEFAULT_BLOCKCHAIN_PREFERENCES);
     }
 
     public void clearPreferences(){

@@ -2,6 +2,8 @@ package com.ufrpe.autothentixclient.usuario.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ufrpe.autothentixclient.infra.BlockChain;
+import com.ufrpe.autothentixclient.infra.Bloco;
 import com.ufrpe.autothentixclient.usuario.dominio.Documento;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaFisica;
 import com.ufrpe.autothentixclient.usuario.dominio.PessoaJuridica;
@@ -31,7 +33,7 @@ public class UsuarioService {
     private static final int OITO = 8;
     private Gson gson = new Gson();
     private String respostaServidor;
-
+    Bloco bloco;
 
     public UsuarioService(){}
 
@@ -87,10 +89,14 @@ public class UsuarioService {
         conexaoServidor.execute(novoJson, ROTACADASTROPJ, METODOPOST);
    }
 
-   public void inserirDocumento(Documento documento, ConexaoServidor conexaoServidor, String token ) {
+   public void inserirDocumento(Documento documento, ConexaoServidor conexaoServidor, String token) {
         String jsonDoc = criarJsonObjeto(documento);
         setJSONDOC(jsonDoc);
         conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST, token);
+   }
+
+   public String criarBloco(String blockchain, ConexaoServidor conexaoServidor, String token){
+       return blockchain;
    }
 
    public void atualizarDocumento(Documento documento, ConexaoServidor conexaoServidor, String token){
@@ -147,4 +153,6 @@ public class UsuarioService {
         Documento documento = gson.fromJson(json, new TypeToken<Documento>(){}.getType());
        return documento;
    }
+
+
 }

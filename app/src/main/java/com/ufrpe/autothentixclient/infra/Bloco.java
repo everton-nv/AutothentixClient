@@ -7,14 +7,19 @@ public class Bloco {
     public String hashAnterior;
     private String data; //our data will be a simple message.
     private long timeStamp; //as number of milliseconds since 1/1/1970.
+    private String acao;
+    private int index;
     private int nonce;
 
     //Block Constructor.
-    public Bloco(String data,String previousHash ) {
+    public Bloco(String data, String acao, String previousHash, int index) {
         this.data = data;
         this.hashAnterior = previousHash;
         this.timeStamp = new Date().getTime();
         this.hashAtual = calcularHash();
+        this.nonce = 0;
+        this.acao = acao;
+        this.index = index;
     }
 
     public String calcularHash() {
@@ -33,4 +38,15 @@ public class Bloco {
         }
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public String getAcao() {
+        return acao;
+    }
+
+    public String getData() {
+        return data;
+    }
 }
