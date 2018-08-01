@@ -24,6 +24,7 @@ public class UsuarioService {
     private static final String ROTAGERARLISTADOC = URLBASE + "geradocumento";
     private static final String ROTAATUALIZARDOC = URLBASE + "geradocumento/";
     private static final String ROTADELETARDOC = URLBASE + "geradocumento/";
+    private static final String ROTAGERARBLOCO = URLBASE + "geradocumento/bloco";
     private static final String METODOGET = "GET";
     private static final String METODOPOST = "POST";
     private static final String METODOPUT = "PUT";
@@ -33,7 +34,6 @@ public class UsuarioService {
     private static final int OITO = 8;
     private Gson gson = new Gson();
     private String respostaServidor;
-    Bloco bloco;
 
     public UsuarioService(){}
 
@@ -67,6 +67,8 @@ public class UsuarioService {
 
     String getRotagerarlistadoc(){return ROTAGERARLISTADOC;}
 
+    String getRotagerarbloco(){return ROTAGERARBLOCO;}
+
     String getMetodoput(){return METODOPUT;}
 
     String getMetododeletar(){ return METODODELETAR;}
@@ -95,8 +97,10 @@ public class UsuarioService {
         conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST, token);
    }
 
-   public String criarBloco(String blockchain, ConexaoServidor conexaoServidor, String token){
-       return blockchain;
+   public void inserirBloco(String json, ConexaoServidor conexaoServidor, String token){
+       Bloco bloco = new Bloco(json,"inserir");
+       String jsonBloco = criarJsonObjeto(bloco);
+       conexaoServidor.execute(jsonBloco,ROTAGERARBLOCO,METODOPOST,token);
    }
 
    public void atualizarDocumento(Documento documento, ConexaoServidor conexaoServidor, String token){

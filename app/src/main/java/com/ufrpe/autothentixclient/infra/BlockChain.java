@@ -6,7 +6,7 @@ public class BlockChain {
     public static ArrayList<Bloco> blockchain = new ArrayList<Bloco>();
     public static int difficulty = 5;
 
-    public static Boolean isChainValid() {
+    public static boolean isChainValid() {
         Bloco currentBlock;
         Bloco previousBlock;
         String hashTarget = new String(new char[difficulty]).replace('\0', '0');

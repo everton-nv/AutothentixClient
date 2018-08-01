@@ -62,6 +62,10 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             jsonResposta = deletarDoc(strings);
         }
 
+        if (Objects.equals(strings[UM], usuarioService.getRotagerarbloco())){
+            jsonResposta = inserirBloco(strings);
+        }
+
 
         return jsonResposta;
     }
@@ -89,6 +93,8 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             conexao.connect();
 
             BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+
+            conexao.disconnect();
             StringBuilder sbHtml = new StringBuilder();
             String linha;
 
@@ -97,6 +103,9 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -134,10 +143,14 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
 
         }catch(Exception e){
             e.printStackTrace();
         }
+
         usuarioService.setRespostaServidor(jsonResposta);
 
         return jsonResposta;
@@ -170,6 +183,9 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -202,6 +218,7 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+
 
         }catch(Exception e){
             e.printStackTrace();
@@ -238,6 +255,9 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -270,6 +290,45 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
+
+    private String inserirBloco(String... strings){
+        String jsonResposta = null;
+        try{
+            URL url = new URL(strings[UM]);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod(strings[DOIS]);
+            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.setRequestProperty("authorization",strings[TRES]);
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(strings[ZERO]);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
 
         }catch(Exception e){
             e.printStackTrace();

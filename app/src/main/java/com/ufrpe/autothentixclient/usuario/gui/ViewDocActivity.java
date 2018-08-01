@@ -37,7 +37,6 @@ public class ViewDocActivity extends AppCompatActivity implements AsyncResposta 
             GuiUtil.myToastShort(this, getString(R.string.msg_error_open_activity));
             closeActivity();
         }
-
         initVlisualizarDoc();
     }
 
@@ -59,6 +58,21 @@ public class ViewDocActivity extends AppCompatActivity implements AsyncResposta 
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initBloco(){
+        try {
+            String jason = getIntent().getStringExtra(URL_PREVIEW.getValue());
+
+            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+            String token = sharedPreferencesServices.getTokenPreferences();
+
+            usuarioService.inserirBloco(jason,conexaoServidor,token);
+
+        } catch (Exception e){
+            Log.e("ViewDocActivity",e.getMessage());
+            GuiUtil.myToast(this,"Ocorreu um erro ao conectar com o servidor, tente novamente.");
+        }
     }
 
     private void initVlisualizarDoc(){

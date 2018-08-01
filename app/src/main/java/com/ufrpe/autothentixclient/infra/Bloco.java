@@ -12,14 +12,14 @@ public class Bloco {
     private int nonce;
 
     //Block Constructor.
-    public Bloco(String data, String acao, String previousHash, int index) {
+    public Bloco(String data, String acao) {
         this.data = data;
-        this.hashAnterior = previousHash;
+        this.hashAnterior = null;
         this.timeStamp = new Date().getTime();
-        this.hashAtual = calcularHash();
+        this.hashAtual = null;
         this.nonce = 0;
         this.acao = acao;
-        this.index = index;
+        this.index = 0;
     }
 
     public String calcularHash() {

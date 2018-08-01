@@ -268,13 +268,16 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         //progressBarLayout.setVisibility(View.GONE);
 
         LoadScreen.loadOut(this, (LinearLayout) findViewById(R.id.progressBarLayout));
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
 
-        if (output != null && output.equals(usuarioService.getJSONDOC())) {
-            initPreview(output);
-        }else {
-            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+        if(output.contains("data") && !output.equals("{\"data\":\"Bloco Enviado\"}")){
+            String token = sharedPreferencesServices.getTokenPreferences();
+            connectToServer();
+            String novoJsonResposta = output.substring(8,output.length()-1);
+            usuarioService.inserirBloco(novoJsonResposta,conexaoServidor,token);
+        }
+        if(output.equals("{\"data\":\"Bloco Enviado\"}")) {
             sharedPreferencesServices.needUpdateDocList();
-
             initPreview(usuarioService.getJSONDOC());
         }
 
