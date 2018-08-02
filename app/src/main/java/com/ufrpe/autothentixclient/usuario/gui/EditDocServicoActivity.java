@@ -34,7 +34,6 @@ public class EditDocServicoActivity extends AppCompatActivity implements AsyncRe
     ConexaoServidor conexaoServidor;
     UsuarioService usuarioService = new UsuarioService();
     ValidacaoService validacaoCadastro = new ValidacaoService();
-    SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,13 +146,14 @@ public class EditDocServicoActivity extends AppCompatActivity implements AsyncRe
 
     @Override
     public void processFinish(String output) {
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
         LoadScreen.loadOut(this, (LinearLayout) findViewById(R.id.progressBarLayout));
-        if(output.equals("{\"data\":[1]")){
+        if(output.equals("{\"data\":[1]}")){
             connectToServer();
             String token = sharedPreferencesServices.getTokenPreferences();
             String jsonDocAtt = usuarioService.getJSONDOC();
             usuarioService.inserirBloco(jsonDocAtt,conexaoServidor,token,"atualizar");
-        }else if(output.equals("{\"data\":\"Bloco Enviado\"}")){
+        }else if(output.equals("{\"data\":\"1 Transação adicionada na fila\"}")){
             sharedPreferencesServices.needUpdateDocList();
             closeActivity();
         }

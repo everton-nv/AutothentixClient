@@ -208,7 +208,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     public void processFinish(String output) {
         LoadScreen.loadOut(getContext(), (LinearLayout) getActivity().findViewById(R.id.progressBarLayout));
         SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getActivity());
-        if(!Objects.equals(output, "{\"data\":\"Documento deletado \"}")) {
+        if(!Objects.equals(output, "{\"data\":\"1 Transação adicionada na fila\"}") && !Objects.equals(output,"{\"data\":\"Documento deletado \"}")) {
             List<Documento> listAux = usuarioService.docServerJsontoObject(output);
             adapter.clearList();
             addNewItens(listAux);
@@ -217,6 +217,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
             adapter.removeListItem(getPosicaoDoc());
             String jsonDocDeletar = usuarioService.getJSONDOC();
             String token = sharedPreferencesServices.getTokenPreferences();
+            connectToServer();
             usuarioService.inserirBloco(jsonDocDeletar,conexaoServidor, token, "deletar");
         }
     }
