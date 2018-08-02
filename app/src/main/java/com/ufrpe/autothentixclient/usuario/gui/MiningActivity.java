@@ -114,6 +114,7 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
     private void iniciarMineracao(){
         SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
         String token = sharedPreferencesServices.getTokenPreferences();
+        connectToServer();
         usuarioService.getMinerarBlocoServer(conexaoServidor, token);
     }
 
