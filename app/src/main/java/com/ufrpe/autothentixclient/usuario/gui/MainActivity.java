@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 myToastShort(this, "Settings Click ok");
                 break;
+            case R.id.action_minerar:
+                initActivity(MiningActivity.class);
+                break;
             case R.id.action_logout:
                 SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
                 sharedPreferencesServices.clearPreferences();

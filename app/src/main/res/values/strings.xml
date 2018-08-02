@@ -121,10 +121,12 @@
     <string name="content_description_doc_icon">Ícone do documento</string>
     <string name="content_description_option_icon">Ícone do documento</string>
     <string name="screen_name_signup">Cadastro</string>
+    <string name="screen_name_mining">Minerar</string>
     <string name="screen_name_create_doc">Novo Documento</string>
     <string name="screen_name_edit_doc">Editar Documento</string>
     <string name="log_screen_signup">SignUpScreen</string>
-    <string name="log_screen_main">SignUpScreen</string>
+    <string name="log_screen_mining">MiningScreen</string>
+    <string name="log_screen_main">MainScreen</string>
     <string name="log_screen_create_doc_service">CreateDocSer</string>
     <string name="log_screen_view_doc">viewDoc</string>
     <string name="log_screen_doc_fragment">DocFragment</string>
@@ -167,6 +169,8 @@
     <string name="lbl_local">Local e Data</string>
     <string name="msg_success_logoff">Deslogado com Sucesso</string>
     <string name="msg_erro_login_or_password_wrong">Email ou senha incorretos.</string>
-    <string name="logging_in">Logando...</string>
+    <string name="logging_in">Logando…</string>
+    <string name="mining_in">Minerando…</string>
     <string name="action_minerar">Minerar</string>
+    <string name="exemple_blockchain">BLOCK{}</string>
 </resources>
