@@ -14,9 +14,9 @@ public class Bloco {
     //Block Constructor.
     public Bloco(String data, String acao) {
         this.data = data;
-        this.hashAnterior = null;
+        this.hashAnterior = "0";
         this.timeStamp = new Date().getTime();
-        this.hashAtual = null;
+        this.hashAtual = calcularHash();
         this.nonce = 0;
         this.acao = acao;
         this.index = 0;

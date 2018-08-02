@@ -30,4 +30,12 @@ public class BlockChain {
         }
         return true;
     }
+
+    public void addBloco(Bloco bloco){
+        blockchain.add(bloco);
+    }
+
+    public static ArrayList<Bloco> getBlockchain() {
+        return blockchain;
+    }
 }

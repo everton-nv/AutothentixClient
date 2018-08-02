@@ -100,7 +100,15 @@ public class UsuarioService {
    public void inserirBloco(String json, ConexaoServidor conexaoServidor, String token){
        Bloco bloco = new Bloco(json,"inserir");
        String jsonBloco = criarJsonObjeto(bloco);
+       teste(bloco);
        conexaoServidor.execute(jsonBloco,ROTAGERARBLOCO,METODOPOST,token);
+   }
+
+   public String teste(Bloco bloco){
+        BlockChain blockChain = new BlockChain();
+        blockChain.addBloco(bloco);
+        String blockChainJson = gson.toJson(BlockChain.getBlockchain());
+        return blockChainJson;
    }
 
    public void atualizarDocumento(Documento documento, ConexaoServidor conexaoServidor, String token){
