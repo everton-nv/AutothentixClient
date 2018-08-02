@@ -68,7 +68,12 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
         if (Objects.equals(strings[ZERO], usuarioService.getRotablockchain())){
             jsonResposta = getBlockchain(strings);
         }
-
+        if (Objects.equals(strings[ZERO], usuarioService.getRotaminerarbloco())){
+            jsonResposta = getMinerarBloco(strings);
+        }
+        if (Objects.equals(strings[UM], usuarioService.getRotaBlocoMinerado())){
+            jsonResposta = inserirBlocominerado(strings);
+        }
 
         return jsonResposta;
     }
@@ -369,6 +374,80 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             }
             jsonResposta = sbHtml.toString();
             reader.close();
+            conexao.disconnect();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
+
+    private String getMinerarBloco(String... strings){
+        String jsonResposta = null;
+        try{
+            URL url = new URL(strings[ZERO]);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod(strings[UM]);
+            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.setRequestProperty("authorization",strings[DOIS]);
+
+            conexao.setDoInput(true);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            conexao.disconnect();
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
+
+    private String inserirBlocominerado(String... strings){
+        String jsonResposta = null;
+        try{
+            URL url = new URL(strings[UM]);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod(strings[DOIS]);
+            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.setRequestProperty("authorization",strings[TRES]);
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(strings[ZERO]);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
             conexao.disconnect();
 
         }catch(Exception e){

@@ -6,7 +6,7 @@ public class BlockChain {
     public static ArrayList<Bloco> blockchain = new ArrayList<Bloco>();
     public static int difficulty = 5;
 
-    public static boolean isChainValid() {
+    public boolean isChainValid() {
         Bloco currentBlock;
         Bloco previousBlock;
         String hashTarget = new String(new char[difficulty]).replace('\0', '0');
@@ -32,10 +32,24 @@ public class BlockChain {
     }
 
     public void addBloco(Bloco bloco){
+        bloco.minerarBloco(difficulty);
         blockchain.add(bloco);
     }
 
-    public static ArrayList<Bloco> getBlockchain() {
+    public ArrayList<Bloco> getBlockchain() {
         return blockchain;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder blockChainStr = new StringBuilder();
+        for(Bloco bloco : this.getBlockchain()){
+            blockChainStr.append(bloco.toString());
+        }
+        return blockChainStr.toString();
+    }
+
+    public static void setBlockchain(ArrayList<Bloco> blockchain) {
+        BlockChain.blockchain = blockchain;
     }
 }

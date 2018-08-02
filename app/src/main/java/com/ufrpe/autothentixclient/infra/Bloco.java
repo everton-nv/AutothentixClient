@@ -38,6 +38,13 @@ public class Bloco {
         }
     }
 
+    @Override
+    public String toString(){
+        return  "Bloco " + Integer.toString(this.index + 1) +
+                "\nHash: " + this.hashAtual + "\nHash do Anterior: " + this.hashAnterior +
+                "\nDados: " + this.data;
+    }
+
     public int getIndex() {
         return index;
     }

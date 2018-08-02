@@ -33,12 +33,22 @@ public class UsuarioService {
     private static final String METODOPUT = "PUT";
     private static final String METODODELETAR = "DELETE";
     private String JSONDOC;
+    private String BLOCOMINERAR;
     private static final int UM = 1;
     private static final int OITO = 8;
     private Gson gson = new Gson();
     private String respostaServidor;
 
     public UsuarioService(){}
+
+
+    public String getBLOCOMINERAR() {
+        return BLOCOMINERAR;
+    }
+
+    public void setBLOCOMINERAR(String BLOCOMINERAR) {
+        this.BLOCOMINERAR = BLOCOMINERAR;
+    }
 
     public String getJSONDOC() {
         return JSONDOC;
@@ -121,11 +131,20 @@ public class UsuarioService {
        conexaoServidor.execute(ROTABLOCKCHAIN, METODOGET, token);
    }
 
+    public void getMinerarBlocoServer(ConexaoServidor conexaoServidor, String token){
+        conexaoServidor.execute(ROTAMINERARBLOCO, METODOGET, token);
+    }
+
+    public void inserirBlocoMinerado(String json, ConexaoServidor conexaoServidor, String token, String acao){
+        Bloco bloco = new Bloco(json, acao);
+        String jsonBloco = criarJsonObjeto(bloco);
+        conexaoServidor.execute(jsonBloco,ROTABLOCOMINERADO,METODOPOST,token);
+    }
 
    public String blockchainToJson(Bloco bloco){
         BlockChain blockChain = new BlockChain();
         blockChain.addBloco(bloco);
-        String blockChainJson = gson.toJson(BlockChain.getBlockchain());
+        String blockChainJson = gson.toJson(blockChain.getBlockchain());
         return blockChainJson;
    }
 
@@ -186,7 +205,16 @@ public class UsuarioService {
         return listaBlocos;
     }
 
+    public ArrayList<Bloco> blockchainAppJsontoObject(String json){
+        ArrayList<Bloco> listaBlocos = gson.fromJson(json, new TypeToken<List<Bloco>>(){}.getType());
+        return listaBlocos;
+    }
 
+    public Bloco blocoJsontoObject(String json){
+        String novoJson = json.substring(OITO,json.length()-UM);
+        Bloco bloco = gson.fromJson(novoJson, new TypeToken<Bloco>(){}.getType());
+        return bloco;
+    }
 
    public Documento docAppJsontoObject(String json){
         Documento documento = gson.fromJson(json, new TypeToken<Documento>(){}.getType());

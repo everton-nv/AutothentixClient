@@ -10,9 +10,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ufrpe.autothentixclient.R;
+import com.ufrpe.autothentixclient.infra.BlockChain;
+import com.ufrpe.autothentixclient.infra.Bloco;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
+import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
+import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getAnimationFadeIn;
@@ -20,6 +26,7 @@ import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getA
 
 public class MiningActivity extends AppCompatActivity implements AsyncResposta {
     ConexaoServidor conexaoServidor;
+    UsuarioService usuarioService = new UsuarioService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +39,9 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
         } catch (Exception e) {
             Log.e(getString(R.string.log_screen_mining), e.getMessage());
             GuiUtil.myToastShort(this, getString(R.string.msg_error_open_activity));
-            changeActivity(MainActivity.class);
+            finish();
         }
+        iniciarMineracao();
     }
 
     private void changeActivity(Class screenClass){
@@ -103,6 +111,12 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
         txtBlockchain.startAnimation(getAnimationFadeIn(this));
     }
 
+    private void iniciarMineracao(){
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+        String token = sharedPreferencesServices.getTokenPreferences();
+        usuarioService.getMinerarBlocoServer(conexaoServidor, token);
+    }
+
     @Override
     public void onBackPressed() {
         changeActivity(LoginActivity.class);
@@ -110,12 +124,42 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
 
     @Override
     public void processStart() {
-        hideLoadLayout();
+        showLoadLayout();
     }
 
     @Override
     public void processFinish(String output) {
-        showLoadLayout();
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
+        String token = sharedPreferencesServices.getTokenPreferences();
+        if ((output.substring(0,8)).equals("{\"data\":")){
+           usuarioService.setBLOCOMINERAR(output);
+           connectToServer();
+           usuarioService.getBlockchainServer(conexaoServidor, token);
+        }else if (output.substring(0,9).equals("{\"data\":[")){
+            BlockChain blockChain = (BlockChain) usuarioService.blockchainServerJsontoObject(output);
+            Bloco bloco = usuarioService.blocoJsontoObject(usuarioService.getBLOCOMINERAR());
+            blockChain.addBloco(bloco);
+            if (blockChain.isChainValid()){
+                Bloco bloco1 = blockChain.getBlockchain().get(-1);
+                String jsonBlocoMinerado = usuarioService.criarJsonObjeto(bloco1);
+                String jsonBlockChain = usuarioService.criarJsonObjeto(blockChain);
+                sharedPreferencesServices.setBlockchainPreferences(jsonBlockChain);
+                connectToServer();
+                usuarioService.inserirBloco(jsonBlocoMinerado, conexaoServidor, token, bloco1.getAcao());
+            }else{
+                connectToServer();
+                usuarioService.getBlockchainServer(conexaoServidor, token);
+            }
+        }else if(output.equals("{\"data\": \"ok\"}")){
+            hideLoadLayout();
+            TextView txtBlockchain = findViewById(R.id.txtBlockchain);
+            String jsonBlockChain = sharedPreferencesServices.getBlockchainPreferences();
+            BlockChain blockChain = new BlockChain();
+            ArrayList<Bloco> listaBlocos = usuarioService.blockchainAppJsontoObject(jsonBlockChain);
+            blockChain.setBlockchain(listaBlocos);
+            txtBlockchain.setText(blockChain.toString());
+        }
+
 
     }
 
