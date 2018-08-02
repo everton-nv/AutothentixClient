@@ -65,6 +65,9 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
         if (Objects.equals(strings[UM], usuarioService.getRotagerarbloco())){
             jsonResposta = inserirBloco(strings);
         }
+        if (Objects.equals(strings[ZERO], usuarioService.getRotablockchain())){
+            jsonResposta = getBlockchain(strings);
+        }
 
 
         return jsonResposta;
@@ -218,6 +221,8 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+            reader.close();
+            conexao.disconnect();
 
 
         }catch(Exception e){
@@ -290,6 +295,8 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
                 sbHtml.append (linha);
             }
             jsonResposta = sbHtml.toString();
+            reader.close();
+            conexao.disconnect();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -328,6 +335,40 @@ public class ConexaoServidor extends AsyncTask<String, String, String> {
             jsonResposta = sbHtml.toString();
             reader.close();
             printStream.close();
+            conexao.disconnect();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
+
+    private String getBlockchain(String... strings){
+        String jsonResposta = null;
+        try{
+            URL url = new URL(strings[ZERO]);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod(strings[UM]);
+            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.setRequestProperty("authorization",strings[DOIS]);
+
+            conexao.setDoInput(true);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
             conexao.disconnect();
 
         }catch(Exception e){

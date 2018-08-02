@@ -25,6 +25,9 @@ public class UsuarioService {
     private static final String ROTAATUALIZARDOC = URLBASE + "geradocumento/";
     private static final String ROTADELETARDOC = URLBASE + "geradocumento/";
     private static final String ROTAGERARBLOCO = URLBASE + "geradocumento/bloco";
+    private static final String ROTAMINERARBLOCO = URLBASE + "geradocumento/minera";
+    private static final String ROTABLOCOMINERADO = URLBASE + "geradocumento/minerado";
+    private static final String ROTABLOCKCHAIN = URLBASE + "geradocumento/blochan";
     private static final String METODOGET = "GET";
     private static final String METODOPOST = "POST";
     private static final String METODOPUT = "PUT";
@@ -41,7 +44,7 @@ public class UsuarioService {
         return JSONDOC;
     }
 
-    private void setJSONDOC(String JSONDOC) {
+    public void setJSONDOC(String JSONDOC) {
         this.JSONDOC = JSONDOC;
     }
 
@@ -73,6 +76,17 @@ public class UsuarioService {
 
     String getMetododeletar(){ return METODODELETAR;}
 
+    String getRotaminerarbloco() {
+        return ROTAMINERARBLOCO;
+    }
+
+    String getRotaBlocoMinerado() {
+        return ROTABLOCOMINERADO;
+    }
+
+    String getRotablockchain() {
+        return ROTABLOCKCHAIN;
+    }
 
     public String criarJsonObjeto(Object objeto){
         return gson.toJson(objeto);
@@ -97,14 +111,18 @@ public class UsuarioService {
         conexaoServidor.execute(jsonDoc, ROTAGERARDOC, METODOPOST, token);
    }
 
-   public void inserirBloco(String json, ConexaoServidor conexaoServidor, String token){
-       Bloco bloco = new Bloco(json,"inserir");
+   public void inserirBloco(String json, ConexaoServidor conexaoServidor, String token, String acao){
+       Bloco bloco = new Bloco(json, acao);
        String jsonBloco = criarJsonObjeto(bloco);
-       teste(bloco);
        conexaoServidor.execute(jsonBloco,ROTAGERARBLOCO,METODOPOST,token);
    }
 
-   public String teste(Bloco bloco){
+   public void getBlockchainServer(ConexaoServidor conexaoServidor, String token){
+       conexaoServidor.execute(ROTABLOCKCHAIN, METODOGET, token);
+   }
+
+
+   public String blockchainToJson(Bloco bloco){
         BlockChain blockChain = new BlockChain();
         blockChain.addBloco(bloco);
         String blockChainJson = gson.toJson(BlockChain.getBlockchain());
@@ -114,6 +132,7 @@ public class UsuarioService {
    public void atualizarDocumento(Documento documento, ConexaoServidor conexaoServidor, String token){
        String novaRotaAtt = ROTAATUALIZARDOC + documento.getId();
        String jsonDocAtt = criarJsonObjeto(documento);
+       setJSONDOC(jsonDocAtt);
        conexaoServidor.execute(jsonDocAtt,novaRotaAtt,METODOPUT,token);
    }
 
@@ -160,6 +179,14 @@ public class UsuarioService {
        ArrayList<Documento> listaDocs = gson.fromJson(novoJson, new TypeToken<List<Documento>>(){}.getType());
        return listaDocs;
    }
+
+    public List blockchainServerJsontoObject(String json){
+        String novoJson = json.substring(OITO,json.length()-UM);
+        ArrayList<Bloco> listaBlocos = gson.fromJson(novoJson, new TypeToken<List<Bloco>>(){}.getType());
+        return listaBlocos;
+    }
+
+
 
    public Documento docAppJsontoObject(String json){
         Documento documento = gson.fromJson(json, new TypeToken<Documento>(){}.getType());

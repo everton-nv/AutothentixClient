@@ -33,14 +33,13 @@ import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getA
 
 public class LoginActivity extends AppCompatActivity implements AsyncResposta {
     private EditText edtEmail, edtPassword;
-    ConexaoServidor conexaoServidor;// = new ConexaoServidor();
+    ConexaoServidor conexaoServidor;
     LinearLayout linearLayout;
     ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        conexaoServidor.delegate = this;
         setContentView(R.layout.activity_login);
 
         try {
@@ -184,16 +183,25 @@ public class LoginActivity extends AppCompatActivity implements AsyncResposta {
 
     @Override
     public void processFinish(String output) {
+        UsuarioService usuarioService = new UsuarioService();
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getApplicationContext());
+
         if(output == null || output.contains("error")){
             GuiUtil.myToast(getApplicationContext(), getString(R.string.msg_erro_login_or_password_wrong));
             showLoginLayout();
         }
-        else{
-            UsuarioService usuarioService = new UsuarioService();
-            SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getApplicationContext());
+        else if ((output.substring(0,9)).equals("{\"token\":")){
             sharedPreferencesServices.setTokenPreferences(usuarioService.limpandoJson(output));
             sharedPreferencesServices.setLoginPreferences(edtEmail.getText().toString());
             sharedPreferencesServices.setPasswordPreferences(edtPassword.getText().toString());
+            String token = sharedPreferencesServices.getTokenPreferences();
+            connectToServer();
+            usuarioService.getBlockchainServer(conexaoServidor, token);
+        }
+        else if (output.equals("{\"data\":[]")){
+            changeActivity(MainActivity.class);
+        }else{
+            sharedPreferencesServices.setBlockchainPreferences(output);
             changeActivity(MainActivity.class);
         }
     }

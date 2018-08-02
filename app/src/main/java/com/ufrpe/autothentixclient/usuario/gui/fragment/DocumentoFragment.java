@@ -157,10 +157,12 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     private void deleteDoc(int position) {
         connectToServer();
         Documento documento = mList.get(position);
+        String jsonDocApagar = usuarioService.criarJsonObjeto(documento);
         SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getContext());
         String token = sharedPreferencesServices.getTokenPreferences();
         setPosicaoDoc(position);
 
+        usuarioService.setJSONDOC(jsonDocApagar);
         usuarioService.deletarDocumento(documento.getId(),conexaoServidor,token);
         GuiUtil.myToastShort(getContext(), "Deletar " + Integer.toString(position));
     }
@@ -205,7 +207,7 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
     @Override
     public void processFinish(String output) {
         LoadScreen.loadOut(getContext(), (LinearLayout) getActivity().findViewById(R.id.progressBarLayout));
-
+        SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(getActivity());
         if(!Objects.equals(output, "{\"data\":\"Documento deletado \"}")) {
             List<Documento> listAux = usuarioService.docServerJsontoObject(output);
             adapter.clearList();
@@ -213,6 +215,9 @@ public class DocumentoFragment extends Fragment implements RecyclerViewOnClickLi
         }
         if (Objects.equals(output,"{\"data\":\"Documento deletado \"}")){
             adapter.removeListItem(getPosicaoDoc());
+            String jsonDocDeletar = usuarioService.getJSONDOC();
+            String token = sharedPreferencesServices.getTokenPreferences();
+            usuarioService.inserirBloco(jsonDocDeletar,conexaoServidor, token, "deletar");
         }
     }
 

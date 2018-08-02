@@ -274,9 +274,9 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
             String token = sharedPreferencesServices.getTokenPreferences();
             connectToServer();
             String novoJsonResposta = output.substring(8,output.length()-1);
-            usuarioService.inserirBloco(novoJsonResposta,conexaoServidor,token);
+            usuarioService.inserirBloco(novoJsonResposta,conexaoServidor,token, "inserir");
         }
-        if(output.equals("{\"data\":\"Bloco Enviado\"}")) {
+        else if(output.equals("{\"data\":\"Bloco Enviado\"}")) {
             sharedPreferencesServices.needUpdateDocList();
             initPreview(usuarioService.getJSONDOC());
         }
