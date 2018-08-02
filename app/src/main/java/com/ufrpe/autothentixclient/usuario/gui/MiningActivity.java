@@ -110,11 +110,12 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
 
     @Override
     public void processStart() {
-
+        hideLoadLayout();
     }
 
     @Override
     public void processFinish(String output) {
+        showLoadLayout();
 
     }
 
