@@ -168,4 +168,5 @@
     <string name="msg_success_logoff">Deslogado com Sucesso</string>
     <string name="msg_erro_login_or_password_wrong">Email ou senha incorretos.</string>
     <string name="logging_in">Logando...</string>
+    <string name="action_minerar">Minerar</string>
 </resources>
