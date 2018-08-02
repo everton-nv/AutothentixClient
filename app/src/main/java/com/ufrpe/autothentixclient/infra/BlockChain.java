@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BlockChain {
     public static ArrayList<Bloco> blockchain = new ArrayList<Bloco>();
-    public static int difficulty = 5;
+    public static int difficulty = 1;
 
     public boolean isChainValid() {
         Bloco currentBlock;
@@ -49,7 +49,7 @@ public class BlockChain {
         return blockChainStr.toString();
     }
 
-    public static void setBlockchain(ArrayList<Bloco> blockchain) {
+    public void setBlockchain(ArrayList<Bloco> blockchain) {
         BlockChain.blockchain = blockchain;
     }
 }

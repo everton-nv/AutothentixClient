@@ -132,12 +132,10 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
     public void processFinish(String output) {
         SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
         String token = sharedPreferencesServices.getTokenPreferences();
-        if ((output.substring(0,8)).equals("{\"data\":")){
-           usuarioService.setBLOCOMINERAR(output);
-           connectToServer();
-           usuarioService.getBlockchainServer(conexaoServidor, token);
-        }else if (output.substring(0,9).equals("{\"data\":[")){
-            BlockChain blockChain = (BlockChain) usuarioService.blockchainServerJsontoObject(output);
+        if (output.substring(0,9).equals("{\"data\":[")){
+            BlockChain blockChain = new BlockChain();
+            ArrayList<Bloco> listaBlocos = usuarioService.blockchainServerJsontoObject(output);
+            blockChain.setBlockchain(listaBlocos);
             Bloco bloco = usuarioService.blocoJsontoObject(usuarioService.getBLOCOMINERAR());
             blockChain.addBloco(bloco);
             if (blockChain.isChainValid()){
@@ -151,6 +149,12 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
                 connectToServer();
                 usuarioService.getBlockchainServer(conexaoServidor, token);
             }
+
+        }else if ((output.substring(0,8)).equals("{\"data\":")){
+        usuarioService.setBLOCOMINERAR(output);
+        connectToServer();
+        usuarioService.getBlockchainServer(conexaoServidor, token);
+
         }else if(output.equals("{\"data\": \"ok\"}")){
             hideLoadLayout();
             TextView txtBlockchain = findViewById(R.id.txtBlockchain);

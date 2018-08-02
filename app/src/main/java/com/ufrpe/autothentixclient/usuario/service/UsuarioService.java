@@ -199,7 +199,7 @@ public class UsuarioService {
        return listaDocs;
    }
 
-    public List blockchainServerJsontoObject(String json){
+    public ArrayList<Bloco> blockchainServerJsontoObject(String json){
         String novoJson = json.substring(OITO,json.length()-UM);
         ArrayList<Bloco> listaBlocos = gson.fromJson(novoJson, new TypeToken<List<Bloco>>(){}.getType());
         return listaBlocos;
