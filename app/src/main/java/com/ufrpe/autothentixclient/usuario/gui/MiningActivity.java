@@ -138,12 +138,13 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
             Bloco bloco = usuarioService.blocoJsontoObject(usuarioService.getBLOCOMINERAR());
             blockChain.addBloco(bloco);
             if (blockChain.isChainValid()){
-                Bloco bloco1 = blockChain.getBlockchain().get(-1);
+                int size = blockChain.getBlockchain().size();
+                Bloco bloco1 = blockChain.getBlockchain().get(size -1);
                 String jsonBlocoMinerado = usuarioService.criarJsonObjeto(bloco1);
                 String jsonBlockChain = usuarioService.criarJsonObjeto(blockChain);
                 sharedPreferencesServices.setBlockchainPreferences(jsonBlockChain);
                 connectToServer();
-                usuarioService.inserirBloco(jsonBlocoMinerado, conexaoServidor, token, bloco1.getAcao());
+                usuarioService.inserirBlocoMinerado(jsonBlocoMinerado, conexaoServidor, token, bloco1.getAcao());
             }else{
                 connectToServer();
                 usuarioService.getBlockchainServer(conexaoServidor, token);
