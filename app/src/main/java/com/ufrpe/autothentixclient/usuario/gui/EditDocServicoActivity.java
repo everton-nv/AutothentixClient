@@ -156,7 +156,7 @@ public class EditDocServicoActivity extends AppCompatActivity implements AsyncRe
             String token = sharedPreferencesServices.getTokenPreferences();
             String jsonDocAtt = usuarioService.getJSONDOC();
             usuarioService.inserirBloco(jsonDocAtt,conexaoServidor,token,"atualizar");
-        }else if(output.equals("{\"data\":\"1 Transação adicionada na fila\"}")){
+        }else if(output.contains("Transação adicionada na fila")){
             sharedPreferencesServices.needUpdateDocList();
             closeActivity();
         }
