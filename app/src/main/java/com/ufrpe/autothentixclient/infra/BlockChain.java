@@ -16,15 +16,15 @@ public class BlockChain {
             currentBlock = blockchain.get(i);
             previousBlock = blockchain.get(i-1);
             //compare registered hash and calculated hash:
-            if(!currentBlock.hashAtual.equals(currentBlock.calcularHash()) ){
+            if(!currentBlock.hash.equals(currentBlock.calcularHash()) ){
                 return false;
             }
             //compare previous hash and registered previous hash
-            if(!previousBlock.hashAtual.equals(currentBlock.hashAnterior) ) {
+            if(!previousBlock.hash.equals(currentBlock.prevHash) ) {
                 return false;
             }
             //check if hash is solved
-            if(!currentBlock.hashAtual.substring( 0, difficulty).equals(hashTarget)) {
+            if(!currentBlock.hash.substring( 0, difficulty).equals(hashTarget)) {
                 return false;
             }
         }

@@ -18,7 +18,6 @@ import com.ufrpe.autothentixclient.usuario.service.ConexaoServidor;
 import com.ufrpe.autothentixclient.usuario.service.UsuarioService;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import static com.ufrpe.autothentixclient.usuario.gui.animation.MyAnimation.getAnimationFadeIn;
@@ -163,6 +162,10 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
             ArrayList<Bloco> listaBlocos = usuarioService.blockchainAppJsontoObject(jsonBlockChain);
             blockChain.setBlockchain(listaBlocos);
             txtBlockchain.setText(blockChain.toString());
+        }
+        else if (output.equals("{\"data\": \"0\"}")){
+            GuiUtil.myToast(this, "Não há bloco para minerar.");
+            finish();
         }
 
 

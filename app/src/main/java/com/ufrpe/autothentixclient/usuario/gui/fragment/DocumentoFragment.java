@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
 import com.ufrpe.autothentixclient.R;
+import com.ufrpe.autothentixclient.infra.BlockChain;
+import com.ufrpe.autothentixclient.infra.Bloco;
 import com.ufrpe.autothentixclient.infra.GuiUtil;
 import com.ufrpe.autothentixclient.infra.SharedPreferencesServices;
 import com.ufrpe.autothentixclient.usuario.dominio.Documento;
