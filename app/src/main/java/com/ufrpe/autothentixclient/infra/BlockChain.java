@@ -43,6 +43,8 @@ public class BlockChain {
     @Override
     public String toString(){
         StringBuilder blockChainStr = new StringBuilder();
+        boolean verdade = isChainValid();
+        blockChainStr.append(verdade ? "Blockchain Válida.\n" : "Blockchain Inválida.\n");
         for(Bloco bloco : this.getBlockchain()){
             blockChainStr.append(bloco.toString());
         }

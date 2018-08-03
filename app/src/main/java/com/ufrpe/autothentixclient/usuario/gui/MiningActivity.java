@@ -146,8 +146,13 @@ public class MiningActivity extends AppCompatActivity implements AsyncResposta {
                 connectToServer();
                 usuarioService.inserirBlocoMinerado(jsonBlocoMinerado, conexaoServidor, token, bloco1.getAcao());
             }else{
+                hideLoadLayout();
+                TextView txtBlockchain = findViewById(R.id.txtBlockchain);
+                txtBlockchain.setText(blockChain.toString());
+
+                /*
                 connectToServer();
-                usuarioService.getBlockchainServer(conexaoServidor, token);
+                usuarioService.getBlockchainServer(conexaoServidor, token);*/
             }
 
         }else if ((output.substring(0,8)).equals("{\"data\":")){

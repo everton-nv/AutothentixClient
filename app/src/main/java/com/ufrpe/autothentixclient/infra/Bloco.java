@@ -45,8 +45,8 @@ public class Bloco {
     @Override
     public String toString(){
         return  "Bloco " + Integer.toString(this.index + 1) +
-                "\nHash: " + this.hash + "\nHash do Anterior: " + this.prevHash +
-                "\nDados: " + this.data;
+                "\nAção: " + this.acao + "\nDados: " + this.data +
+                "\nHash: " + this.hash + "\nHash do Anterior: " + this.prevHash + "\n\n" ;
     }
 
     public int getIndex() {
