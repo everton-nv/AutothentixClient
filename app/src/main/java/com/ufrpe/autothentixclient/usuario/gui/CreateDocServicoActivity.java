@@ -273,13 +273,13 @@ public class CreateDocServicoActivity extends AppCompatActivity implements Async
         LoadScreen.loadOut(this, (LinearLayout) findViewById(R.id.progressBarLayout));
         SharedPreferencesServices sharedPreferencesServices = new SharedPreferencesServices(this);
 
-        if(output.contains("data") && !output.equals("{\"data\":\"1 Transação adicionada na fila\"}")){
+        if(output.contains("data") && !output.contains("Transação adicionada na fila")){
             String token = sharedPreferencesServices.getTokenPreferences();
             connectToServer();
             String novoJsonResposta = output.substring(8,output.length()-1);
             usuarioService.inserirBloco(novoJsonResposta,conexaoServidor,token, "inserir");
         }
-        else if(output.equals("{\"data\":\"1 Transação adicionada na fila\"}")) {
+        else if(output.contains("Transação adicionada na fila")) {
             sharedPreferencesServices.needUpdateDocList();
             initPreview(usuarioService.getJSONDOC());
         }
